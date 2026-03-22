@@ -1,0 +1,48 @@
+---
+import { t, type Lang } from '../i18n/utils';
+import { getLocalizedRoute } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+  mobile?: boolean;
+}
+
+const { lang, currentPath, mobile = false } = Astro.props;
+
+const navItems = [
+  { key: 'home',         translationKey: 'nav.home' as const },
+  { key: 'articles',     translationKey: 'nav.articles' as const },
+  { key: 'bibliography', translationKey: 'nav.bibliography' as const },
+  { key: 'about',        translationKey: 'nav.about' as const },
+  { key: 'contact',      translationKey: 'nav.contact' as const },
+];
+---
+
+<nav>
+  <ul class:list={[
+    mobile ? 'flex flex-col gap-2' : 'flex gap-4 text-sm'
+  ]}>
+    {navItems.map(({ key, translationKey }) => {
+      const href = getLocalizedRoute(lang, key);
+      const isActive = currentPath === href || (key !== 'home' && currentPath.startsWith(href));
+      return (
+        <li>
+          <a
+            href={href}
+            class:list={[
+              'transition-colors',
+              isActive
+                ? 'text-primary-700 font-semibold'
+                : 'text-gray-600 hover:text-primary-700',
+              mobile && 'block py-1',
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {t(lang, translationKey)}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { supportedLangs, type Lang } from '../../i18n/translations';
+import { t } from '../../i18n/utils';
+import { routes } from '../../i18n/routes';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  const pageKeys = ['bibliography', 'about', 'contact'];
+  const paths: { params: { lang: string; slug: string }; props: { routeKey: string } }[] = [];
+
+  for (const lang of supportedLangs) {
+    for (const routeKey of pageKeys) {
+      const localizedPath = routes[routeKey]?.[lang as Lang];
+      if (!localizedPath) continue;
+      const slug = localizedPath.replace(/^\/|\/$/g, '');
+      paths.push({
+        params: { lang, slug },
+        props: { routeKey },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const { routeKey } = Astro.props;
+
+const title = t(lang, `${routeKey}.title` as any);
+
+let bibliographyRefs: any[] = [];
+if (routeKey === 'bibliography') {
+  const entries = await getCollection('bibliography');
+  bibliographyRefs = entries
+    .filter((e) => e.id.startsWith(`${lang}/`))
+    .flatMap((e) => e.data.references ?? []);
+}
+---
+
+<BaseLayout title={title}>
+  <div class="mx-auto max-w-5xl px-4 py-16">
+    <h1 class="text-4xl font-bold text-primary-800 mb-8">{title}</h1>
+
+    {routeKey === 'bibliography' && (
+      bibliographyRefs.length === 0 ? (
+        <p class="text-gray-600">{t(lang, 'bibliography.empty')}</p>
+      ) : (
+        <ul class="space-y-6">
+          {bibliographyRefs.map((ref) => (
+            <li class="border-b border-gray-200 pb-4">
+              <p class="font-semibold text-primary-700">{ref.title}</p>
+              <p class="text-sm text-gray-600">
+                {ref.authors.join(', ')} ({ref.year})
+              </p>
+              {ref.journal && <p class="text-sm text-gray-500 italic">{ref.journal}</p>}
+              {ref.doi && (
+                <a
+                  href={`https://doi.org/${ref.doi}`}
+                  class="text-sm text-primary-600 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  DOI: {ref.doi}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      )
+    )}
+
+    {routeKey === 'about' && (
+      <p class="text-lg text-gray-600 leading-relaxed">
+        {t(lang, 'about.content')}
+      </p>
+    )}
+
+    {routeKey === 'contact' && (
+      <div class="text-lg text-gray-600 leading-relaxed">
+        <p>{t(lang, 'contact.content')}</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

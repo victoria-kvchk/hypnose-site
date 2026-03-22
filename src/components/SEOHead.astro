@@ -1,0 +1,36 @@
+---
+import type { Lang } from '../i18n/utils';
+import { getSwitchLangPath } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  currentPath: string;
+}
+
+const { title, description, lang, currentPath } = Astro.props;
+
+const alternateLang = lang === 'fr' ? 'en' : 'fr';
+const alternatePath = getSwitchLangPath(currentPath, alternateLang);
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="description" content={description} />
+<title>{title}</title>
+<link rel="canonical" href={`${Astro.site}${currentPath.slice(1)}`} />
+
+<!-- hreflang -->
+<link rel="alternate" hreflang={lang} href={`${Astro.site}${currentPath.slice(1)}`} />
+<link rel="alternate" hreflang={alternateLang} href={`${Astro.site}${alternatePath.slice(1)}`} />
+<link rel="alternate" hreflang="x-default" href={`${Astro.site}${currentPath.slice(1)}`} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />

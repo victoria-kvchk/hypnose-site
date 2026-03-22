@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEOHead from '../components/SEOHead.astro';
+import { getLangFromUrl, t } from '../i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const { title, description } = Astro.props;
+
+const pageTitle = title
+  ? `${title} | ${t(lang, 'site.title')}`
+  : t(lang, 'site.title');
+const pageDescription = description ?? t(lang, 'site.description');
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <SEOHead
+      title={pageTitle}
+      description={pageDescription}
+      lang={lang}
+      currentPath={currentPath}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-gray-900">
+    <Header lang={lang} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

@@ -1,0 +1,92 @@
+---
+import Nav from './Nav.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { t, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b border-gray-200 bg-white">
+  <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+    <a href={`/${lang}/`} class="text-xl font-bold text-primary-700 hover:text-primary-900">
+      {t(lang, 'site.title')}
+    </a>
+
+    <!-- Navigation desktop -->
+    <div class="hidden md:flex items-center gap-6">
+      <Nav lang={lang} currentPath={currentPath} />
+      <LanguageSwitcher lang={lang} currentPath={currentPath} />
+    </div>
+
+    <!-- Bouton menu mobile -->
+    <button
+      type="button"
+      id="mobile-menu-toggle"
+      class="md:hidden cursor-pointer p-2 text-gray-600"
+      aria-label="Menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menu mobile -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 px-4 py-4">
+    <div class="flex justify-end mb-2">
+      <button
+        type="button"
+        id="mobile-menu-close"
+        class="cursor-pointer p-2 text-gray-600"
+        aria-label={lang === 'fr' ? 'Fermer le menu' : 'Close menu'}
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <Nav lang={lang} currentPath={currentPath} mobile />
+    <div class="mt-4 pt-4 border-t border-gray-100">
+      <LanguageSwitcher lang={lang} currentPath={currentPath} />
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const close = document.getElementById('mobile-menu-close');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    const firstLink = menu?.querySelector('a');
+    firstLink?.focus();
+  }
+
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.focus();
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  close?.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+      closeMenu();
+    }
+  });
+</script>
