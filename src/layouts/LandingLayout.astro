@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SEOHead from '../components/SEOHead.astro';
 import Fonts from '../components/Fonts.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 import { getLangFromUrl, t } from '../i18n/utils';
 
 interface Props {
@@ -30,7 +31,8 @@ const currentPath = Astro.url.pathname;
     />
     <Fonts />
   </head>
-  <body class="min-h-screen bg-sand-100 text-ink antialiased">
+  <body class="min-h-screen bg-sand text-ink antialiased">
+    <SiteHeader lang={lang} currentPath={currentPath} />
     <slot />
   </body>
 </html>

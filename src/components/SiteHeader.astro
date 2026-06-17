@@ -1,0 +1,336 @@
+---
+/**
+ * SiteHeader — en-tête fixe de la landing.
+ * Transparent au-dessus du hero (texte sombre lisible sur photo claire),
+ * passe en fond crème + filet + ombre légère au scroll.
+ * Mobile (<900px) : nav repliée dans un drawer plein écran.
+ *
+ * NB : les liens de nav pointent vers des ancres de la landing / la route
+ * "à propos" ; THÉRAPIE et RESSOURCES sont provisoires (#) en attendant l'IA.
+ */
+import { getLocalizedRoute, getSwitchLangPath, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  currentPath?: string;
+}
+
+const { lang, currentPath = `/${lang}/` } = Astro.props;
+const other: Lang = lang === 'fr' ? 'en' : 'fr';
+const switchPath = getSwitchLangPath(currentPath, other);
+
+const nav =
+  lang === 'fr'
+    ? [
+        { label: 'Recherche', href: '#research' },
+        { label: 'Thérapie', href: '#' },
+        { label: 'Publications', href: '#publications' },
+        { label: 'À propos', href: getLocalizedRoute(lang, 'about') },
+        { label: 'Ressources', href: '#' },
+      ]
+    : [
+        { label: 'Research', href: '#research' },
+        { label: 'Therapy', href: '#' },
+        { label: 'Publications', href: '#publications' },
+        { label: 'About', href: getLocalizedRoute(lang, 'about') },
+        { label: 'Resources', href: '#' },
+      ];
+
+const ctaLabel = lang === 'fr' ? 'Soutenir la recherche' : 'Support the research';
+const menuLabel = lang === 'fr' ? 'Menu' : 'Menu';
+const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
+---
+
+<header id="site-header" data-header class="site-header">
+  <div class="wrap grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4">
+    <!-- Logo -->
+    <a href={`/${lang}/`} class="emblem-link" aria-label="HYPNOSIS — accueil">
+      <span class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1">
+          <defs>
+            <clipPath id="emblem-clip"><circle cx="16" cy="16" r="13" /></clipPath>
+          </defs>
+          <g clip-path="url(#emblem-clip)" stroke-width="1">
+            <path d="M2 19 C 7 15, 12 15, 16 18 S 25 21, 30 16.5" />
+            <path d="M3 23 C 8 20, 13 20, 16 22 S 24 24, 29 21" opacity="0.55" />
+            <path d="M4 14 C 8 11.5, 13 11.5, 16 13.5 S 24 15.5, 28 12.5" opacity="0.55" />
+          </g>
+          <circle cx="16" cy="16" r="13" />
+        </svg>
+      </span>
+      <span class="wordmark">HYPNOSIS</span>
+    </a>
+
+    <!-- Navigation centrale (desktop) -->
+    <nav class="primary-nav" aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+      {nav.map((item) => (
+        <a href={item.href} class="nav-link">{item.label}</a>
+      ))}
+    </nav>
+
+    <!-- Droite : langue + CTA (desktop), hamburger (mobile) -->
+    <div class="flex items-center justify-end gap-4">
+      <a href={switchPath} class="lang-toggle" aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}>
+        {other.toUpperCase()}
+      </a>
+      <a href="#" class="pill pill--desktop">{ctaLabel}</a>
+      <button type="button" id="drawer-open" class="burger" aria-label={menuLabel} aria-expanded="false" aria-controls="site-drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Drawer plein écran (mobile) -->
+<div id="site-drawer" class="drawer" aria-hidden="true">
+  <div class="wrap flex items-center justify-between py-4">
+    <span class="wordmark">HYPNOSIS</span>
+    <button type="button" id="drawer-close" class="burger burger--close" aria-label={closeLabel}>
+      <span></span><span></span>
+    </button>
+  </div>
+  <nav class="drawer-nav wrap" aria-label={lang === 'fr' ? 'Navigation' : 'Navigation'}>
+    {nav.map((item) => (
+      <a href={item.href} class="drawer-link" data-drawer-link>{item.label}</a>
+    ))}
+  </nav>
+  <div class="wrap drawer-foot">
+    <a href="#" class="pill" data-drawer-link>{ctaLabel}</a>
+    <a href={switchPath} class="lang-toggle" data-drawer-link>
+      {other.toUpperCase()}
+    </a>
+  </div>
+</div>
+
+<style>
+  /* ——— Bandeau ——— */
+  .site-header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease),
+      box-shadow 0.35s var(--ease);
+  }
+  .site-header.is-scrolled {
+    background-color: color-mix(in srgb, var(--sand) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom-color: var(--line);
+    box-shadow: 0 8px 24px -18px rgba(31, 31, 31, 0.45);
+  }
+
+  /* ——— Logo ——— */
+  .emblem-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--ink);
+  }
+  .emblem {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    color: var(--clay);
+  }
+  .emblem svg { width: 100%; height: 100%; }
+  .wordmark {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* ——— Nav centrale ——— */
+  .primary-nav {
+    display: none;
+    justify-content: center;
+    gap: 2.2rem;
+  }
+  .nav-link {
+    position: relative;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.75rem;        /* ~12px */
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-block: 0.4rem;
+  }
+  /* soulignement animé fin au hover */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--terracotta);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after { transform: scaleX(1); }
+
+  /* ——— Toggle langue ——— */
+  .lang-toggle {
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    transition: color 0.3s var(--ease);
+  }
+  .lang-toggle:hover { color: var(--ink); }
+
+  /* ——— Pilule CTA ——— */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.62em 1.25em;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
+      border-color 0.3s var(--ease);
+  }
+  .pill:hover {
+    background-color: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--sand);
+  }
+  .pill--desktop { display: none; }
+
+  /* ——— Hamburger ——— */
+  .burger {
+    position: relative;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .burger span {
+    display: block;
+    width: 20px;
+    height: 1.4px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .burger--close span { position: absolute; }
+  .burger--close span:nth-child(1) { transform: rotate(45deg); }
+  .burger--close span:nth-child(2) { transform: rotate(-45deg); }
+
+  /* ——— Drawer ——— */
+  .drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: var(--sand);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-1.5%);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease),
+      visibility 0s linear 0.4s;
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .drawer-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .drawer-link {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1.1;
+    color: var(--ink);
+    padding-block: 0.35rem;
+    transition: color 0.3s var(--ease);
+  }
+  .drawer-link:hover { color: var(--clay); }
+  .drawer-foot {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ——— Breakpoint 900px : desktop ——— */
+  @media (min-width: 900px) {
+    .primary-nav { display: flex; }
+    .pill--desktop { display: inline-flex; }
+    .burger { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .drawer,
+    .nav-link::after,
+    .pill,
+    .burger span { transition-duration: 0.001ms; }
+  }
+</style>
+
+<script>
+  // Fond crème au scroll
+  const header = document.getElementById('site-header');
+  const setScrolled = () => header?.classList.toggle('is-scrolled', window.scrollY > 10);
+  setScrolled();
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(() => { setScrolled(); ticking = false; });
+    }
+  }, { passive: true });
+
+  // Drawer
+  const drawer = document.getElementById('site-drawer');
+  const openBtn = document.getElementById('drawer-open');
+  const closeBtn = document.getElementById('drawer-close');
+
+  const open = () => {
+    drawer?.classList.add('is-open');
+    drawer?.setAttribute('aria-hidden', 'false');
+    openBtn?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    drawer?.querySelector<HTMLAnchorElement>('[data-drawer-link]')?.focus();
+  };
+  const close = () => {
+    drawer?.classList.remove('is-open');
+    drawer?.setAttribute('aria-hidden', 'true');
+    openBtn?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    openBtn?.focus();
+  };
+
+  openBtn?.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  drawer?.querySelectorAll('[data-drawer-link]').forEach((el) =>
+    el.addEventListener('click', close)
+  );
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.classList.contains('is-open')) close();
+  });
+</script>

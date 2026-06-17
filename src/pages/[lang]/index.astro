@@ -11,7 +11,6 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params as { lang: Lang };
-const other: Lang = lang === 'fr' ? 'en' : 'fr';
 
 // Libellés du squelette (placeholders) — bilingues
 const ui = {
@@ -62,26 +61,9 @@ const ui = {
     }
   </script>
 
-  {/* ═══════════ 1 · HEADER ═══════════ */}
-  <header class="sticky top-0 z-40 bg-[color-mix(in_srgb,var(--sand)_82%,transparent)] backdrop-blur-md">
-    <div class="wrap flex items-center justify-between py-5">
-      <a href={`/${lang}/`} class="display text-[1.4rem] tracking-tight text-ink">
-        {ui.brand}<span class="text-terracotta">·</span>
-      </a>
-      <nav class="hidden items-center gap-9 md:flex">
-        {ui.nav.map((item) => <a href="#" class="label-link">{item}</a>)}
-      </nav>
-      <div class="flex items-center gap-6">
-        <a href={`/${other}/`} class="label-link">{other}</a>
-        <a href="#" class="rounded-[var(--radius)] border border-line-strong px-5 py-2 label-link hover:!text-ink">
-          {ui.cta}
-        </a>
-      </div>
-    </div>
-    <hr class="hairline" />
-  </header>
+  {/* En-tête fixe : composant SiteHeader, monté par LandingLayout. */}
 
-  {/* ═══════════ 2 · HERO — image plein cadre, titre sur le sable ═══════════ */}
+  {/* ═══════════ HERO — image plein cadre, titre sur le sable ═══════════ */}
   <section
     data-section="hero"
     class="relative isolate flex min-h-[clamp(580px,90vh,860px)] items-center overflow-hidden"
@@ -104,6 +86,8 @@ const ui = {
 
     {/* voile sable dégradé pour la lisibilité du titre à gauche */}
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-sand/92 via-sand/45 to-transparent"></div>
+    {/* voile haut léger : lisibilité du header transparent sur toute la largeur */}
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sand/65 to-transparent"></div>
 
     {/* contenu */}
     <div class="wrap relative z-10">
