@@ -17,6 +17,11 @@
       grain/voile éditorial pour cohérence avec les sections à textures génératives.
 - [ ] **Légende / crédit** : ajouter un crédit photo si nécessaire.
 
+## Cartes « axes »
+- [ ] **Résolution `mecanismes.jpg`** : seulement 235 × 420 px → douce sur une
+      grande carte (3:4, ~400px de large en desktop). Fournir une source plus
+      grande (~1000 px de large). `clinique.jpg` (525px) et `applications.jpg`
+      (768px) sont corrects.
+
 ## Sections suivantes (à construire)
-- [ ] Citation sombre, cartes « axes » (3 textures distinctes), mission : choisir
-      pour chacune **texture générative** (`Texture.astro`) ou **photo**.
+- [ ] Mission : choisir **texture générative** (`Texture.astro`) ou **photo**.

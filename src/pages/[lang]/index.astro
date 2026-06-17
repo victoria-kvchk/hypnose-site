@@ -6,7 +6,13 @@ import SectionHeader from '../../components/SectionHeader.astro';
 import ScrollCue from '../../components/ScrollCue.astro';
 import Texture from '../../components/Texture.astro';
 import heroImage from '../../assets/hero.jpg';
+import axeMecanismes from '../../assets/axes/mecanismes.jpg';
+import axeClinique from '../../assets/axes/clinique.jpg';
+import axeApplications from '../../assets/axes/applications.jpg';
 import { supportedLangs, type Lang } from '../../i18n/translations';
+
+// visuels des axes, dans l'ordre des cartes (01, 02, 03)
+const axisImages = [axeMecanismes, axeClinique, axeApplications];
 
 export function getStaticPaths() {
   return supportedLangs.map((lang) => ({ params: { lang } }));
@@ -27,7 +33,11 @@ const ui = {
       pubs: { eyebrow: 'Publications récentes', h: 'Revue éditoriale minimaliste.', note: 'Liste : date · titre · revue · catégorie, séparée par des filets.' },
       mission: { eyebrow: 'Notre approche', h: 'Section mission, grande image sur la moitié de l’écran.', note: 'Manifeste — image 50% / texte 50%.' },
     },
-    cards: ['Mécanismes cognitifs', 'Recherche clinique', 'Applications thérapeutiques'],
+    cards: [
+      { title: 'Mécanismes cognitifs', body: 'Comment la suggestion module l’attention, la perception et le sentiment d’agentivité — observé par l’imagerie et la psychophysique.' },
+      { title: 'Recherche clinique', body: 'Essais contrôlés, protocoles reproductibles et méta-analyses qui mesurent l’effet réel de l’hypnose en contexte de soin.' },
+      { title: 'Applications thérapeutiques', body: 'De la douleur chronique à l’anxiété procédurale : où l’hypnose s’intègre, avec quelles indications et quelles limites.' },
+    ],
     heroAlt: 'Paysage minéral abstrait vu du ciel',
     imageLabel: 'Image — texture aérienne abstraite',
     placeholderBody: 'Contenu à venir.',
@@ -45,7 +55,11 @@ const ui = {
       pubs: { eyebrow: 'Recent publications', h: 'Minimalist editorial review.', note: 'List: date · title · journal · category, separated by hairlines.' },
       mission: { eyebrow: 'Our approach', h: 'Mission section, large image on half the screen.', note: 'Manifesto — 50% image / 50% text.' },
     },
-    cards: ['Cognitive mechanisms', 'Clinical research', 'Therapeutic applications'],
+    cards: [
+      { title: 'Cognitive mechanisms', body: 'How suggestion modulates attention, perception and the sense of agency — observed through imaging and psychophysics.' },
+      { title: 'Clinical research', body: 'Controlled trials, reproducible protocols and meta-analyses that measure the real effect of hypnosis in care settings.' },
+      { title: 'Therapeutic applications', body: 'From chronic pain to procedural anxiety: where hypnosis fits, with which indications and limits.' },
+    ],
     heroAlt: 'Abstract mineral landscape seen from above',
     imageLabel: 'Image — abstract aerial texture',
     placeholderBody: 'Content to come.',
@@ -141,16 +155,24 @@ const ui = {
       class="mb-16 max-w-2xl"
       eyebrow={ui.sections.axes.eyebrow}
       title={ui.sections.axes.h}
-      note={ui.sections.axes.note}
     />
     <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-3">
         {ui.cards.map((card, i) => (
-          <article data-reveal>
-            <div class="placeholder aspect-[3/4] w-full">
-              <span>{String(i + 1).padStart(2, '0')}</span>
+          <article data-reveal class="group">
+            <div class="relative aspect-[3/4] w-full overflow-hidden rounded-[var(--radius)]">
+              <Image
+                src={axisImages[i]}
+                alt={card.title}
+                sizes="(min-width: 768px) 30vw, 100vw"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              />
+              <span class="absolute left-4 top-3 z-10 font-serif text-[1.1rem] text-paper-on-dark [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div class="pointer-events-none absolute inset-0 rounded-[var(--radius)] ring-1 ring-inset ring-ink/5"></div>
             </div>
-            <h3 class="t-card mt-6">{card}</h3>
-            <p class="mt-3 text-ink-soft">{ui.placeholderBody}</p>
+            <h3 class="t-card mt-6">{card.title}</h3>
+            <p class="mt-3 text-ink-soft">{card.body}</p>
           </article>
         ))}
       </div>

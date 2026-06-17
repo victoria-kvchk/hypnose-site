@@ -35,7 +35,7 @@
 
   /* échelle (desktop, fluide) */
   --step-h1:    clamp(40px, 4.5vw, 64px);
-  --step-quote: clamp(32px, 4vw,   52px);
+  --step-quote: clamp(26px, 3vw,   40px);
   --step-h2:    clamp(30px, 3.5vw, 44px);
   --step-card:  clamp(22px, 2vw,   26px);
   --step-body:  clamp(16px, 1.05vw, 18px);
