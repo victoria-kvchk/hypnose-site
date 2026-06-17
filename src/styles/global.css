@@ -92,6 +92,8 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    /* compense le header fixe pour l'ancrage (#research, #publications…) */
+    scroll-padding-top: 5rem;
   }
 
   body {

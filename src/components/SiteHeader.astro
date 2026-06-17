@@ -48,9 +48,9 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
       <span class="emblem" aria-hidden="true">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1">
           <defs>
-            <clipPath id="emblem-clip"><circle cx="16" cy="16" r="13" /></clipPath>
+            <clipPath id="site-header-emblem-clip"><circle cx="16" cy="16" r="13" /></clipPath>
           </defs>
-          <g clip-path="url(#emblem-clip)" stroke-width="1">
+          <g clip-path="url(#site-header-emblem-clip)" stroke-width="1">
             <path d="M2 19 C 7 15, 12 15, 16 18 S 25 21, 30 16.5" />
             <path d="M3 23 C 8 20, 13 20, 16 22 S 24 24, 29 21" opacity="0.55" />
             <path d="M4 14 C 8 11.5, 13 11.5, 16 13.5 S 24 15.5, 28 12.5" opacity="0.55" />
@@ -70,7 +70,7 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
 
     <!-- Droite : langue + CTA (desktop), hamburger (mobile) -->
     <div class="flex items-center justify-end gap-4">
-      <a href={switchPath} class="lang-toggle" aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}>
+      <a href={switchPath} class="lang-toggle lang-toggle--bar" aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}>
         {other.toUpperCase()}
       </a>
       <a href="#" class="pill pill--desktop">{ctaLabel}</a>
@@ -185,6 +185,8 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
     transition: color 0.3s var(--ease);
   }
   .lang-toggle:hover { color: var(--ink); }
+  /* en mobile, la bascule de langue vit dans le drawer (évite le doublon) */
+  .lang-toggle--bar { display: none; }
 
   /* ——— Pilule CTA ——— */
   .pill {
@@ -280,6 +282,7 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   @media (min-width: 900px) {
     .primary-nav { display: flex; }
     .pill--desktop { display: inline-flex; }
+    .lang-toggle--bar { display: inline; }
     .burger { display: none; }
   }
 
@@ -310,18 +313,27 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   const openBtn = document.getElementById('drawer-open');
   const closeBtn = document.getElementById('drawer-close');
 
+  // tout l'arrière-plan (hors drawer) devient inerte : sort du tab order
+  // et des pointer events → focus naturellement piégé dans le drawer
+  const background = () =>
+    Array.from(document.body.children).filter((el) => el !== drawer);
+
   const open = () => {
-    drawer?.classList.add('is-open');
-    drawer?.setAttribute('aria-hidden', 'false');
+    if (!drawer) return;
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
     openBtn?.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
-    drawer?.querySelector<HTMLAnchorElement>('[data-drawer-link]')?.focus();
+    background().forEach((el) => el.setAttribute('inert', ''));
+    drawer.querySelector<HTMLElement>('[data-drawer-link]')?.focus();
   };
   const close = () => {
-    drawer?.classList.remove('is-open');
-    drawer?.setAttribute('aria-hidden', 'true');
+    if (!drawer) return;
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
     openBtn?.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    background().forEach((el) => el.removeAttribute('inert'));
     openBtn?.focus();
   };
 
@@ -332,5 +344,9 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   );
   addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer?.classList.contains('is-open')) close();
+  });
+  // referme le drawer si l'on repasse en desktop (≥900px)
+  matchMedia('(min-width: 900px)').addEventListener('change', (e) => {
+    if (e.matches && drawer?.classList.contains('is-open')) close();
   });
 </script>
