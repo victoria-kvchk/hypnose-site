@@ -13,9 +13,11 @@ import { getLocalizedRoute, getSwitchLangPath, type Lang } from '../i18n/utils';
 interface Props {
   lang: Lang;
   currentPath?: string;
+  /** variante opaque : pages sans hero (crème d'emblée, dans le flux) */
+  solid?: boolean;
 }
 
-const { lang, currentPath = `/${lang}/` } = Astro.props;
+const { lang, currentPath = `/${lang}/`, solid = false } = Astro.props;
 const other: Lang = lang === 'fr' ? 'en' : 'fr';
 const switchPath = getSwitchLangPath(currentPath, other);
 
@@ -42,7 +44,7 @@ const menuLabel = lang === 'fr' ? 'Menu' : 'Menu';
 const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
 ---
 
-<header id="site-header" data-header class="site-header">
+<header id="site-header" data-header class:list={['site-header', solid && 'site-header--solid']}>
   <div class="wrap grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4">
     <!-- Logo -->
     <a href={`/${lang}/`} class="emblem-link" aria-label="HYPNOSIS — accueil">
@@ -119,6 +121,14 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
     backdrop-filter: saturate(140%) blur(10px);
     border-bottom-color: var(--line);
     box-shadow: 0 8px 24px -18px rgba(31, 31, 31, 0.45);
+  }
+
+  /* variante opaque (pages sans hero) : dans le flux, crème dès le départ */
+  .site-header--solid {
+    position: sticky;
+    background-color: color-mix(in srgb, var(--sand) 92%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom-color: var(--line);
   }
 
   /* ——— Logo ——— */
