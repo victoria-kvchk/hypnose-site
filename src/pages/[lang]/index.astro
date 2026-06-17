@@ -2,6 +2,7 @@
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import Section from '../../components/Section.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import Texture from '../../components/Texture.astro';
 import { supportedLangs, type Lang } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -87,9 +88,16 @@ const ui = {
       </a>
       <p class="mt-10 text-[0.72rem] italic text-ink-faint">{ui.sections.hero.note}</p>
     </div>
-    <div data-reveal class="placeholder aspect-[4/5] w-full md:-mr-[2vw] md:aspect-auto md:h-[min(70vh,640px)]">
-      <span>{ui.imageLabel}</span>
-    </div>
+    <figure data-reveal class="media aspect-[4/5] w-full md:-mr-[2vw] md:aspect-auto md:h-[min(70vh,640px)]">
+      <div class="media__parallax" data-parallax data-parallax-speed="0.1">
+        <div class="media__zoom">
+          <Texture variant="estuary" seed={11} />
+        </div>
+      </div>
+      <figcaption class="absolute bottom-3 right-4 z-[3] eyebrow text-paper-on-dark mix-blend-difference">
+        Estuaire — I
+      </figcaption>
+    </figure>
   </Section>
 
   {/* ═══════════ 3 · CITATION ═══════════ */}
@@ -206,6 +214,37 @@ const ui = {
         el.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
         io.observe(el);
       });
+    })();
+  </script>
+
+  {/* Parallaxe douce — vanilla, rAF, désactivée si réduction de mouvement */}
+  <script is:inline>
+    (() => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const els = Array.from(document.querySelectorAll('[data-parallax]'));
+      if (!els.length) return;
+
+      let ticking = false;
+      const update = () => {
+        const vh = window.innerHeight;
+        for (const el of els) {
+          const r = el.getBoundingClientRect();
+          // progression ~[-1, 1] : 0 quand l'élément est centré dans le viewport
+          const center = r.top + r.height / 2;
+          const prog = (center - vh / 2) / (vh / 2 + r.height / 2);
+          const speed = parseFloat(el.getAttribute('data-parallax-speed') || '0.1');
+          const shift = -prog * r.height * speed;
+          el.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
+        }
+        ticking = false;
+      };
+      const onScroll = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      };
+
+      update();
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll, { passive: true });
     })();
   </script>
 </LandingLayout>

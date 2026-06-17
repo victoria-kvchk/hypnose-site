@@ -214,6 +214,39 @@
     text-transform: uppercase;
     letter-spacing: var(--track-label);
   }
+
+  /* — Média avec parallaxe + zoom lent (hero, sections image) ———— */
+  .media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    isolation: isolate;
+  }
+  /* filet intérieur très discret */
+  .media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(31, 31, 31, 0.06);
+    pointer-events: none;
+  }
+  /* couche translatée par le script de parallaxe (déborde pour ne pas
+     révéler les bords pendant le mouvement) */
+  .media__parallax {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: -12%;
+    height: 124%;
+  }
+  /* couche du zoom lent */
+  .media__zoom {
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+  }
 }
 
 /* ============================================================
@@ -236,5 +269,21 @@
     html { scroll-behavior: auto; }
     .reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
     * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+}
+
+/* Zoom lent à l'apparition + parallaxe — uniquement si mouvement autorisé.
+   (En réduction de mouvement, `.reveal-ready` n'est jamais posé et le script
+   de parallaxe s'arrête : média totalement statique.) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready .media__zoom {
+    transform: scale(1.12);
+  }
+  .reveal-ready [data-reveal].is-visible .media__zoom {
+    transform: scale(1);
+    transition: transform 1800ms var(--ease);
+  }
+  .media__parallax {
+    will-change: transform;
   }
 }
