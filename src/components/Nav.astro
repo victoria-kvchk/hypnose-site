@@ -21,7 +21,7 @@ const navItems = [
 
 <nav>
   <ul class:list={[
-    mobile ? 'flex flex-col gap-2' : 'flex gap-4 text-sm'
+    mobile ? 'flex flex-col gap-3' : 'flex items-center gap-7'
   ]}>
     {navItems.map(({ key, translationKey }) => {
       const href = getLocalizedRoute(lang, key);
@@ -31,10 +31,8 @@ const navItems = [
           <a
             href={href}
             class:list={[
-              'transition-colors',
-              isActive
-                ? 'text-primary-700 font-semibold'
-                : 'text-gray-600 hover:text-primary-700',
+              'label-link',
+              isActive && '!text-ink',
               mobile && 'block py-1',
             ]}
             aria-current={isActive ? 'page' : undefined}

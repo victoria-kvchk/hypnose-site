@@ -1,18 +1,240 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary-50: #f0f5ff;
-  --color-primary-100: #dbe8fe;
-  --color-primary-200: #bfd3fe;
-  --color-primary-300: #93b4fd;
-  --color-primary-400: #6090fa;
-  --color-primary-500: #3b6cf5;
-  --color-primary-600: #254cea;
-  --color-primary-700: #1d3ad7;
-  --color-primary-800: #1e31ae;
-  --color-primary-900: #1e2f89;
-  --color-primary-950: #172054;
+/* ============================================================
+   TOKENS — source unique de vérité (:root)
+   ============================================================ */
+:root {
+  color-scheme: light;
 
-  --font-sans: 'Inter', 'system-ui', sans-serif;
-  --font-serif: 'Georgia', serif;
+  /* — Couleurs ———————————————————————————————— */
+  --paper:        #FBF9F5;   /* clair extrême */
+  --sand:         #F7F3EE;   /* fond principal */
+  --sand-2:       #EFE5D9;   /* fond secondaire */
+  --sand-3:       #E4D6C5;   /* surfaces / placeholders */
+
+  --ink:          #1F1F1F;   /* texte titres */
+  --ink-soft:     #4A4744;   /* corps */
+  --ink-faint:    #6B655C;   /* légendes — assombri pour AA (≈5.2:1 sur --sand) */
+
+  --clay:         #6A4638;   /* brun chaud */
+  --terracotta:   #B56C42;   /* accent chaud (liens d’action) */
+  --cool:         #516A72;   /* accent froid */
+
+  /* surfaces sombres (citation, futures sections sombres) */
+  --ink-deep:      #211915;  /* fond sombre */
+  --paper-on-dark: #F3E9DC;  /* texte sur sombre */
+  --paper-dim:     #C9B8A4;  /* texte atténué sur sombre */
+
+  --line:         rgba(31, 31, 31, 0.12);  /* hairline */
+  --line-strong:  rgba(31, 31, 31, 0.22);
+
+  /* — Typographie ————————————————————————————— */
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-ui:      'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* échelle (desktop, fluide) */
+  --step-h1:    clamp(48px, 6vw,   84px);
+  --step-quote: clamp(32px, 4vw,   52px);
+  --step-h2:    clamp(30px, 3.5vw, 44px);
+  --step-card:  clamp(22px, 2vw,   26px);
+  --step-body:  clamp(16px, 1.05vw, 18px);
+  --step-label: clamp(11px, 0.8vw, 13px);
+
+  --lh-tight:   1.05;
+  --lh-quote:   1.15;
+  --lh-snug:    1.25;
+  --lh-body:    1.6;
+
+  --track-label: 0.14em;
+
+  /* — Grille & rythme ————————————————————————— */
+  --container:  1320px;
+  --gutter:     max(24px, 5vw);
+  --section-y:  clamp(80px, 12vh, 160px);
+  --radius:     5px;
+
+  /* — Mouvement ————————————————————————————— */
+  --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+  --dur:        600ms;
+}
+
+/* ============================================================
+   PONT TAILWIND — utilitaires adossés aux tokens
+   (bg-sand, text-ink, text-terracotta, font-display…)
+   ============================================================ */
+@theme {
+  --color-paper:      var(--paper);
+  --color-sand:       var(--sand);
+  --color-sand-2:     var(--sand-2);
+  --color-sand-3:     var(--sand-3);
+  --color-ink:        var(--ink);
+  --color-ink-soft:   var(--ink-soft);
+  --color-ink-faint:  var(--ink-faint);
+  --color-clay:          var(--clay);
+  --color-terracotta:    var(--terracotta);
+  --color-cool:          var(--cool);
+  --color-ink-deep:      var(--ink-deep);
+  --color-paper-on-dark: var(--paper-on-dark);
+  --color-paper-dim:     var(--paper-dim);
+  --color-line:          var(--line);
+  --color-line-strong:   var(--line-strong);
+
+  --font-display: var(--font-display);
+  --font-ui:      var(--font-ui);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--sand);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: var(--step-body);
+    line-height: var(--lh-body);
+    font-feature-settings: 'kern' 1;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--ink);
+    /* ligatures actives, optical sizing pour les grands corps */
+    font-feature-settings: 'liga' 1, 'dlig' 1, 'kern' 1;
+    font-optical-sizing: auto;
+    letter-spacing: -0.012em;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--terracotta) 20%, transparent);
+    color: var(--clay);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cool);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ============================================================
+   COMPOSANTS UTILITAIRES (grille, type, filets, liens)
+   ============================================================ */
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .section {
+    padding-block: var(--section-y);
+  }
+
+  .display { font-family: var(--font-display); font-weight: 400; }
+
+  .t-h1    { font-size: var(--step-h1);    line-height: var(--lh-tight); }
+  .t-quote { font-size: var(--step-quote); line-height: var(--lh-quote); font-weight: 400; }
+  .t-h2    { font-size: var(--step-h2);    line-height: var(--lh-snug); }
+  .t-card  { font-size: var(--step-card);  line-height: var(--lh-snug); }
+
+  /* eyebrow / labels / nav / dates / catégories */
+  .eyebrow {
+    font-family: var(--font-ui);
+    font-size: var(--step-label);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+    color: var(--ink-faint);
+  }
+
+  .label-link {
+    font-family: var(--font-ui);
+    font-size: var(--step-label);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+    color: var(--ink-soft);
+    transition: color var(--dur) var(--ease);
+  }
+  .label-link:hover { color: var(--ink); }
+
+  /* lien d’action « LABEL → » */
+  .link-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--font-ui);
+    font-size: var(--step-label);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+    color: var(--terracotta);
+  }
+  .link-action .arrow {
+    transition: transform var(--dur) var(--ease);
+  }
+  .link-action:hover .arrow { transform: translateX(4px); }
+
+  /* filet 1px */
+  .hairline {
+    height: 1px;
+    border: 0;
+    background: var(--line);
+  }
+
+  /* zone placeholder (texture/image à venir) */
+  .placeholder {
+    position: relative;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent 0 11px,
+        color-mix(in srgb, var(--sand-3) 55%, transparent) 11px 12px
+      ),
+      var(--sand-2);
+    display: grid;
+    place-items: center;
+    color: var(--ink-faint);
+  }
+  .placeholder span {
+    font-family: var(--font-ui);
+    font-size: var(--step-label);
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+  }
+}
+
+/* ============================================================
+   MICRO-INTERACTION — apparition au scroll
+   (activée seulement si JS + mouvement autorisé)
+   ============================================================ */
+@layer utilities {
+  .reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal-ready [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
 }

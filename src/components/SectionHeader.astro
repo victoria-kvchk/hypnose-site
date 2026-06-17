@@ -1,0 +1,30 @@
+---
+/**
+ * SectionHeader — bloc d’en-tête réutilisable : eyebrow + titre (+ note dev).
+ * Centralise le rythme typographique des en-têtes de section.
+ */
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** niveau du titre (h1 pour le hero, h2 ailleurs) */
+  as?: 'h1' | 'h2';
+  /** note de développement optionnelle (placeholder) */
+  note?: string;
+  /** classes sur le conteneur */
+  class?: string;
+  /** classes additionnelles sur le titre */
+  titleClass?: string;
+  /** marque le conteneur comme cible d’apparition au scroll */
+  reveal?: boolean;
+}
+
+const { eyebrow, title, as = 'h2', note, class: cls, titleClass, reveal = false } = Astro.props;
+const Title = as;
+const sizeClass = as === 'h1' ? 't-h1' : 't-h2';
+---
+
+<div class:list={[cls]} data-reveal={reveal ? true : undefined}>
+  <p class="eyebrow mb-6">{eyebrow}</p>
+  <Title class:list={[sizeClass, 'text-balance', titleClass]}>{title}</Title>
+  {note && <p class="mt-8 text-[0.72rem] italic text-ink-faint">{note}</p>}
+</div>

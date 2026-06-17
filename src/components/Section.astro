@@ -1,0 +1,32 @@
+---
+/**
+ * Section — enveloppe de section éditoriale.
+ * Rend `<section class="section [class]"> <div class="wrap">…</div> </section>`.
+ * `bare` saute le conteneur `.wrap` (pour les sections plein-cadre).
+ */
+interface Props {
+  id?: string;
+  /** valeur de data-section (repérage / ancrage) */
+  section?: string;
+  /** classes supplémentaires sur <section> (ex. fond) */
+  class?: string;
+  /** classes supplémentaires sur le conteneur .wrap */
+  wrapClass?: string;
+  /** ne pas envelopper dans .wrap */
+  bare?: boolean;
+}
+
+const { id, section, class: cls, wrapClass, bare = false } = Astro.props;
+---
+
+<section id={id} data-section={section} class:list={['section', cls]}>
+  {
+    bare ? (
+      <slot />
+    ) : (
+      <div class:list={['wrap', wrapClass]}>
+        <slot />
+      </div>
+    )
+  }
+</section>

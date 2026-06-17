@@ -39,47 +39,49 @@ if (routeKey === 'bibliography') {
 ---
 
 <BaseLayout title={title}>
-  <div class="mx-auto max-w-5xl px-4 py-16">
-    <h1 class="text-4xl font-bold text-primary-800 mb-8">{title}</h1>
+  <section class="section">
+    <div class="wrap max-w-3xl">
+      <h1 class="t-h1 mb-12">{title}</h1>
 
-    {routeKey === 'bibliography' && (
-      bibliographyRefs.length === 0 ? (
-        <p class="text-gray-600">{t(lang, 'bibliography.empty')}</p>
-      ) : (
-        <ul class="space-y-6">
-          {bibliographyRefs.map((ref) => (
-            <li class="border-b border-gray-200 pb-4">
-              <p class="font-semibold text-primary-700">{ref.title}</p>
-              <p class="text-sm text-gray-600">
-                {ref.authors.join(', ')} ({ref.year})
-              </p>
-              {ref.journal && <p class="text-sm text-gray-500 italic">{ref.journal}</p>}
-              {ref.doi && (
-                <a
-                  href={`https://doi.org/${ref.doi}`}
-                  class="text-sm text-primary-600 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  DOI: {ref.doi}
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
-      )
-    )}
+      {routeKey === 'bibliography' && (
+        bibliographyRefs.length === 0 ? (
+          <p class="text-ink-soft">{t(lang, 'bibliography.empty')}</p>
+        ) : (
+          <ul>
+            {bibliographyRefs.map((ref) => (
+              <li class="border-t border-line py-6">
+                <p class="t-card text-ink">{ref.title}</p>
+                <p class="mt-1 text-[0.92rem] text-ink-soft">
+                  {ref.authors.join(', ')} ({ref.year})
+                </p>
+                {ref.journal && <p class="text-[0.92rem] italic text-ink-faint">{ref.journal}</p>}
+                {ref.doi && (
+                  <a
+                    href={`https://doi.org/${ref.doi}`}
+                    class="link-action mt-3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    DOI&nbsp;: {ref.doi} <span class="arrow">→</span>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        )
+      )}
 
-    {routeKey === 'about' && (
-      <p class="text-lg text-gray-600 leading-relaxed">
-        {t(lang, 'about.content')}
-      </p>
-    )}
+      {routeKey === 'about' && (
+        <p class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
+          {t(lang, 'about.content')}
+        </p>
+      )}
 
-    {routeKey === 'contact' && (
-      <div class="text-lg text-gray-600 leading-relaxed">
-        <p>{t(lang, 'contact.content')}</p>
-      </div>
-    )}
-  </div>
+      {routeKey === 'contact' && (
+        <div class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
+          <p>{t(lang, 'contact.content')}</p>
+        </div>
+      )}
+    </div>
+  </section>
 </BaseLayout>
