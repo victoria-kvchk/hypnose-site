@@ -16,9 +16,10 @@
   --ink-soft:     #4A4744;   /* corps */
   --ink-faint:    #6B655C;   /* légendes — assombri pour AA (≈5.2:1 sur --sand) */
 
-  --clay:         #6A4638;   /* brun chaud */
-  --terracotta:   #B56C42;   /* accent chaud (liens d’action) */
-  --cool:         #516A72;   /* accent froid */
+  --clay:             #6A4638;   /* brun chaud */
+  --terracotta:       #B56C42;   /* accent chaud (liens d’action) */
+  --terracotta-light: #CF9269;   /* terracotta clair (hover sur fond sombre) */
+  --cool:             #516A72;   /* accent froid */
 
   /* surfaces sombres (citation, futures sections sombres) */
   --ink-deep:      #211915;  /* fond sombre */
@@ -186,6 +187,10 @@
     transition: transform var(--dur) var(--ease);
   }
   .link-action:hover .arrow { transform: translateX(4px); }
+
+  /* variante crème pour fond sombre (citation, sections texturées) */
+  .link-action--cream { color: var(--paper-on-dark); }
+  .link-action--cream:hover { color: var(--terracotta-light); }
 
   /* pilule CTA : bordure fine ink → remplissage terracotta + texte crème */
   .pill {

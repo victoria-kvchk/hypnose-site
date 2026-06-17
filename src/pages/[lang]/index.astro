@@ -4,6 +4,7 @@ import LandingLayout from '../../layouts/LandingLayout.astro';
 import Section from '../../components/Section.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import ScrollCue from '../../components/ScrollCue.astro';
+import Texture from '../../components/Texture.astro';
 import heroImage from '../../assets/hero.jpg';
 import { supportedLangs, type Lang } from '../../i18n/translations';
 
@@ -21,7 +22,7 @@ const ui = {
     cta: 'Explorer la recherche',
     sections: {
       hero: { h: 'Comprendre l’hypnose autrement.', body: 'Un lieu dédié à la recherche scientifique sur l’hypnose et la thérapie par hypnose.' },
-      quote: { eyebrow: 'Citation', h: 'Bloc citation pleine largeur, fond sombre texturé.', note: 'Citation — clamp(32–52px), line-height 1.15.' },
+      quote: { text: 'L’hypnose n’est pas un état d’exception, mais une variation naturelle de la conscience.', lede: 'Les recherches contemporaines montrent des effets mesurables sur l’attention, la perception, la mémoire et le contrôle cognitif.', link: 'En savoir plus' },
       axes: { eyebrow: 'Axes de recherche', h: 'Trois territoires d’étude.', note: 'Trois cartes avec image abstraite distincte.' },
       pubs: { eyebrow: 'Publications récentes', h: 'Revue éditoriale minimaliste.', note: 'Liste : date · titre · revue · catégorie, séparée par des filets.' },
       mission: { eyebrow: 'Notre approche', h: 'Section mission, grande image sur la moitié de l’écran.', note: 'Manifeste — image 50% / texte 50%.' },
@@ -39,7 +40,7 @@ const ui = {
     cta: 'Explore the research',
     sections: {
       hero: { h: 'Understanding hypnosis, differently.', body: 'A place dedicated to scientific research on hypnosis and hypnotherapy.' },
-      quote: { eyebrow: 'Quote', h: 'Full-width quote block, dark textured background.', note: 'Quote — clamp(32–52px), line-height 1.15.' },
+      quote: { text: 'Hypnosis is not an exceptional state, but a natural variation of consciousness.', lede: 'Contemporary research shows measurable effects on attention, perception, memory and cognitive control.', link: 'Learn more' },
       axes: { eyebrow: 'Research axes', h: 'Three fields of study.', note: 'Three cards, each with a distinct abstract image.' },
       pubs: { eyebrow: 'Recent publications', h: 'Minimalist editorial review.', note: 'List: date · title · journal · category, separated by hairlines.' },
       mission: { eyebrow: 'Our approach', h: 'Mission section, large image on half the screen.', note: 'Manifesto — 50% image / 50% text.' },
@@ -110,14 +111,28 @@ const ui = {
     </div>
   </section>
 
-  {/* ═══════════ 3 · CITATION ═══════════ */}
-  <Section section="quote" class="bg-ink-deep text-paper-on-dark">
-    <p class="eyebrow mb-8 !text-paper-dim/70" data-reveal>{ui.sections.quote.eyebrow}</p>
-    <blockquote class="display t-quote max-w-[16ch] text-balance md:max-w-[24ch]" data-reveal>
-      {ui.sections.quote.h}
-    </blockquote>
-    <p class="mt-8 text-[0.72rem] italic text-paper-dim/60" data-reveal>{ui.sections.quote.note}</p>
-  </Section>
+  {/* ═══════════ 3 · CITATION — deux colonnes sur fond texturé ═══════════ */}
+  <section data-section="quote" class="relative isolate overflow-hidden text-paper-on-dark">
+    {/* fond texturé sombre */}
+    <div class="absolute inset-0">
+      <Texture variant="deep" seed={5} class="h-full w-full" />
+    </div>
+    {/* scrim pour le contraste du texte crème */}
+    <div class="pointer-events-none absolute inset-0 bg-ink-deep/55"></div>
+
+    {/* contenu deux colonnes */}
+    <div class="wrap relative z-10 grid grid-cols-1 items-center gap-10 py-[clamp(96px,16vh,190px)] md:grid-cols-[1.55fr_1fr] md:gap-16">
+      <blockquote data-reveal class="display t-quote text-balance text-paper-on-dark">
+        «&nbsp;{ui.sections.quote.text}&nbsp;»
+      </blockquote>
+      <div data-reveal class="md:max-w-xs">
+        <p class="text-pretty leading-relaxed text-paper-dim">{ui.sections.quote.lede}</p>
+        <a href="#research" class="link-action link-action--cream mt-8">
+          {ui.sections.quote.link} <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   {/* ═══════════ 4 · AXES (trois cartes) ═══════════ */}
   <Section id="research" section="axes">
