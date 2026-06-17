@@ -1,8 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import Section from '../../components/Section.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import Texture from '../../components/Texture.astro';
+import heroImage from '../../assets/hero.jpg';
 import { supportedLangs, type Lang } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -26,6 +27,7 @@ const ui = {
       mission: { eyebrow: 'Notre approche', h: 'Section mission, grande image sur la moitié de l’écran.', note: 'Manifeste — image 50% / texte 50%.' },
     },
     cards: ['Mécanismes cognitifs', 'Recherche clinique', 'Applications thérapeutiques'],
+    heroAlt: 'Paysage minéral abstrait vu du ciel',
     imageLabel: 'Image — texture aérienne abstraite',
     placeholderBody: 'Contenu à venir.',
     footerNote: 'Footer — sobre : wordmark, colonnes de liens, filet, mentions.',
@@ -43,6 +45,7 @@ const ui = {
       mission: { eyebrow: 'Our approach', h: 'Mission section, large image on half the screen.', note: 'Manifesto — 50% image / 50% text.' },
     },
     cards: ['Cognitive mechanisms', 'Clinical research', 'Therapeutic applications'],
+    heroAlt: 'Abstract mineral landscape seen from above',
     imageLabel: 'Image — abstract aerial texture',
     placeholderBody: 'Content to come.',
     footerNote: 'Footer — sober: wordmark, link columns, hairline, legal.',
@@ -91,12 +94,16 @@ const ui = {
     <figure data-reveal class="media aspect-[4/5] w-full md:-mr-[2vw] md:aspect-auto md:h-[min(70vh,640px)]">
       <div class="media__parallax" data-parallax data-parallax-speed="0.1">
         <div class="media__zoom">
-          <Texture variant="estuary" seed={11} />
+          <Image
+            src={heroImage}
+            alt={ui.heroAlt}
+            loading="eager"
+            fetchpriority="high"
+            sizes="(min-width: 768px) 46vw, 100vw"
+            class="h-full w-full object-cover"
+          />
         </div>
       </div>
-      <figcaption class="absolute bottom-3 right-4 z-[3] eyebrow text-paper-on-dark mix-blend-difference">
-        Estuaire — I
-      </figcaption>
     </figure>
   </Section>
 
