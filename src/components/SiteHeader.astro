@@ -22,21 +22,22 @@ const switchPath = getSwitchLangPath(currentPath, other);
 const nav =
   lang === 'fr'
     ? [
-        { label: 'Recherche', href: '#research' },
-        { label: 'Thérapie', href: '#' },
-        { label: 'Publications', href: '#publications' },
+        { label: 'Recherche', href: `/${lang}/#research` },
+        { label: 'Thérapie', href: getLocalizedRoute(lang, 'therapy') },
+        { label: 'Publications', href: getLocalizedRoute(lang, 'articles') },
         { label: 'À propos', href: getLocalizedRoute(lang, 'about') },
-        { label: 'Ressources', href: '#' },
+        { label: 'Ressources', href: getLocalizedRoute(lang, 'bibliography') },
       ]
     : [
-        { label: 'Research', href: '#research' },
-        { label: 'Therapy', href: '#' },
-        { label: 'Publications', href: '#publications' },
+        { label: 'Research', href: `/${lang}/#research` },
+        { label: 'Therapy', href: getLocalizedRoute(lang, 'therapy') },
+        { label: 'Publications', href: getLocalizedRoute(lang, 'articles') },
         { label: 'About', href: getLocalizedRoute(lang, 'about') },
-        { label: 'Resources', href: '#' },
+        { label: 'Resources', href: getLocalizedRoute(lang, 'bibliography') },
       ];
 
 const ctaLabel = lang === 'fr' ? 'Soutenir la recherche' : 'Support the research';
+const ctaHref = getLocalizedRoute(lang, 'support');
 const menuLabel = lang === 'fr' ? 'Menu' : 'Menu';
 const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
 ---
@@ -73,7 +74,7 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
       <a href={switchPath} class="lang-toggle lang-toggle--bar" aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}>
         {other.toUpperCase()}
       </a>
-      <a href="#" class="pill pill--desktop">{ctaLabel}</a>
+      <a href={ctaHref} class="pill pill--desktop">{ctaLabel}</a>
       <button type="button" id="drawer-open" class="burger" aria-label={menuLabel} aria-expanded="false" aria-controls="site-drawer">
         <span></span><span></span>
       </button>
@@ -95,7 +96,7 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
     ))}
   </nav>
   <div class="wrap drawer-foot">
-    <a href="#" class="pill" data-drawer-link>{ctaLabel}</a>
+    <a href={ctaHref} class="pill" data-drawer-link>{ctaLabel}</a>
     <a href={switchPath} class="lang-toggle" data-drawer-link>
       {other.toUpperCase()}
     </a>

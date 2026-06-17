@@ -21,6 +21,9 @@ export const translations = {
     'contact.title': 'Contact',
     'contact.content': 'Pour toute question ou suggestion, n\'hésitez pas à nous contacter.',
     'contact.email.label': 'E-mail',
+    'therapy.title': 'Thérapie',
+    'support.title': 'Soutenir la recherche',
+    'page.construction': 'Cette page est en cours de construction.',
   },
   en: {
     'site.title': 'Hypnosis & Therapy',
@@ -40,6 +43,9 @@ export const translations = {
     'contact.title': 'Contact',
     'contact.content': 'For any questions or suggestions, feel free to get in touch.',
     'contact.email.label': 'Email',
+    'therapy.title': 'Therapy',
+    'support.title': 'Support the research',
+    'page.construction': 'This page is under construction.',
   },
 } as const;
 

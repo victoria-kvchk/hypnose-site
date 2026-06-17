@@ -6,7 +6,7 @@ import { routes } from '../../i18n/routes';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
-  const pageKeys = ['bibliography', 'about', 'contact'];
+  const pageKeys = ['bibliography', 'about', 'contact', 'therapy', 'support'];
   const paths: { params: { lang: string; slug: string }; props: { routeKey: string } }[] = [];
 
   for (const lang of supportedLangs) {
@@ -81,6 +81,12 @@ if (routeKey === 'bibliography') {
         <div class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
           <p>{t(lang, 'contact.content')}</p>
         </div>
+      )}
+
+      {(routeKey === 'therapy' || routeKey === 'support') && (
+        <p class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
+          {t(lang, 'page.construction')}
+        </p>
       )}
     </div>
   </section>
