@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import Section from '../../components/Section.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import ScrollCue from '../../components/ScrollCue.astro';
 import heroImage from '../../assets/hero.jpg';
 import { supportedLangs, type Lang } from '../../i18n/translations';
 
@@ -19,7 +20,7 @@ const ui = {
     nav: ['Recherche', 'Publications', 'Mission'],
     cta: 'Explorer la recherche',
     sections: {
-      hero: { eyebrow: 'Cognition · Clinique · Preuves', h: 'Comprendre l’hypnose autrement.', body: 'Explorer les mécanismes cognitifs, les preuves scientifiques et les applications thérapeutiques de l’hypnose moderne.' },
+      hero: { h: 'Comprendre l’hypnose autrement.', body: 'Un lieu dédié à la recherche scientifique sur l’hypnose et la thérapie par hypnose.' },
       quote: { eyebrow: 'Citation', h: 'Bloc citation pleine largeur, fond sombre texturé.', note: 'Citation — clamp(32–52px), line-height 1.15.' },
       axes: { eyebrow: 'Axes de recherche', h: 'Trois territoires d’étude.', note: 'Trois cartes avec image abstraite distincte.' },
       pubs: { eyebrow: 'Publications récentes', h: 'Revue éditoriale minimaliste.', note: 'Liste : date · titre · revue · catégorie, séparée par des filets.' },
@@ -37,7 +38,7 @@ const ui = {
     nav: ['Research', 'Publications', 'Mission'],
     cta: 'Explore the research',
     sections: {
-      hero: { eyebrow: 'Cognition · Clinical · Evidence', h: 'Understanding hypnosis, differently.', body: 'Exploring the cognitive mechanisms, scientific evidence and therapeutic applications of modern hypnosis.' },
+      hero: { h: 'Understanding hypnosis, differently.', body: 'A place dedicated to scientific research on hypnosis and hypnotherapy.' },
       quote: { eyebrow: 'Quote', h: 'Full-width quote block, dark textured background.', note: 'Quote — clamp(32–52px), line-height 1.15.' },
       axes: { eyebrow: 'Research axes', h: 'Three fields of study.', note: 'Three cards, each with a distinct abstract image.' },
       pubs: { eyebrow: 'Recent publications', h: 'Minimalist editorial review.', note: 'List: date · title · journal · category, separated by hairlines.' },
@@ -88,16 +89,24 @@ const ui = {
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-sand/92 via-sand/45 to-transparent"></div>
     {/* voile haut léger : lisibilité du header transparent sur toute la largeur */}
     <div class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sand/65 to-transparent"></div>
+    {/* overlay léger supplémentaire en mobile pour la lisibilité du texte */}
+    <div class="pointer-events-none absolute inset-0 bg-sand/25 md:hidden"></div>
 
     {/* contenu */}
     <div class="wrap relative z-10">
       <div data-reveal class="max-w-xl py-24">
-        <SectionHeader as="h1" eyebrow={ui.sections.hero.eyebrow} title={ui.sections.hero.h} />
-        <p class="mt-8 max-w-md text-ink-soft">{ui.sections.hero.body}</p>
-        <a href="#research" class="link-action mt-10">
+        <h1 class="t-h1 text-balance">{ui.sections.hero.h}</h1>
+        <hr class="mt-8 h-px w-16 border-0 bg-terracotta" />
+        <p class="mt-7 max-w-md text-pretty text-ink-soft">{ui.sections.hero.body}</p>
+        <a href="#research" class="pill mt-9 w-full sm:w-auto">
           {ui.cta} <span class="arrow">→</span>
         </a>
       </div>
+    </div>
+
+    {/* indicateur de scroll signature, bas-droite de la photo */}
+    <div class="absolute bottom-7 right-6 z-20 md:bottom-10 md:right-10">
+      <ScrollCue lang={lang} />
     </div>
   </section>
 

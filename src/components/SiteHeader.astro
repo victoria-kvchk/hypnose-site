@@ -188,27 +188,7 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   /* en mobile, la bascule de langue vit dans le drawer (évite le doublon) */
   .lang-toggle--bar { display: none; }
 
-  /* ——— Pilule CTA ——— */
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--ink);
-    border-radius: 999px;
-    padding: 0.62em 1.25em;
-    font-family: var(--font-ui);
-    font-weight: 500;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
-      border-color 0.3s var(--ease);
-  }
-  .pill:hover {
-    background-color: var(--terracotta);
-    border-color: var(--terracotta);
-    color: var(--sand);
-  }
+  /* ——— Pilule CTA (style commun dans global.css ; ici, affichage) ——— */
   .pill--desktop { display: none; }
 
   /* ——— Hamburger ——— */
