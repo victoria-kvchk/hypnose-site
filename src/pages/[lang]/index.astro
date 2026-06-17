@@ -20,7 +20,7 @@ const ui = {
     nav: ['Recherche', 'Publications', 'Mission'],
     cta: 'Explorer la recherche',
     sections: {
-      hero: { eyebrow: 'Cognition · Clinique · Preuves', h: 'Comprendre l’hypnose autrement.', note: 'Hero — deux colonnes : titre + texte + lien d’action à gauche, image plein cadre à droite.' },
+      hero: { eyebrow: 'Cognition · Clinique · Preuves', h: 'Comprendre l’hypnose autrement.', body: 'Explorer les mécanismes cognitifs, les preuves scientifiques et les applications thérapeutiques de l’hypnose moderne.' },
       quote: { eyebrow: 'Citation', h: 'Bloc citation pleine largeur, fond sombre texturé.', note: 'Citation — clamp(32–52px), line-height 1.15.' },
       axes: { eyebrow: 'Axes de recherche', h: 'Trois territoires d’étude.', note: 'Trois cartes avec image abstraite distincte.' },
       pubs: { eyebrow: 'Publications récentes', h: 'Revue éditoriale minimaliste.', note: 'Liste : date · titre · revue · catégorie, séparée par des filets.' },
@@ -38,7 +38,7 @@ const ui = {
     nav: ['Research', 'Publications', 'Mission'],
     cta: 'Explore the research',
     sections: {
-      hero: { eyebrow: 'Cognition · Clinical · Evidence', h: 'Understanding hypnosis, differently.', note: 'Hero — two columns: title + text + action link left, full-bleed image right.' },
+      hero: { eyebrow: 'Cognition · Clinical · Evidence', h: 'Understanding hypnosis, differently.', body: 'Exploring the cognitive mechanisms, scientific evidence and therapeutic applications of modern hypnosis.' },
       quote: { eyebrow: 'Quote', h: 'Full-width quote block, dark textured background.', note: 'Quote — clamp(32–52px), line-height 1.15.' },
       axes: { eyebrow: 'Research axes', h: 'Three fields of study.', note: 'Three cards, each with a distinct abstract image.' },
       pubs: { eyebrow: 'Recent publications', h: 'Minimalist editorial review.', note: 'List: date · title · journal · category, separated by hairlines.' },
@@ -81,31 +81,41 @@ const ui = {
     <hr class="hairline" />
   </header>
 
-  {/* ═══════════ 2 · HERO ═══════════ */}
-  <Section section="hero" wrapClass="grid grid-cols-1 items-center gap-x-16 gap-y-12 md:grid-cols-[1.05fr_1fr]">
-    <div data-reveal>
-      <SectionHeader as="h1" eyebrow={ui.sections.hero.eyebrow} title={ui.sections.hero.h} />
-      <p class="mt-8 max-w-md text-ink-soft">{ui.placeholderBody}</p>
-      <a href="#" class="link-action mt-10">
-        {ui.cta} <span class="arrow">→</span>
-      </a>
-      <p class="mt-10 text-[0.72rem] italic text-ink-faint">{ui.sections.hero.note}</p>
-    </div>
-    <figure data-reveal class="media aspect-[4/5] w-full md:-mr-[2vw] md:aspect-auto md:h-[min(70vh,640px)]">
-      <div class="media__parallax" data-parallax data-parallax-speed="0.1">
+  {/* ═══════════ 2 · HERO — image plein cadre, titre sur le sable ═══════════ */}
+  <section
+    data-section="hero"
+    class="relative isolate flex min-h-[clamp(580px,90vh,860px)] items-center overflow-hidden"
+  >
+    {/* image plein cadre + parallaxe/zoom (sable à gauche) */}
+    <figure data-reveal class="reveal-fade absolute inset-0 overflow-hidden">
+      <div class="media__parallax" data-parallax data-parallax-speed="0.08">
         <div class="media__zoom">
           <Image
             src={heroImage}
             alt={ui.heroAlt}
             loading="eager"
             fetchpriority="high"
-            sizes="(min-width: 768px) 46vw, 100vw"
-            class="h-full w-full object-cover"
+            sizes="100vw"
+            class="h-full w-full object-cover [object-position:28%_center]"
           />
         </div>
       </div>
     </figure>
-  </Section>
+
+    {/* voile sable dégradé pour la lisibilité du titre à gauche */}
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-sand/92 via-sand/45 to-transparent"></div>
+
+    {/* contenu */}
+    <div class="wrap relative z-10">
+      <div data-reveal class="max-w-xl py-24">
+        <SectionHeader as="h1" eyebrow={ui.sections.hero.eyebrow} title={ui.sections.hero.h} />
+        <p class="mt-8 max-w-md text-ink-soft">{ui.sections.hero.body}</p>
+        <a href="#research" class="link-action mt-10">
+          {ui.cta} <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   {/* ═══════════ 3 · CITATION ═══════════ */}
   <Section section="quote" class="bg-ink-deep text-paper-on-dark">

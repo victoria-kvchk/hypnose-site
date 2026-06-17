@@ -264,6 +264,11 @@
     opacity: 1;
     transform: none;
   }
+  /* variante : fondu seul, sans translation (médias plein cadre) */
+  .reveal-ready [data-reveal].reveal-fade,
+  .reveal-ready [data-reveal].reveal-fade.is-visible {
+    transform: none;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

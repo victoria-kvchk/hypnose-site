@@ -1,21 +1,21 @@
 # TODO — réglages à revisiter
 
-## Hero (colonne image)
-- [ ] **Résolution de l'image** : `src/assets/hero.jpg` = 675 × 1200 px. L'image
-      déborde (`md:-mr-[2vw]`) et subit un zoom lent (scale 1.12) → sur grand écran /
-      retina elle peut paraître un peu douce. Idéalement fournir une source
-      ~2000 px de large (le poids n'a pas d'importance, Astro réoptimise).
-- [ ] **Intensité de la parallaxe** : attribut `data-parallax-speed="0.1"` sur
-      `.media__parallax` dans le hero (`src/pages/[lang]/index.astro`). À régler
-      entre ~0.06 et ~0.15 selon le ressenti.
-- [ ] **Débordement / cadrage** : marge `md:-mr-[2vw]` + ratios `aspect-[4/5]`
-      (mobile) et `md:h-[min(70vh,640px)]` (desktop). À réajuster avec le cadrage
-      réel de la photo.
-- [ ] **Image seule vs overlay** : le hero affiche la photo seule. Décider si on
-      ajoute un léger grain/voile éditorial pour cohérence avec les sections à
-      textures génératives.
-- [ ] **Légende / crédit** : l'ancienne légende « Estuaire — I » (liée à la texture
-      générée) a été retirée. Ajouter une légende ou un crédit photo si nécessaire.
+## Hero (image plein cadre, titre sur le sable)
+- [ ] **Résolution de l'image** : `src/assets/hero.jpg` = 1200 × 675 px (paysage,
+      pivotée 90° depuis l'original portrait). Affichée **plein écran** + zoom lent →
+      sur grand écran / retina, 1200 px de large peut paraître doux. Idéalement
+      fournir une source ~2400 px de large (poids sans importance, Astro réoptimise).
+- [ ] **Cadrage / object-position** : `[object-position:28%_center]` garde le sable
+      (gauche) sous le titre. À réajuster selon les breakpoints, surtout en **mobile**
+      (l'image paysage est fortement recadrée dans un viewport haut).
+- [ ] **Voile de lisibilité** : dégradé `from-sand/92 via-sand/45 to-transparent`.
+      Vérifier le contraste du titre sur toute la largeur du bloc texte ; ajuster
+      l'opacité/les arrêts si le titre déborde sur la zone sombre (vague).
+- [ ] **Intensité de la parallaxe** : `data-parallax-speed="0.08"` sur
+      `.media__parallax`. À régler entre ~0.05 et ~0.12.
+- [ ] **Image seule vs overlay** : photo seule pour l'instant. Décider d'un léger
+      grain/voile éditorial pour cohérence avec les sections à textures génératives.
+- [ ] **Légende / crédit** : ajouter un crédit photo si nécessaire.
 
 ## Sections suivantes (à construire)
 - [ ] Citation sombre, cartes « axes » (3 textures distinctes), mission : choisir
