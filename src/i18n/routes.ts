@@ -8,6 +8,10 @@ export const routes: Record<string, Record<Lang, string>> = {
   contact:      { fr: '/contact/',      en: '/contact/' },
   therapy:      { fr: '/therapie/',     en: '/therapy/' },
   support:      { fr: '/soutenir/',     en: '/support/' },
+  faq:          { fr: '/faq/',          en: '/faq/' },
+  glossary:     { fr: '/glossaire/',    en: '/glossary/' },
+  legal:        { fr: '/mentions-legales/', en: '/legal-notice/' },
+  privacy:      { fr: '/confidentialite/', en: '/privacy/' },
 };
 
 export function getLocalizedRoute(lang: Lang, routeKey: string): string {

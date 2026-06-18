@@ -218,6 +218,17 @@
   .pill .arrow { transition: transform 0.3s var(--ease); }
   .pill:hover .arrow { transform: translateX(4px); }
 
+  /* variante crème : bouton clair sur fond sombre (newsletter, sections texturées) */
+  .pill--cream {
+    border-color: var(--paper-on-dark);
+    color: var(--paper-on-dark);
+  }
+  .pill--cream:hover {
+    background-color: var(--paper-on-dark);
+    border-color: var(--paper-on-dark);
+    color: var(--ink-deep);
+  }
+
   /* filet 1px */
   .hairline {
     height: 1px;
@@ -325,3 +336,62 @@
     will-change: transform;
   }
 }
+
+/* ============================================================
+   CORPS D'ARTICLE — prose rendue depuis le Markdown
+   (styles globaux : s'appliquent au HTML injecté par <Content/>)
+   ============================================================ */
+.article-prose {
+  font-size: var(--step-body);
+  color: var(--ink-soft);
+  line-height: var(--lh-body);
+}
+.article-prose > * + * { margin-top: 1.15rem; }
+.article-prose h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 2.2vw, 1.8rem);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin-top: 2.75rem;
+  margin-bottom: 0.25rem;
+}
+.article-prose p { color: var(--ink-soft); }
+.article-prose strong { font-weight: 600; color: var(--ink); }
+.article-prose em { font-style: italic; }
+.article-prose a:not(.cite-link) { color: var(--clay); text-decoration: underline; text-underline-offset: 2px; }
+.article-prose a:not(.cite-link):hover { color: var(--terracotta); }
+.article-prose ul { list-style: none; padding: 0; }
+.article-prose ul > li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-top: 0.85rem;
+}
+.article-prose ul > li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--clay);
+}
+
+/* bibliothèque — boutons de tri */
+.biblio-sort {
+  font-family: var(--font-ui);
+  color: var(--ink-faint);
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.biblio-sort:hover { color: var(--ink); }
+.biblio-sort[aria-pressed="true"] {
+  color: var(--clay);
+  background-color: var(--sand-2);
+}
+
+/* exposants de citation [n] → liens vers les sources */
+.cite { font-size: 0.7em; line-height: 0; margin-left: 1px; white-space: nowrap; }
+.cite .cite-link {
+  color: var(--clay);
+  text-decoration: none;
+  padding: 0 1px;
+}
+.cite .cite-link:hover { color: var(--terracotta); }

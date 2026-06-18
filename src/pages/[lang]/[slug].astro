@@ -3,10 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { supportedLangs, type Lang } from '../../i18n/translations';
 import { t } from '../../i18n/utils';
 import { routes } from '../../i18n/routes';
+import { faqItems } from '../../i18n/faq';
+import { glossaryItems } from '../../i18n/glossary';
+import { legalSections } from '../../i18n/legal';
+import { privacySections } from '../../i18n/privacy';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
-  const pageKeys = ['bibliography', 'about', 'contact', 'therapy', 'support'];
+  const pageKeys = ['bibliography', 'about', 'contact', 'therapy', 'support', 'faq', 'glossary', 'legal', 'privacy'];
   const paths: { params: { lang: string; slug: string }; props: { routeKey: string } }[] = [];
 
   for (const lang of supportedLangs) {
@@ -29,13 +33,63 @@ const { routeKey } = Astro.props;
 
 const title = t(lang, `${routeKey}.title` as any);
 
-let bibliographyRefs: any[] = [];
+// Pages structurées en sections (titre + paragraphes) : mentions légales, confidentialité.
+const docSections =
+  routeKey === 'legal' ? legalSections[lang]
+  : routeKey === 'privacy' ? privacySections[lang]
+  : null;
+
+// Bibliothèque : références universelles (non traduites), groupées par thème.
+const BIB_TOPIC_ORDER = ['definition', 'mechanisms', 'pain', 'clinical', 'memory', 'books'];
+const BIB_TOPIC_LABELS: Record<string, Record<Lang, string>> = {
+  definition: { fr: 'Définition & mesure', en: 'Definition & measurement' },
+  mechanisms: { fr: 'Mécanismes & neurosciences', en: 'Mechanisms & neuroscience' },
+  pain: { fr: 'Douleur', en: 'Pain' },
+  clinical: { fr: 'Applications cliniques', en: 'Clinical applications' },
+  memory: { fr: 'Mémoire & limites', en: 'Memory & limitations' },
+  books: { fr: 'Ouvrages de référence', en: 'Reference works' },
+};
+// suffixe « éditeur(s) » pour les ouvrages collectifs
+const editorsTag = (a: string[]) =>
+  lang === 'fr' ? ' (dir.)' : a.length > 1 ? ' (eds.)' : ' (ed.)';
+const surname = (author: string) => author.split(',')[0];
+const BIB_LEVEL_LABELS: Record<string, Record<Lang, string>> = {
+  established: { fr: 'Établi', en: 'Established' },
+  promising: { fr: 'Prometteur', en: 'Promising' },
+  exploratory: { fr: 'Exploratoire', en: 'Exploratory' },
+};
+const BIB_LEVEL_CLASS: Record<string, string> = {
+  established: 'border-clay/40 text-clay',
+  promising: 'border-cool/40 text-cool',
+  exploratory: 'border-line text-ink-faint',
+};
+const fmtAuthors = (a: string[]) =>
+  a.length > 4 ? `${a.slice(0, 4).join(', ')}, et al.` : a.join(', ');
+
+let bibGroups: { key: string; refs: any[] }[] = [];
 if (routeKey === 'bibliography') {
   const entries = await getCollection('bibliography');
-  bibliographyRefs = entries
-    .filter((e) => e.id.startsWith(`${lang}/`))
-    .flatMap((e) => e.data.references ?? []);
+  const refs = entries.flatMap((e) => e.data.references ?? []);
+  bibGroups = BIB_TOPIC_ORDER
+    .map((key) => {
+      let groupRefs = refs.filter((r) => r.topic === key);
+      // les ouvrages de référence sont triés par auteur (alphabétique)
+      if (key === 'books') {
+        groupRefs = [...groupRefs].sort(
+          (a, b) => surname(a.authors[0]).localeCompare(surname(b.authors[0]), 'fr') || a.year - b.year
+        );
+      }
+      return { key, refs: groupRefs };
+    })
+    .filter((g) => g.refs.length > 0);
 }
+// liste aplatie + index stable (ordre par défaut = thème) pour le tri/filtre client
+let _bi = 0;
+const bibItems = bibGroups.flatMap((g) => g.refs.map((r) => ({ ref: r, topic: g.key, i: _bi++ })));
+const BIB_UI =
+  lang === 'fr'
+    ? { sort: 'Trier', byTheme: 'Thème', byAuthor: 'Auteur', byYear: 'Année', theme: 'Thème', all: 'Toutes' }
+    : { sort: 'Sort', byTheme: 'Theme', byAuthor: 'Author', byYear: 'Year', theme: 'Theme', all: 'All' };
 ---
 
 <BaseLayout title={title}>
@@ -44,30 +98,121 @@ if (routeKey === 'bibliography') {
       <h1 class="t-h1 mb-12">{title}</h1>
 
       {routeKey === 'bibliography' && (
-        bibliographyRefs.length === 0 ? (
+        bibGroups.length === 0 ? (
           <p class="text-ink-soft">{t(lang, 'bibliography.empty')}</p>
         ) : (
-          <ul>
-            {bibliographyRefs.map((ref) => (
-              <li class="border-t border-line py-6">
-                <p class="t-card text-ink">{ref.title}</p>
-                <p class="mt-1 text-[0.92rem] text-ink-soft">
-                  {ref.authors.join(', ')} ({ref.year})
-                </p>
-                {ref.journal && <p class="text-[0.92rem] italic text-ink-faint">{ref.journal}</p>}
-                {ref.doi && (
-                  <a
-                    href={`https://doi.org/${ref.doi}`}
-                    class="link-action mt-3"
-                    target="_blank"
-                    rel="noopener noreferrer"
+          <>
+            <p class="mb-10 max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
+              {t(lang, 'bibliography.lede')}
+            </p>
+
+            {/* barre de tri / filtre (révélée par JS ; sans JS, liste groupée par thème) */}
+            <div id="biblio-controls" hidden class="mb-4 flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-line py-4 text-[0.85rem]">
+              <div class="flex items-center gap-3">
+                <span class="eyebrow">{BIB_UI.sort}</span>
+                <div class="flex gap-1">
+                  <button type="button" class="biblio-sort rounded-full px-3 py-1" data-sort="theme" aria-pressed="true">{BIB_UI.byTheme}</button>
+                  <button type="button" class="biblio-sort rounded-full px-3 py-1" data-sort="author" aria-pressed="false">{BIB_UI.byAuthor}</button>
+                  <button type="button" class="biblio-sort rounded-full px-3 py-1" data-sort="year" aria-pressed="false">{BIB_UI.byYear}</button>
+                </div>
+              </div>
+              <label class="flex items-center gap-3">
+                <span class="eyebrow">{BIB_UI.theme}</span>
+                <select id="biblio-theme" class="border-b border-line bg-transparent py-1 pr-6 text-ink-soft focus:outline-none">
+                  <option value="all">{BIB_UI.all}</option>
+                  {bibGroups.map((g) => (
+                    <option value={g.key}>{BIB_TOPIC_LABELS[g.key][lang]}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <ul id="biblio-list">
+              {bibItems.map((it, idx) => (
+                <>
+                  {(idx === 0 || bibItems[idx - 1].topic !== it.topic) && (
+                    <li class="biblio-head eyebrow mt-12 mb-2 text-ink-soft first:mt-0" data-topic={it.topic}>{BIB_TOPIC_LABELS[it.topic][lang]}</li>
+                  )}
+                  <li
+                    class="ref border-t border-line py-5"
+                    data-topic={it.topic}
+                    data-topic-label={BIB_TOPIC_LABELS[it.topic][lang]}
+                    data-author={surname(it.ref.authors[0]).toLowerCase()}
+                    data-year={it.ref.year}
+                    data-i={it.i}
                   >
-                    DOI&nbsp;: {ref.doi} <span class="arrow">→</span>
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+                    <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+                      <p class="text-[1.02rem] font-medium leading-snug text-ink">{it.ref.title}</p>
+                      {it.ref.level && (
+                        <span class={`shrink-0 rounded-full border px-2 py-0.5 text-[0.62rem] font-medium uppercase tracking-wide ${BIB_LEVEL_CLASS[it.ref.level]}`}>
+                          {BIB_LEVEL_LABELS[it.ref.level][lang]}
+                        </span>
+                      )}
+                    </div>
+                    <p class="mt-1 text-[0.85rem] text-ink-soft">{fmtAuthors(it.ref.authors)}{it.ref.editors ? editorsTag(it.ref.authors) : ''} ({it.ref.year})</p>
+                    {(it.ref.journal ?? it.ref.publisher) && <p class="text-[0.85rem] italic text-ink-faint">{it.ref.journal ?? it.ref.publisher}</p>}
+                    {it.ref.doi && (
+                      <a
+                        href={`https://doi.org/${it.ref.doi}`}
+                        class="link-action mt-3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        DOI&nbsp;: {it.ref.doi} <span class="arrow">→</span>
+                      </a>
+                    )}
+                  </li>
+                </>
+              ))}
+            </ul>
+
+            <script is:inline define:vars={{ topicOrder: BIB_TOPIC_ORDER }}>
+              (() => {
+                const list = document.getElementById('biblio-list');
+                const controls = document.getElementById('biblio-controls');
+                if (!list || !controls) return;
+                const refs = Array.from(list.querySelectorAll('.ref'));
+                const HEAD_CLASS = 'biblio-head eyebrow mt-12 mb-2 text-ink-soft first:mt-0';
+                let sort = 'theme';
+                let theme = 'all';
+
+                const apply = () => {
+                  list.querySelectorAll('.biblio-head').forEach((h) => h.remove());
+                  const cmpName = (a, b) => a.dataset.author.localeCompare(b.dataset.author, 'fr');
+                  let vis = refs.filter((r) => theme === 'all' || r.dataset.topic === theme);
+                  refs.forEach((r) => { r.style.display = 'none'; });
+                  if (sort === 'author') vis.sort((a, b) => cmpName(a, b) || a.dataset.year - b.dataset.year);
+                  else if (sort === 'year') vis.sort((a, b) => b.dataset.year - a.dataset.year || cmpName(a, b));
+                  else vis.sort((a, b) => topicOrder.indexOf(a.dataset.topic) - topicOrder.indexOf(b.dataset.topic) || a.dataset.i - b.dataset.i);
+                  let last = null;
+                  vis.forEach((r) => {
+                    if (sort === 'theme' && r.dataset.topic !== last) {
+                      const h = document.createElement('li');
+                      h.className = HEAD_CLASS;
+                      h.textContent = r.dataset.topicLabel;
+                      list.appendChild(h);
+                      last = r.dataset.topic;
+                    }
+                    r.style.display = '';
+                    list.appendChild(r);
+                  });
+                };
+
+                controls.querySelectorAll('.biblio-sort').forEach((btn) => {
+                  btn.addEventListener('click', () => {
+                    sort = btn.dataset.sort;
+                    controls.querySelectorAll('.biblio-sort').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+                    apply();
+                  });
+                });
+                const sel = document.getElementById('biblio-theme');
+                sel.addEventListener('change', () => { theme = sel.value; apply(); });
+
+                controls.hidden = false;
+                apply();
+              })();
+            </script>
+          </>
         )
       )}
 
@@ -78,8 +223,77 @@ if (routeKey === 'bibliography') {
       )}
 
       {routeKey === 'contact' && (
-        <div class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
-          <p>{t(lang, 'contact.content')}</p>
+        <div class="max-w-prose">
+          <p class="text-[1.06rem] leading-relaxed text-ink-soft">{t(lang, 'contact.content')}</p>
+          <a
+            id="contact-email"
+            href="#"
+            data-subject={lang === 'fr' ? 'Contact via le site' : 'Website contact'}
+            class="pill mt-8"
+          >
+            {t(lang, 'contact.cta')} <span class="arrow">→</span>
+          </a>
+          {/* L'adresse n'est ni affichée ni écrite en clair : reconstruite au clic depuis une chaîne encodée (anti-collecte). */}
+          <script is:inline>
+            (() => {
+              const a = document.getElementById('contact-email');
+              if (!a) return;
+              const open = () => {
+                const e = atob('dmljdG9yaWEta0BvdXRsb29rLmZy');
+                const s = a.getAttribute('data-subject') || '';
+                window.location.href = 'mailto:' + e + '?subject=' + encodeURIComponent(s);
+              };
+              a.addEventListener('click', (ev) => { ev.preventDefault(); open(); });
+            })();
+          </script>
+        </div>
+      )}
+
+      {routeKey === 'faq' && (
+        <>
+          <div class="border-b border-line">
+            {faqItems[lang].map((item) => (
+              <details class="group border-t border-line">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 [&::-webkit-details-marker]:hidden">
+                  <span class="t-card text-ink transition-colors group-hover:text-clay group-open:text-clay">{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    class="shrink-0 text-2xl leading-none text-clay transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-open:rotate-45"
+                  >+</span>
+                </summary>
+                <p class="max-w-prose pb-7 text-[1.04rem] leading-relaxed text-ink-soft">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
+
+      {routeKey === 'glossary' && (
+        <>
+          <p class="mb-12 max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
+            {t(lang, 'glossary.lede')}
+          </p>
+          <dl class="border-b border-line">
+            {glossaryItems[lang].map((item) => (
+              <div class="border-t border-line py-6">
+                <dt class="t-card text-ink">{item.term}</dt>
+                <dd class="mt-2 max-w-prose text-[1.04rem] leading-relaxed text-ink-soft">{item.def}</dd>
+              </div>
+            ))}
+          </dl>
+        </>
+      )}
+
+      {docSections && (
+        <div class="max-w-prose space-y-10">
+          {docSections.map((s) => (
+            <section>
+              <h2 class="t-card text-ink">{s.heading}</h2>
+              {s.body.map((p) => (
+                <p class="mt-3 text-[1.04rem] leading-relaxed text-ink-soft">{p}</p>
+              ))}
+            </section>
+          ))}
         </div>
       )}
 

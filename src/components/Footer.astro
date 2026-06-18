@@ -1,5 +1,6 @@
 ---
-import { t, type Lang } from '../i18n/utils';
+import { getLocalizedRoute, type Lang } from '../i18n/utils';
+import Newsletter from './Newsletter.astro';
 
 interface Props {
   lang: Lang;
@@ -7,16 +8,72 @@ interface Props {
 
 const { lang } = Astro.props;
 const year = new Date().getFullYear();
+
+const brand = 'Hypnose';
+
+/** Contenu du footer, par langue. Les `route` renvoient vers les pages existantes. */
+const content = {
+  fr: {
+    columns: [
+      { title: 'Recherche', links: [{ label: 'Projets en cours' }, { label: 'Publications', route: 'articles' }, { label: 'Axes de recherche' }] },
+      { title: 'Thérapie', links: [{ label: 'Applications cliniques', route: 'therapy' }, { label: 'Formations' }, { label: 'Ressources patients' }] },
+      { title: 'Ressources', links: [{ label: 'Bibliothèque', route: 'bibliography' }, { label: 'Glossaire', route: 'glossary' }, { label: 'FAQ', route: 'faq' }] },
+    ],
+    newsletter: { title: 'Recevoir la newsletter', placeholder: 'Votre email', action: 'S’inscrire' },
+    legal: [{ label: 'Mentions légales', route: 'legal' }, { label: 'Confidentialité', route: 'privacy' }, { label: 'Contact', route: 'contact' }],
+    legalAria: 'Liens légaux',
+  },
+  en: {
+    columns: [
+      { title: 'Research', links: [{ label: 'Ongoing projects' }, { label: 'Publications', route: 'articles' }, { label: 'Research axes' }] },
+      { title: 'Therapy', links: [{ label: 'Clinical applications', route: 'therapy' }, { label: 'Trainings' }, { label: 'Patient resources' }] },
+      { title: 'Resources', links: [{ label: 'Library', route: 'bibliography' }, { label: 'Glossary', route: 'glossary' }, { label: 'FAQ', route: 'faq' }] },
+    ],
+    newsletter: { title: 'Subscribe to the newsletter', placeholder: 'Your email', action: 'Subscribe' },
+    legal: [{ label: 'Legal notice', route: 'legal' }, { label: 'Privacy', route: 'privacy' }, { label: 'Contact', route: 'contact' }],
+    legalAria: 'Legal links',
+  },
+}[lang];
 ---
 
-<footer class="bg-sand-2">
-  <hr class="hairline" />
-  <div class="wrap flex flex-col items-center gap-1 py-10 text-center md:flex-row md:justify-between md:text-left">
-    <p class="display text-[1.15rem] text-ink">
-      {t(lang, 'site.title')}<span class="text-terracotta">·</span>
-    </p>
-    <p class="text-[0.78rem] text-ink-faint">
-      &copy; {year} {t(lang, 'site.title')}. {t(lang, 'footer.rights')}
-    </p>
+<footer class="bg-sand">
+  <div class="wrap pb-10">
+    <hr class="hairline mb-14" />
+
+    {/* bloc principal : logo · 3 colonnes de liens · newsletter */}
+    <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-[1.5fr_1fr_1fr_1fr_1.7fr] md:gap-10">
+      {/* logo (gauche) */}
+      <div>
+        <p class="display text-[1.5rem] text-ink">{brand}<span class="text-terracotta">·</span></p>
+      </div>
+
+      {/* colonnes de liens */}
+      {content.columns.map((col) => (
+        <nav aria-label={col.title}>
+          <p class="eyebrow mb-4 text-ink-soft">{col.title}</p>
+          <ul class="space-y-2.5">
+            {col.links.map((link) => (
+              <li><a href={link.route ? getLocalizedRoute(lang, link.route) : '#'} class="text-[0.875rem] text-ink-soft transition-colors hover:text-terracotta">{link.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+
+      {/* newsletter (droite) — pleine largeur sur mobile */}
+      <div>
+        <p class="eyebrow mb-4 text-ink-soft">{content.newsletter.title}</p>
+        <Newsletter lang={lang} variant="footer" />
+      </div>
+    </div>
+
+    {/* barre inférieure */}
+    <div class="mt-16 flex flex-col gap-3 border-t border-line pt-6 text-[0.78rem] text-ink-faint md:flex-row md:items-center md:justify-between">
+      <p>&copy; {year} Hypnosis Research</p>
+      <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label={content.legalAria}>
+        {content.legal.map((link) => (
+          <a href={link.route ? getLocalizedRoute(lang, link.route) : '#'} class="transition-colors hover:text-terracotta">{link.label}</a>
+        ))}
+      </nav>
+    </div>
   </div>
 </footer>

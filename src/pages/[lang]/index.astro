@@ -1,17 +1,22 @@
 ---
 import { Image } from 'astro:assets';
 import LandingLayout from '../../layouts/LandingLayout.astro';
+import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import ScrollCue from '../../components/ScrollCue.astro';
 import Texture from '../../components/Texture.astro';
 import AxisIcon from '../../components/AxisIcon.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { newsletterCopy } from '../../i18n/newsletter';
 import heroImage from '../../assets/hero.jpg';
 import axeMecanismes from '../../assets/axes/mecanismes.jpg';
 import axeClinique from '../../assets/axes/clinique.jpg';
 import axeApplications from '../../assets/axes/applications.jpg';
+import missionImage from '../../assets/axes/mission.jpg';
 import { supportedLangs, type Lang } from '../../i18n/translations';
 import { getLocalizedRoute } from '../../i18n/utils';
+import { getCollection } from 'astro:content';
 
 // visuels + icônes des axes, dans l'ordre des cartes
 const axisImages = [axeMecanismes, axeClinique, axeApplications];
@@ -26,50 +31,59 @@ const { lang } = Astro.params as { lang: Lang };
 // Libellés du squelette (placeholders) — bilingues
 const ui = {
   fr: {
-    brand: 'Hypnose',
-    nav: ['Recherche', 'Publications', 'Mission'],
     cta: 'Explorer la recherche',
     sections: {
       hero: { h: 'Comprendre l’hypnose autrement.', body: 'Un lieu dédié à la recherche scientifique sur l’hypnose et la thérapie par hypnose.' },
       quote: { text: 'L’hypnose n’est pas un état d’exception, mais une variation naturelle de la conscience.', lede: 'Les recherches contemporaines montrent des effets mesurables sur l’attention, la perception, la mémoire et le contrôle cognitif.', link: 'En savoir plus' },
       axes: { eyebrow: 'Axes de recherche', h: 'Explorer. Comprendre. Transmettre.' },
-      pubs: { eyebrow: 'Publications récentes', h: 'Revue éditoriale minimaliste.', note: 'Liste : date · titre · revue · catégorie, séparée par des filets.' },
-      mission: { eyebrow: 'Notre approche', h: 'Section mission, grande image sur la moitié de l’écran.', note: 'Manifeste — image 50% / texte 50%.' },
+      pubs: { eyebrow: 'Publications récentes', h: 'La science en mouvement' },
+      mission: {
+        eyebrow: 'La démarche',
+        h: 'Transmettre la recherche au plus grand nombre',
+        body: 'Vulgariser les articles scientifiques et l’actualité de la recherche sur l’hypnose, pour les rendre clairs, fiables et accessibles au plus grand nombre.',
+        alt: 'Recherche scientifique sur l’hypnose',
+      },
     },
     cards: [
-      { title: 'Mécanismes cognitifs', body: 'Comment la suggestion module l’attention, la perception et le sentiment d’agentivité — observé par l’imagerie et la psychophysique.' },
+      { title: 'Mécanismes cognitifs', body: 'Comment la suggestion module l’attention, la perception et le sentiment d’agentivité, observé par l’imagerie et la psychophysique.' },
       { title: 'Recherche clinique', body: 'Essais contrôlés, protocoles reproductibles et méta-analyses qui mesurent l’effet réel de l’hypnose en contexte de soin.' },
       { title: 'Applications thérapeutiques', body: 'De la douleur chronique à l’anxiété procédurale : où l’hypnose s’intègre, avec quelles indications et quelles limites.' },
     ],
     heroAlt: 'Paysage minéral abstrait vu du ciel',
-    imageLabel: 'Image — texture aérienne abstraite',
     placeholderBody: 'Contenu à venir.',
-    footerNote: 'Footer — sobre : wordmark, colonnes de liens, filet, mentions.',
-    rights: 'Tous droits réservés.',
   },
   en: {
-    brand: 'Hypnose',
-    nav: ['Research', 'Publications', 'Mission'],
     cta: 'Explore the research',
     sections: {
       hero: { h: 'Understanding hypnosis, differently.', body: 'A place dedicated to scientific research on hypnosis and hypnotherapy.' },
       quote: { text: 'Hypnosis is not an exceptional state, but a natural variation of consciousness.', lede: 'Contemporary research shows measurable effects on attention, perception, memory and cognitive control.', link: 'Learn more' },
       axes: { eyebrow: 'Research axes', h: 'Explore. Understand. Share.' },
-      pubs: { eyebrow: 'Recent publications', h: 'Minimalist editorial review.', note: 'List: date · title · journal · category, separated by hairlines.' },
-      mission: { eyebrow: 'Our approach', h: 'Mission section, large image on half the screen.', note: 'Manifesto — 50% image / 50% text.' },
+      pubs: { eyebrow: 'Recent publications', h: 'Science in motion' },
+      mission: {
+        eyebrow: 'The approach',
+        h: 'Bringing research to the widest audience',
+        body: 'Translating scientific papers and the latest research on hypnosis into clear, reliable and accessible writing for the widest possible audience.',
+        alt: 'Scientific research on hypnosis',
+      },
     },
     cards: [
-      { title: 'Cognitive mechanisms', body: 'How suggestion modulates attention, perception and the sense of agency — observed through imaging and psychophysics.' },
+      { title: 'Cognitive mechanisms', body: 'How suggestion modulates attention, perception and the sense of agency, observed through imaging and psychophysics.' },
       { title: 'Clinical research', body: 'Controlled trials, reproducible protocols and meta-analyses that measure the real effect of hypnosis in care settings.' },
       { title: 'Therapeutic applications', body: 'From chronic pain to procedural anxiety: where hypnosis fits, with which indications and limits.' },
     ],
     heroAlt: 'Abstract mineral landscape seen from above',
-    imageLabel: 'Image — abstract aerial texture',
     placeholderBody: 'Content to come.',
-    footerNote: 'Footer — sober: wordmark, link columns, hairline, legal.',
-    rights: 'All rights reserved.',
   },
 }[lang];
+
+// articles publiés (section Publications) — du plus récent au plus ancien
+const publishedArticles = (await getCollection('articles'))
+  .filter((article) => article.data.lang === lang)
+  .sort((x, y) => y.data.date.getTime() - x.data.date.getTime())
+  .slice(0, 5);
+
+// copie de la section newsletter (config Brevo gérée dans le composant)
+const nl = newsletterCopy[lang];
 ---
 
 <LandingLayout>
@@ -162,6 +176,7 @@ const ui = {
     <div class="grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-3">
         {ui.cards.map((card, i) => (
           <a href={getLocalizedRoute(lang, 'articles')} data-reveal class="group block">
+            {/* wrapper image : overflow-hidden UNIQUEMENT ici, pour le zoom au survol */}
             <div class="relative aspect-square w-full overflow-hidden rounded-[var(--radius)]">
               <Image
                 src={axisImages[i]}
@@ -170,12 +185,12 @@ const ui = {
                 class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
               />
               <div class="pointer-events-none absolute inset-0 rounded-[var(--radius)] ring-1 ring-inset ring-ink/5"></div>
-              {/* pastille crème à cheval sur le bas de l'image */}
-              <span class="absolute -bottom-6 left-5 z-10 flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-sand text-clay shadow-[0_5px_16px_-6px_rgba(31,31,31,0.4)] ring-1 ring-ink/5">
-                <AxisIcon name={axisIcons[i]} class="h-6 w-6" />
-              </span>
             </div>
-            <h3 class="t-card mt-9 transition-colors group-hover:text-clay">{card.title}</h3>
+            {/* pastille crème — FRÈRE du wrapper, remontée pour chevaucher le bord bas de l'image */}
+            <span class="relative z-10 -mt-[1.625rem] ml-5 flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-sand text-clay shadow-[0_5px_16px_-6px_rgba(31,31,31,0.4)] ring-1 ring-ink/5">
+              <AxisIcon name={axisIcons[i]} class="h-6 w-6" />
+            </span>
+            <h3 class="t-card mt-4 transition-colors group-hover:text-clay">{card.title}</h3>
             <p class="mt-3 text-ink-soft">{card.body}</p>
           </a>
         ))}
@@ -189,64 +204,68 @@ const ui = {
           <p class="eyebrow mb-6">{ui.sections.pubs.eyebrow}</p>
           <h2 class="t-h2">{ui.sections.pubs.h}</h2>
         </div>
-        <p class="max-w-xs text-[0.72rem] italic text-ink-faint md:text-right">{ui.sections.pubs.note}</p>
       </div>
       <hr class="hairline" />
-      {[0, 1, 2, 3].map((row) => (
-        <div data-reveal>
-          <div class="grid grid-cols-1 items-baseline gap-2 py-7 md:grid-cols-[5rem_1fr_auto] md:gap-8">
-            <span class="eyebrow !text-clay">20{25 - row}</span>
-            <span class="t-card !text-[1.15rem] text-ink">{ui.placeholderBody}</span>
-            <span class="eyebrow">Journal · Cat.</span>
-          </div>
-          <hr class="hairline" />
+      {publishedArticles.length === 0 ? (
+        <div class="grid grid-cols-1 items-baseline gap-2 py-7 md:grid-cols-[6rem_1fr_auto] md:gap-8">
+          <span class="eyebrow !text-clay">{new Date().getFullYear()}</span>
+          <span class="t-card !text-[1.15rem] text-ink-soft">{ui.placeholderBody}</span>
+          <span class="eyebrow">–</span>
         </div>
-      ))}
+      ) : (
+        publishedArticles.map((article) => (
+          <a href={`/${lang}/articles/${article.id}/`} data-reveal class="group block">
+            <div class="grid grid-cols-1 items-baseline gap-2 py-7 md:grid-cols-[6rem_1fr_auto] md:gap-8">
+              <span class="eyebrow !text-clay">{article.data.date.getFullYear()}</span>
+              <span class="t-card !text-[1.15rem] text-ink transition-colors group-hover:text-clay">{article.data.title}</span>
+              <span class="eyebrow">{article.data.category}</span>
+            </div>
+            <hr class="hairline" />
+          </a>
+        ))
+      )}
   </Section>
 
   {/* ═══════════ 6 · MISSION ═══════════ */}
-  <section data-section="mission">
+  <section id="mission" data-section="mission">
     <div class="grid grid-cols-1 md:grid-cols-2">
-      <div class="placeholder h-[55vh] !rounded-none md:h-auto md:min-h-[88vh]" data-reveal>
-        <span>{ui.imageLabel}</span>
-      </div>
-      <div class="flex items-center bg-sand px-[var(--gutter)] py-[var(--section-y)]">
+      {/* texte — moitié gauche sur fond sable */}
+      <div class="order-2 flex items-center bg-sand px-[var(--gutter)] py-[var(--section-y)] md:order-1">
         <div class="max-w-md" data-reveal>
           <SectionHeader eyebrow={ui.sections.mission.eyebrow} title={ui.sections.mission.h} />
-          <p class="mt-6 text-ink-soft">{ui.placeholderBody}</p>
-          <a href="#" class="link-action mt-9">{ui.cta} <span class="arrow">→</span></a>
-          <p class="mt-8 text-[0.72rem] italic text-ink-faint">{ui.sections.mission.note}</p>
+          <p class="mt-6 text-ink-soft">{ui.sections.mission.body}</p>
+          <a href={getLocalizedRoute(lang, 'articles')} class="link-action mt-9">{ui.cta} <span class="arrow">→</span></a>
         </div>
+      </div>
+      {/* image — moitié droite, plein bord ; en absolute pour épouser la hauteur du texte */}
+      <div class="reveal-fade relative order-1 h-[40vh] md:order-2 md:h-auto" data-reveal>
+        <Image
+          src={missionImage}
+          alt={ui.sections.mission.alt}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
       </div>
     </div>
   </section>
 
-  {/* ═══════════ 7 · FOOTER ═══════════ */}
-  <footer class="bg-sand">
-    <div class="wrap pt-20 pb-10">
-      <hr class="hairline mb-14" />
-      <div class="grid grid-cols-2 gap-10 md:grid-cols-[1.5fr_repeat(3,1fr)]" data-reveal>
-        <div class="col-span-2 md:col-span-1">
-          <p class="display text-[1.5rem] text-ink">{ui.brand}<span class="text-terracotta">·</span></p>
-          <p class="mt-4 max-w-xs text-[0.72rem] italic text-ink-faint">{ui.footerNote}</p>
-        </div>
-        {[0, 1, 2].map((col) => (
-          <div>
-            <p class="eyebrow mb-4">{ui.nav[col] ?? '—'}</p>
-            <ul class="space-y-2.5">
-              {[0, 1, 2].map(() => (
-                <li><a href="#" class="text-[0.95rem] text-ink-soft hover:text-clay">{ui.placeholderBody}</a></li>
-              ))}
-            </ul>
-          </div>
-        ))}
+  {/* ═══════════ 7 · NEWSLETTER — bandeau sur fond clair ═══════════ */}
+  <Section section="newsletter" class="bg-sand-2">
+    {/* contenu deux colonnes : texte à gauche, formulaire à droite */}
+    <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_1fr] md:gap-16">
+      <div data-reveal>
+        <p class="eyebrow mb-6">{nl.eyebrow}</p>
+        <h2 class="t-h2 text-balance">{nl.title}</h2>
+        <p class="mt-6 max-w-md text-pretty text-ink-soft">{nl.lede}</p>
       </div>
-      <div class="mt-16 flex flex-col gap-2 text-[0.72rem] text-ink-faint md:flex-row md:justify-between">
-        <p>© 2026 {ui.brand}. {ui.rights}</p>
-        <p class="eyebrow">Paris — 48.85°N</p>
+      <div data-reveal class="md:pt-2">
+        <Newsletter lang={lang} variant="section" />
       </div>
     </div>
-  </footer>
+  </Section>
+
+  {/* ═══════════ 8 · FOOTER (composant partagé) ═══════════ */}
+  <Footer lang={lang} />
 
   {/* Observateur d’apparition au scroll */}
   <script is:inline>

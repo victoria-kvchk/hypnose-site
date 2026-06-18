@@ -1,0 +1,438 @@
+# Bibliothèque — références évaluées par les pairs, DOI vérifiés via Crossref.
+# `topic` regroupe les entrées ; `level` (établi/prometteur/exploratoire) n'est
+# renseigné que pour les références d'efficacité (douleur, applications cliniques).
+# Pour ajouter une référence : copier un bloc, renseigner les champs, vérifier le DOI.
+references:
+  # ─── Définition & mesure ───────────────────────────────────────────────
+  - id: elkins2015
+    authors: ["Elkins, G. R.", "Barabasz, A. F.", "Council, J. R.", "Spiegel, D."]
+    year: 2015
+    title: "Advancing research and practice: the revised APA Division 30 definition of hypnosis"
+    journal: "American Journal of Clinical Hypnosis, 57(4), 378-385"
+    doi: "10.1080/00029157.2015.1011465"
+    topic: definition
+  - id: shor1963
+    authors: ["Shor, R. E.", "Orne, E. C."]
+    year: 1963
+    title: "Norms on the Harvard Group Scale of Hypnotic Susceptibility, Form A"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 11(1), 39-47"
+    doi: "10.1080/00207146308409226"
+    topic: definition
+  - id: piccione1989
+    authors: ["Piccione, C.", "Hilgard, E. R.", "Zimbardo, P. G."]
+    year: 1989
+    title: "On the degree of stability of measured hypnotizability over a 25-year period"
+    journal: "Journal of Personality and Social Psychology, 56(2), 289-295"
+    doi: "10.1037/0022-3514.56.2.289"
+    topic: definition
+  - id: lynn2015grounding
+    authors: ["Lynn, S. J.", "Green, J. P.", "Kirsch, I.", "Capafons, A.", "Lilienfeld, S. O.", "Laurence, J.-R.", "Montgomery, G. H."]
+    year: 2015
+    title: 'Grounding hypnosis in science: the "new" APA Division 30 definition of hypnosis as a step backward'
+    journal: "American Journal of Clinical Hypnosis, 57(4), 390-401"
+    doi: "10.1080/00029157.2015.1011472"
+    topic: definition
+  - id: laurence2008measuring
+    authors: ["Laurence, J.-R.", "Beaulieu-Prévost, D.", "du Chéné, T."]
+    year: 2008
+    title: "Measuring and understanding individual differences in hypnotizability"
+    publisher: "in The Oxford Handbook of Hypnosis (dir. Nash & Barnier), Oxford University Press, 225-253"
+    doi: "10.1093/oxfordhb/9780198570097.013.0009"
+    topic: definition
+
+  # ─── Mécanismes & neurosciences ────────────────────────────────────────
+  - id: oakley2013
+    authors: ["Oakley, D. A.", "Halligan, P. W."]
+    year: 2013
+    title: "Hypnotic suggestion: opportunities for cognitive neuroscience"
+    journal: "Nature Reviews Neuroscience, 14(8), 565-576"
+    doi: "10.1038/nrn3538"
+    topic: mechanisms
+  - id: oakley2009
+    authors: ["Oakley, D. A.", "Halligan, P. W."]
+    year: 2009
+    title: "Hypnotic suggestion and cognitive neuroscience"
+    journal: "Trends in Cognitive Sciences, 13(6), 264-270"
+    doi: "10.1016/j.tics.2009.03.004"
+    topic: mechanisms
+  - id: terhune2017
+    authors: ["Terhune, D. B.", "Cleeremans, A.", "Raz, A.", "Lynn, S. J."]
+    year: 2017
+    title: "Hypnosis and top-down regulation of consciousness"
+    journal: "Neuroscience & Biobehavioral Reviews, 81, 59-74"
+    doi: "10.1016/j.neubiorev.2017.02.002"
+    topic: mechanisms
+  - id: lynn2020myths
+    authors: ["Lynn, S. J.", "Kirsch, I.", "Terhune, D. B.", "Green, J. P."]
+    year: 2020
+    title: "Myths and misconceptions about hypnosis and suggestion: separating fact and fiction"
+    journal: "Applied Cognitive Psychology, 34(6), 1253-1264"
+    doi: "10.1002/acp.3730"
+    topic: mechanisms
+  - id: lynn2005statedebate
+    authors: ["Lynn, S. J.", "Fassler, O.", "Knox, J."]
+    year: 2005
+    title: "Hypnosis and the altered state debate: something more or nothing more?"
+    journal: "Contemporary Hypnosis, 22(1), 39-45"
+    doi: "10.1002/ch.21"
+    topic: mechanisms
+  - id: rainville1997
+    authors: ["Rainville, P.", "Duncan, G. H.", "Price, D. D.", "Carrier, B.", "Bushnell, M. C."]
+    year: 1997
+    title: "Pain affect encoded in human anterior cingulate but not somatosensory cortex"
+    journal: "Science, 277(5328), 968-971"
+    doi: "10.1126/science.277.5328.968"
+    topic: mechanisms
+  - id: landry2017
+    authors: ["Landry, M.", "Lifshitz, M.", "Raz, A."]
+    year: 2017
+    title: "Brain correlates of hypnosis: a systematic review and meta-analytic exploration"
+    journal: "Neuroscience & Biobehavioral Reviews, 81(Pt A), 75-98"
+    doi: "10.1016/j.neubiorev.2017.02.020"
+    topic: mechanisms
+  - id: vanhaudenhuyse2014
+    authors: ["Vanhaudenhuyse, A.", "Laureys, S.", "Faymonville, M.-E."]
+    year: 2014
+    title: "Neurophysiology of hypnosis"
+    journal: "Neurophysiologie Clinique/Clinical Neurophysiology, 44(4), 343-353"
+    doi: "10.1016/j.neucli.2013.09.006"
+    topic: mechanisms
+  - id: demertzi2011
+    authors: ["Demertzi, A.", "Soddu, A.", "Faymonville, M.-E.", "Bahri, M. A.", "Gosseries, O.", "Vanhaudenhuyse, A."]
+    year: 2011
+    title: "Hypnotic modulation of resting state fMRI default mode and extrinsic network connectivity"
+    journal: "Progress in Brain Research, 193, 309-322"
+    doi: "10.1016/B978-0-444-53839-0.00020-X"
+    topic: mechanisms
+  - id: kirsch1995altered
+    authors: ["Kirsch, I.", "Lynn, S. J."]
+    year: 1995
+    title: "The altered state of hypnosis: changes in the theoretical landscape"
+    journal: "American Psychologist, 50(10), 846-858"
+    doi: "10.1037/0003-066X.50.10.846"
+    topic: mechanisms
+  - id: kirsch1998dissociation
+    authors: ["Kirsch, I.", "Lynn, S. J."]
+    year: 1998
+    title: "Dissociation theories of hypnosis"
+    journal: "Psychological Bulletin, 123(1), 100-115"
+    doi: "10.1037/0033-2909.123.1.100"
+    topic: mechanisms
+  - id: martin2019alterations
+    authors: ["Martin, J.-R.", "Pacherie, E."]
+    year: 2019
+    title: "Alterations of agency in hypnosis: a new predictive coding model"
+    journal: "Psychological Review, 126(1), 133-152"
+    doi: "10.1037/rev0000134"
+    topic: mechanisms
+  - id: spanos1986
+    authors: ["Spanos, N. P."]
+    year: 1986
+    title: 'Hypnotic behavior: a social-psychological interpretation of amnesia, analgesia, and "trance logic"'
+    journal: "Behavioral and Brain Sciences, 9(3), 449-467"
+    doi: "10.1017/S0140525X00046537"
+    topic: mechanisms
+  - id: kallio2011
+    authors: ["Kallio, S.", "Hyönä, J.", "Revonsuo, A.", "Sikka, P.", "Nummenmaa, L."]
+    year: 2011
+    title: "The existence of a hypnotic state revealed by eye movements"
+    journal: "PLoS ONE, 6(10), e26374"
+    doi: "10.1371/journal.pone.0026374"
+    topic: mechanisms
+
+  # ─── Douleur ───────────────────────────────────────────────────────────
+  - id: montgomery2000
+    authors: ["Montgomery, G. H.", "DuHamel, K. N.", "Redd, W. H."]
+    year: 2000
+    title: "A meta-analysis of hypnotically induced analgesia: how effective is hypnosis?"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 48(2), 138-153"
+    doi: "10.1080/00207140008410045"
+    level: established
+    topic: pain
+  - id: thompson2019
+    authors: ["Thompson, T.", "Terhune, D. B.", "Oram, C.", "Sharangparni, J.", "Rouf, R.", "Solmi, M."]
+    year: 2019
+    title: "The effectiveness of hypnosis for pain relief: a systematic review and meta-analysis of 85 controlled experimental trials"
+    journal: "Neuroscience & Biobehavioral Reviews, 99, 298-310"
+    doi: "10.1016/j.neubiorev.2019.02.013"
+    level: established
+    topic: pain
+  - id: jensen2014
+    authors: ["Jensen, M. P.", "Patterson, D. R."]
+    year: 2014
+    title: "Hypnotic approaches for chronic pain management: clinical implications of recent research findings"
+    journal: "American Psychologist, 69(2), 167-177"
+    doi: "10.1037/a0035644"
+    level: established
+    topic: pain
+  - id: adachi2014
+    authors: ["Adachi, T.", "Fujino, H.", "Nakae, A.", "Mashimo, T.", "Sasaki, J."]
+    year: 2014
+    title: "A meta-analysis of hypnosis for chronic pain problems: a comparison between hypnosis, standard care, and other psychological interventions"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 62(1), 1-28"
+    doi: "10.1080/00207144.2013.841471"
+    level: promising
+    topic: pain
+
+  # ─── Applications cliniques ────────────────────────────────────────────
+  - id: hauser2016
+    authors: ["Häuser, W.", "Hagl, M.", "Schmierer, A.", "Hansen, E."]
+    year: 2016
+    title: "The efficacy, safety and applications of medical hypnosis: a systematic review of meta-analyses"
+    journal: "Deutsches Ärzteblatt International, 113(17-18), 289-296"
+    doi: "10.3238/arztebl.2016.0289"
+    level: established
+    topic: clinical
+  - id: tefikow2013
+    authors: ["Tefikow, S.", "Barth, J.", "Maichrowitz, S.", "Beelmann, A.", "Strauss, B.", "Rosendahl, J."]
+    year: 2013
+    title: "Efficacy of hypnosis in adults undergoing surgery or medical procedures: a meta-analysis of randomized controlled trials"
+    journal: "Clinical Psychology Review, 33(5), 623-636"
+    doi: "10.1016/j.cpr.2013.03.005"
+    level: established
+    topic: clinical
+  - id: montgomery2002
+    authors: ["Montgomery, G. H.", "David, D.", "Winkel, G.", "Silverstein, J. H.", "Bovbjerg, D. H."]
+    year: 2002
+    title: "The effectiveness of adjunctive hypnosis with surgical patients: a meta-analysis"
+    journal: "Anesthesia & Analgesia, 94(6), 1639-1645"
+    doi: "10.1097/00000539-200206000-00052"
+    level: established
+    topic: clinical
+  - id: black2020
+    authors: ["Black, C. J.", "Thakur, E. R.", "Houghton, L. A.", "Quigley, E. M. M.", "Moayyedi, P.", "Ford, A. C."]
+    year: 2020
+    title: "Efficacy of psychological therapies for irritable bowel syndrome: systematic review and network meta-analysis"
+    journal: "Gut, 69(8), 1441-1451"
+    doi: "10.1136/gutjnl-2020-321191"
+    level: established
+    topic: clinical
+  - id: schaefert2014
+    authors: ["Schaefert, R.", "Klose, P.", "Moser, G.", "Häuser, W."]
+    year: 2014
+    title: "Efficacy, tolerability, and safety of hypnosis in adult irritable bowel syndrome: systematic review and meta-analysis"
+    journal: "Psychosomatic Medicine, 76(5), 389-398"
+    doi: "10.1097/PSY.0000000000000039"
+    level: established
+    topic: clinical
+  - id: madden2016
+    authors: ["Madden, K.", "Middleton, P.", "Cyna, A. M.", "Matthewson, M.", "Jones, L."]
+    year: 2016
+    title: "Hypnosis for pain management during labour and childbirth"
+    journal: "Cochrane Database of Systematic Reviews, 2016(5), CD009356"
+    doi: "10.1002/14651858.CD009356.pub3"
+    level: promising
+    topic: clinical
+  - id: elkins2008
+    authors: ["Elkins, G.", "Marcus, J.", "Stearns, V.", "Perfect, M.", "Rajab, M. H.", "Ruud, C."]
+    year: 2008
+    title: "Randomized trial of a hypnosis intervention for treatment of hot flashes among breast cancer survivors"
+    journal: "Journal of Clinical Oncology, 26(31), 5022-5026"
+    doi: "10.1200/JCO.2008.16.6389"
+    level: promising
+    topic: clinical
+  - id: kirsch1995cbt
+    authors: ["Kirsch, I.", "Montgomery, G.", "Sapirstein, G."]
+    year: 1995
+    title: "Hypnosis as an adjunct to cognitive-behavioral psychotherapy: a meta-analysis"
+    journal: "Journal of Consulting and Clinical Psychology, 63(2), 214-220"
+    doi: "10.1037/0022-006X.63.2.214"
+    level: established
+    topic: clinical
+  - id: valentine2019anxiety
+    authors: ["Valentine, K. E.", "Milling, L. S.", "Clark, L. J.", "Moriarty, C. L."]
+    year: 2019
+    title: "The efficacy of hypnosis as a treatment for anxiety: a meta-analysis"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 67(3), 336-363"
+    doi: "10.1080/00207144.2019.1613863"
+    level: promising
+    topic: clinical
+  - id: milling2019depression
+    authors: ["Milling, L. S.", "Valentine, K. E.", "McCarley, H. S.", "LoStimolo, L. M."]
+    year: 2019
+    title: "A meta-analysis of hypnotic interventions for depression symptoms: high hopes for hypnosis?"
+    journal: "American Journal of Clinical Hypnosis, 61(3), 227-243"
+    doi: "10.1080/00029157.2018.1489777"
+    level: promising
+    topic: clinical
+  - id: lam2015insomnia
+    authors: ["Lam, T. H.", "Chung, K. F.", "Yeung, W. F.", "Yu, B. Y. M.", "Yung, K. P.", "Ng, T. H. Y."]
+    year: 2015
+    title: "Hypnotherapy for insomnia: a systematic review and meta-analysis of randomized controlled trials"
+    journal: "Complementary Therapies in Medicine, 23(5), 719-732"
+    doi: "10.1016/j.ctim.2015.07.011"
+    level: promising
+    topic: clinical
+  - id: rotaru2016ptsd
+    authors: ["Rotaru, T. S.", "Rusu, A."]
+    year: 2016
+    title: "A meta-analysis for the efficacy of hypnotherapy in alleviating PTSD symptoms"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 64(1), 116-136"
+    doi: "10.1080/00207144.2015.1099406"
+    level: exploratory
+    topic: clinical
+  - id: milling2018obesity
+    authors: ["Milling, L. S.", "Gover, M. C.", "Moriarty, C. L."]
+    year: 2018
+    title: "The effectiveness of hypnosis as an intervention for obesity: a meta-analytic review"
+    journal: "Psychology of Consciousness: Theory, Research, and Practice, 5(1), 29-45"
+    doi: "10.1037/cns0000139"
+    level: exploratory
+    topic: clinical
+
+  # ─── Mémoire & limites ─────────────────────────────────────────────────
+  - id: laurence1983
+    authors: ["Laurence, J.-R.", "Perry, C."]
+    year: 1983
+    title: "Hypnotically created memory among highly hypnotizable subjects"
+    journal: "Science, 222(4623), 523-524"
+    doi: "10.1126/science.6623094"
+    topic: memory
+  - id: mazzoni1999
+    authors: ["Mazzoni, G. A. L.", "Loftus, E. F.", "Seitz, A.", "Lynn, S. J."]
+    year: 1999
+    title: "Changing beliefs and memories through dream interpretation"
+    journal: "Applied Cognitive Psychology, 13(2), 125-144"
+    doi: "10.1002/(SICI)1099-0720(199904)13:2<125::AID-ACP560>3.0.CO;2-5"
+    topic: memory
+  - id: scoboria2002
+    authors: ["Scoboria, A.", "Mazzoni, G.", "Kirsch, I.", "Milling, L. S."]
+    year: 2002
+    title: "Immediate and persisting effects of misleading questions and hypnosis on memory reports"
+    journal: "Journal of Experimental Psychology: Applied, 8(1), 26-32"
+    doi: "10.1037/1076-898X.8.1.26"
+    topic: memory
+  - id: scoboria2006
+    authors: ["Scoboria, A.", "Mazzoni, G.", "Kirsch, I."]
+    year: 2006
+    title: "Effects of misleading questions and hypnotic memory suggestion on memory reports: a signal-detection analysis"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 54(3), 340-359"
+    doi: "10.1080/00207140600689538"
+    topic: memory
+  - id: mazzoni2010memory
+    authors: ["Mazzoni, G.", "Heap, M.", "Scoboria, A."]
+    year: 2010
+    title: "Hypnosis and memory: theory, laboratory research, and applications"
+    publisher: "in Handbook of Clinical Hypnosis (dir. Lynn, Rhue & Kirsch), American Psychological Association, 709-741"
+    doi: "10.2307/j.ctv1chs5qj.33"
+    topic: memory
+  - id: lynn2009forensic
+    authors: ["Lynn, S. J.", "Boycheva, E.", "Deming, A.", "Lilienfeld, S. O.", "Hallquist, M. N."]
+    year: 2009
+    title: "Forensic hypnosis: the state of the science"
+    publisher: "in Psychological Science in the Courtroom: Consensus and Controversy (dir. Skeem, Douglas & Lilienfeld), Guilford Press, 80-99"
+    topic: memory
+
+  # ─── Ouvrages de référence (livres) — triés par auteur ─────────────────
+  - id: erickson1976
+    authors: ["Erickson, M. H.", "Rossi, E. L.", "Rossi, S. I."]
+    year: 1976
+    title: "Hypnotic realities: the induction of clinical hypnosis and forms of indirect suggestion"
+    publisher: "Irvington Publishers"
+    topic: books
+  - id: erickson1979
+    authors: ["Erickson, M. H.", "Rossi, E. L."]
+    year: 1979
+    title: "Hypnotherapy: an exploratory casebook"
+    publisher: "Irvington Publishers"
+    topic: books
+  - id: erickson1980papers
+    authors: ["Erickson, M. H."]
+    year: 1980
+    title: "The collected papers of Milton H. Erickson on hypnosis"
+    publisher: "Irvington (coffret 4 vol. ; dir. E. L. Rossi)"
+    topic: books
+  - id: erickson1981experiencing
+    authors: ["Erickson, M. H.", "Rossi, E. L."]
+    year: 1981
+    title: "Experiencing hypnosis: therapeutic approaches to altered states"
+    publisher: "Irvington Publishers"
+    topic: books
+  - id: erickson1983healing
+    authors: ["Erickson, M. H."]
+    year: 1983
+    title: "Healing in hypnosis: the seminars, workshops, and lectures of Milton H. Erickson, volume 1"
+    publisher: "Irvington (Seminars, Workshops & Lectures, vol. 1 ; dir. Rossi, Ryan & Sharp)"
+    topic: books
+  - id: erickson1989february
+    authors: ["Erickson, M. H.", "Rossi, E. L."]
+    year: 1989
+    title: "The February man: evolving consciousness and identity in hypnotherapy"
+    publisher: "Brunner/Mazel (rééd. Routledge, 2009)"
+    topic: books
+  - id: erickson2008works
+    authors: ["Erickson, M. H."]
+    year: 2008
+    title: "The collected works of Milton H. Erickson, M.D."
+    publisher: "Milton H. Erickson Foundation Press (16 vol., 2008–2015 ; dir. Rossi, Erickson-Klein & Rossi)"
+    topic: books
+  - id: hammond1990
+    authors: ["Hammond, D. C."]
+    editors: true
+    year: 1990
+    title: "Handbook of hypnotic suggestions and metaphors"
+    publisher: "W. W. Norton (American Society of Clinical Hypnosis)"
+    topic: books
+  - id: hilgard1986
+    authors: ["Hilgard, E. R."]
+    year: 1986
+    title: "Divided consciousness: multiple controls in human thought and action"
+    publisher: "Wiley (éd. augmentée ; 1ʳᵉ éd. 1977)"
+    topic: books
+  - id: lynn2010
+    authors: ["Lynn, S. J.", "Rhue, J. W.", "Kirsch, I."]
+    editors: true
+    year: 2010
+    title: "Handbook of clinical hypnosis"
+    publisher: "American Psychological Association (2ᵉ éd.)"
+    topic: books
+  - id: nash2008
+    authors: ["Nash, M. R.", "Barnier, A. J."]
+    editors: true
+    year: 2008
+    title: "The Oxford handbook of hypnosis: theory, research, and practice"
+    publisher: "Oxford University Press"
+    topic: books
+  - id: spiegel2004
+    authors: ["Spiegel, H.", "Spiegel, D."]
+    year: 2004
+    title: "Trance and treatment: clinical uses of hypnosis"
+    publisher: "American Psychiatric Publishing (2ᵉ éd.)"
+    topic: books
+  - id: weitzenhoffer2000
+    authors: ["Weitzenhoffer, A. M."]
+    year: 2000
+    title: "The practice of hypnotism"
+    publisher: "John Wiley & Sons (2ᵉ éd.)"
+    topic: books
+  - id: yapko2001
+    authors: ["Yapko, M. D."]
+    year: 2001
+    title: "Treating depression with hypnosis: integrating cognitive-behavioral and strategic approaches"
+    publisher: "Brunner-Routledge"
+    topic: books
+  - id: yapko2025
+    authors: ["Yapko, M. D.", "Criswell, S. R."]
+    year: 2025
+    title: "Trancework: an introduction to the practice of clinical hypnosis"
+    publisher: "Routledge (6ᵉ éd. ; 4ᵉ éd. 2012 la plus citée)"
+    topic: books
+  - id: lynn2006essentials
+    authors: ["Lynn, S. J.", "Kirsch, I."]
+    year: 2006
+    title: "Essentials of clinical hypnosis: an evidence-based approach"
+    publisher: "American Psychological Association"
+    topic: books
+  - id: raz2016meditation
+    authors: ["Raz, A.", "Lifshitz, M."]
+    editors: true
+    year: 2016
+    title: "Hypnosis and meditation: towards an integrative science of conscious planes"
+    publisher: "Oxford University Press"
+    topic: books
+  - id: yapko2011mindfulness
+    authors: ["Yapko, M. D."]
+    year: 2011
+    title: "Mindfulness and hypnosis: the power of suggestion to transform experience"
+    publisher: "W. W. Norton"
+    topic: books
