@@ -22,8 +22,13 @@ import type { Lang } from './translations';
  * il affiche l'état de succès sans rien envoyer (un avertissement est logué
  * dans la console).
  */
+/** URL publique du formulaire Brevo. Repli si `.env` absent (ex. build sur
+ *  une autre machine). Sans secret : c'est une URL publique côté navigateur. */
+const BREVO_FORM_ACTION_FALLBACK =
+  'https://9837da37.sibforms.com/serve/MUIFANg0h7uB7C-FyzNfqctv6uuwDwvfYl86E9AcczstuCfkn4HxbQVKnMkYpohU9b8dnsHZuYJYjg92IMyvZ4SU3slONbq8RJWAUDGszGQC1pCi8yLR3jljedLOGfNfVTMjmBcBsHya3eGAcK778H5HmAoCNmQE2SxBRD8zGmEriDElgEvnF2m7OKdm4MK35qvuQYvHvYZgjtfr-A==';
+
 export const BREVO = {
-  formAction: import.meta.env.PUBLIC_BREVO_FORM_ACTION ?? '',
+  formAction: import.meta.env.PUBLIC_BREVO_FORM_ACTION ?? BREVO_FORM_ACTION_FALLBACK,
   /** Noms des champs attendus par le formulaire Brevo. */
   emailField: 'EMAIL',
   /** Champ piège anti-bot (doit rester vide). */
