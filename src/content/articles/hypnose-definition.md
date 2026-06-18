@@ -14,7 +14,7 @@ keyPoints:
   - "Ce qu’elle n’est pas : du sommeil, une perte de contrôle, ou un moyen de faire agir quelqu’un contre sa volonté [2]."
 glossary: ["induction", "suggestion", "sensibilité hypnotique", "état modifié de conscience"]
 readNext: ["Comment lire la science de l’hypnose", "L’hypnose peut-elle vraiment réduire la douleur ?"]
-takeaway: "L’hypnose est un état ordinaire d’attention focalisée et de réceptivité aux suggestions. Ni sommeil, ni perte de contrôle, ni magie : c’est un consensus scientifique, même si la nature profonde du phénomène fait encore débat."
+takeaway: "L’hypnose est un état naturel dans lequel l’attention est particulièrement concentrée et l’esprit plus réceptif aux suggestions. Ce n’est ni du sommeil, ni une perte de contrôle, ni quelque chose de magique. Son existence et ses effets sont largement reconnus par la communauté scientifique, même si la nature profonde du phénomène fait encore débat."
 sources:
   - text: "Elkins, G. R., Barabasz, A. F., Council, J. R., & Spiegel, D. (2015). Advancing research and practice: the revised APA Division 30 definition of hypnosis. International Journal of Clinical and Experimental Hypnosis, 63(1), 1-9. (Définitions de l’hypnose, de l’induction et de l’hypnotisabilité ; reprises par la Society of Psychological Hypnosis, APA Division 30.)"
     doi: "10.1080/00207144.2014.961870"
