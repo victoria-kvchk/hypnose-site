@@ -1,7 +1,8 @@
 ---
 title: "L’hypnose : ce qu’elle est, et ce qu’elle n’est pas"
 description: "L’hypnose n’a rien de magique : un état d’attention focalisée où l’on devient plus réceptif aux suggestions, tout en restant conscient et maître de soi. Ce que dit la science, et ce qui relève du mythe."
-date: 2026-06-17
+date: 2023-09-12
+updated: 2026-06-17
 category: "Les bases"
 kicker: "Consensus scientifique"
 readingMinutes: 6

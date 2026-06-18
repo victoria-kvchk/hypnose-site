@@ -17,16 +17,15 @@ const { entry } = Astro.props;
 const a = entry.data;
 const { Content } = await render(entry);
 
-const dateStr = a.date.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const dateOpts = { year: 'numeric', month: 'long', day: 'numeric' } as const;
+const locale = lang === 'fr' ? 'fr-FR' : 'en-GB';
+const dateStr = a.date.toLocaleDateString(locale, dateOpts);
+const updatedStr = a.updated ? a.updated.toLocaleDateString(locale, dateOpts) : null;
 const ui =
   lang === 'fr'
-    ? { read: 'min de lecture', keep: 'À retenir', brief: 'En bref', more: 'Pour aller plus loin', glossary: 'Glossaire', next: 'À lire ensuite', sources: 'Sources' }
-    : { read: 'min read', keep: 'Key takeaway', brief: 'In brief', more: 'Going further', glossary: 'Glossary', next: 'Read next', sources: 'Sources' };
-const metaBits = [a.category, a.kicker, dateStr, a.readingMinutes ? `${a.readingMinutes} ${ui.read}` : null].filter(Boolean);
+    ? { read: 'min de lecture', updated: 'mis à jour le', keep: 'À retenir', brief: 'En bref', more: 'Pour aller plus loin', glossary: 'Glossaire', next: 'À lire ensuite', sources: 'Sources' }
+    : { read: 'min read', updated: 'updated', keep: 'Key takeaway', brief: 'In brief', more: 'Going further', glossary: 'Glossary', next: 'Read next', sources: 'Sources' };
+const metaBits = [a.category, a.kicker, dateStr, updatedStr ? `${ui.updated} ${updatedStr}` : null, a.readingMinutes ? `${a.readingMinutes} ${ui.read}` : null].filter(Boolean);
 ---
 
 <BaseLayout title={a.title} description={a.description}>
