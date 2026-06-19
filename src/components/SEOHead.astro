@@ -1,18 +1,41 @@
 ---
 import type { Lang } from '../i18n/utils';
-import { getSwitchLangPath } from '../i18n/utils';
+import { getSwitchLangPath, t } from '../i18n/utils';
 
 interface Props {
   title: string;
   description: string;
   lang: Lang;
   currentPath: string;
+  /** chemin d'image OG (défaut : /og-default.jpg) */
+  image?: string;
+  /** type Open Graph */
+  type?: 'website' | 'article';
+  /** ISO 8601, pour les articles */
+  publishedTime?: string;
+  modifiedTime?: string;
+  /** données structurées JSON-LD (objet ou tableau d'objets) */
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
-const { title, description, lang, currentPath } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+  currentPath,
+  image,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  jsonLd,
+} = Astro.props;
 
 const alternateLang = lang === 'fr' ? 'en' : 'fr';
 const alternatePath = getSwitchLangPath(currentPath, alternateLang);
+const canonical = `${Astro.site}${currentPath.slice(1)}`;
+const ogImage = new URL(image ?? '/og-default.jpg', Astro.site).href;
+const siteName = t(lang, 'site.title');
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <meta charset="utf-8" />
@@ -22,15 +45,35 @@ const alternatePath = getSwitchLangPath(currentPath, alternateLang);
 <meta name="generator" content={Astro.generator} />
 <meta name="description" content={description} />
 <title>{title}</title>
-<link rel="canonical" href={`${Astro.site}${currentPath.slice(1)}`} />
+<link rel="canonical" href={canonical} />
 
 <!-- hreflang -->
-<link rel="alternate" hreflang={lang} href={`${Astro.site}${currentPath.slice(1)}`} />
+<link rel="alternate" hreflang={lang} href={canonical} />
 <link rel="alternate" hreflang={alternateLang} href={`${Astro.site}${alternatePath.slice(1)}`} />
-<link rel="alternate" hreflang="x-default" href={`${Astro.site}${currentPath.slice(1)}`} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
 
 <!-- Open Graph -->
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+<meta property="og:image" content={ogImage} />
+{type === 'article' && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{type === 'article' && modifiedTime && (
+  <meta property="article:modified_time" content={modifiedTime} />
+)}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Données structurées -->
+{jsonLdItems.map((item) => (
+  <script type="application/ld+json" set:html={JSON.stringify(item)} />
+))}

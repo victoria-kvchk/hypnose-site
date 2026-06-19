@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hypno-therapeutique.fr/sitemap-index.xml

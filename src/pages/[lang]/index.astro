@@ -15,7 +15,7 @@ import axeClinique from '../../assets/axes/clinique.jpg';
 import axeApplications from '../../assets/axes/applications.jpg';
 import missionImage from '../../assets/axes/mission.jpg';
 import { supportedLangs, type Lang } from '../../i18n/translations';
-import { getLocalizedRoute } from '../../i18n/utils';
+import { getLocalizedRoute, t } from '../../i18n/utils';
 import { getCollection } from 'astro:content';
 
 // visuels + icônes des axes, dans l'ordre des cartes
@@ -84,9 +84,26 @@ const publishedArticles = (await getCollection('articles'))
 
 // copie de la section newsletter (config Brevo gérée dans le composant)
 const nl = newsletterCopy[lang];
+
+// SEO : données structurées site (accueil)
+const siteName = t(lang, 'site.title');
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteName,
+  url: Astro.site?.href,
+  logo: new URL('/favicon.svg', Astro.site).href,
+};
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteName,
+  url: Astro.site?.href,
+  inLanguage: lang,
+};
 ---
 
-<LandingLayout>
+<LandingLayout jsonLd={[orgLd, siteLd]}>
   {/* Active l’état initial du reveal seulement si JS + mouvement autorisé (anti-FOUC) */}
   <script is:inline>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {

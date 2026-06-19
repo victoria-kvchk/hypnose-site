@@ -8,10 +8,11 @@ import { getLangFromUrl, t } from '../i18n/utils';
 interface Props {
   title?: string;
   description?: string;
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 const lang = getLangFromUrl(Astro.url);
-const { title, description } = Astro.props;
+const { title, description, jsonLd } = Astro.props;
 
 const pageTitle = title
   ? `${title} | ${t(lang, 'site.title')}`
@@ -28,6 +29,7 @@ const currentPath = Astro.url.pathname;
       description={pageDescription}
       lang={lang}
       currentPath={currentPath}
+      jsonLd={jsonLd}
     />
     <Fonts />
   </head>
