@@ -68,6 +68,46 @@ export const glossaryItems: Record<Lang, GlossaryItem[]> = {
       term: 'Niveau de preuve',
       def: 'Une façon de situer la solidité des données derrière une affirmation. Sur ce site, trois repères : établi (preuves solides et convergentes), prometteur (résultats encourageants à confirmer), exploratoire (premières données, à interpréter avec prudence).',
     },
+    {
+      term: 'IRM (imagerie par résonance magnétique)',
+      def: 'Appareil qui photographie le cerveau. En version « fonctionnelle » (IRMf), il suit l’afflux de sang pour repérer, indirectement, les zones les plus actives.',
+    },
+    {
+      term: 'TEP (tomographie par émission de positons)',
+      def: 'Technique d’imagerie qui mesure l’activité du cerveau à l’aide d’un traceur faiblement radioactif, en suivant la consommation d’énergie ou le débit sanguin.',
+    },
+    {
+      term: 'EEG (électroencéphalographie)',
+      def: 'Appareil permettant de mesurer l’activité électrique du cerveau, à l’aide d’électrodes posées sur le cuir chevelu.',
+    },
+    {
+      term: 'Cortex cingulaire antérieur',
+      def: 'Région profonde et médiane du cerveau. Elle détecte les conflits et l’effort, et participe au côté désagréable de la douleur. Une sorte de système d’alerte.',
+    },
+    {
+      term: 'Cortex préfrontal dorsolatéral',
+      def: 'À l’avant du cerveau, sur les côtés. Cœur du réseau qui pilote l’attention volontaire et la concentration, souvent appelé « le chef d’orchestre ».',
+    },
+    {
+      term: 'Réseau du mode par défaut',
+      def: 'Ensemble de régions qui s’activent ensemble quand on ne fait rien de précis : rêverie, retour sur soi, rumination. Sa partie avant s’apaise souvent sous hypnose.',
+    },
+    {
+      term: 'Insula',
+      def: 'Région nichée au creux du cerveau qui reçoit l’état interne du corps (cœur, respiration, douleur). Siège de la perception des sensations internes.',
+    },
+    {
+      term: 'Cortex somatosensoriel primaire',
+      def: 'Zone qui reçoit et localise les sensations du corps : toucher, intensité d’une stimulation. L’aire sensorielle « de base ».',
+    },
+    {
+      term: 'Connectivité fonctionnelle',
+      def: 'Mesure du « travail ensemble » de deux régions : leur activité monte et descend de façon coordonnée. Une connexion peut se renforcer ou se relâcher.',
+    },
+    {
+      term: 'Double dissociation',
+      def: 'Situation où une action A modifie X sans toucher Y, et une action B modifie Y sans toucher X. Une preuve forte que X et Y sont indépendants.',
+    },
   ],
   en: [
     {
@@ -129,6 +169,46 @@ export const glossaryItems: Record<Lang, GlossaryItem[]> = {
     {
       term: 'Level of evidence',
       def: 'A way of situating the strength of the data behind a claim. On this site, three markers: established (solid, converging evidence), promising (encouraging results to be confirmed), exploratory (early data, to interpret with caution).',
+    },
+    {
+      term: 'MRI (magnetic resonance imaging)',
+      def: 'A machine that images the brain. In its “functional” form (fMRI), it tracks blood flow to locate, indirectly, the most active areas.',
+    },
+    {
+      term: 'PET (positron emission tomography)',
+      def: 'An imaging technique that measures brain activity using a mildly radioactive tracer that follows energy use or blood flow.',
+    },
+    {
+      term: 'EEG (electroencephalography)',
+      def: 'A device that measures the brain’s electrical activity using electrodes placed on the scalp.',
+    },
+    {
+      term: 'Anterior cingulate cortex',
+      def: 'A deep, midline brain region. It detects conflict and effort, and contributes to the unpleasant side of pain. A kind of alarm system.',
+    },
+    {
+      term: 'Dorsolateral prefrontal cortex',
+      def: 'At the front of the brain, on the sides. The core of the network that steers voluntary attention and concentration, often called “the conductor”.',
+    },
+    {
+      term: 'Default mode network',
+      def: 'A set of regions that activate together when we are not doing anything in particular: daydreaming, self-reflection, rumination. Its front part often quiets down under hypnosis.',
+    },
+    {
+      term: 'Insula',
+      def: 'A region tucked deep in the brain that receives the body’s internal state (heart, breathing, pain). The seat of internal-sensation perception.',
+    },
+    {
+      term: 'Primary somatosensory cortex',
+      def: 'The area that receives and locates body sensations: touch, the intensity of a stimulus. The “basic” sensory area.',
+    },
+    {
+      term: 'Functional connectivity',
+      def: 'A measure of how much two regions “work together”: their activity rises and falls in a coordinated way. A connection can strengthen or loosen.',
+    },
+    {
+      term: 'Double dissociation',
+      def: 'A situation where action A changes X without affecting Y, and action B changes Y without affecting X. Strong evidence that X and Y are independent.',
     },
   ],
 };
