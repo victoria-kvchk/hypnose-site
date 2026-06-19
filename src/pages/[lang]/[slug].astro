@@ -7,6 +7,7 @@ import { faqItems } from '../../i18n/faq';
 import { glossaryItems } from '../../i18n/glossary';
 import { legalSections } from '../../i18n/legal';
 import { privacySections } from '../../i18n/privacy';
+import { aboutSections } from '../../i18n/about';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
@@ -33,10 +34,25 @@ const { routeKey } = Astro.props;
 
 const title = t(lang, `${routeKey}.title` as any);
 
+// SEO : données structurées FAQ (résultats enrichis)
+const faqLd =
+  routeKey === 'faq'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems[lang].map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      }
+    : undefined;
+
 // Pages structurées en sections (titre + paragraphes) : mentions légales, confidentialité.
 const docSections =
   routeKey === 'legal' ? legalSections[lang]
   : routeKey === 'privacy' ? privacySections[lang]
+  : routeKey === 'about' ? aboutSections[lang]
   : null;
 
 // Bibliothèque : références universelles (non traduites), groupées par thème.
@@ -92,7 +108,7 @@ const BIB_UI =
     : { sort: 'Sort', byTheme: 'Theme', byAuthor: 'Author', byYear: 'Year', theme: 'Theme', all: 'All' };
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} jsonLd={faqLd}>
   <section class="section">
     <div class="wrap max-w-3xl">
       <h1 class="t-h1 mb-12">{title}</h1>
@@ -214,12 +230,6 @@ const BIB_UI =
             </script>
           </>
         )
-      )}
-
-      {routeKey === 'about' && (
-        <p class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
-          {t(lang, 'about.content')}
-        </p>
       )}
 
       {routeKey === 'contact' && (

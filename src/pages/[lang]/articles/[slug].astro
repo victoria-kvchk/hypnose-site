@@ -2,7 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { type Lang } from '../../../i18n/translations';
-import { getLocalizedRoute } from '../../../i18n/utils';
+import { getLocalizedRoute, t } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -23,12 +23,40 @@ const dateStr = a.date.toLocaleDateString(locale, dateOpts);
 const updatedStr = a.updated ? a.updated.toLocaleDateString(locale, dateOpts) : null;
 const ui =
   lang === 'fr'
-    ? { read: 'min de lecture', updated: 'mis à jour le', keep: 'À retenir', brief: 'En bref', more: 'Pour aller plus loin', glossary: 'Glossaire', next: 'À lire ensuite', sources: 'Sources' }
-    : { read: 'min read', updated: 'updated', keep: 'Key takeaway', brief: 'In brief', more: 'Going further', glossary: 'Glossary', next: 'Read next', sources: 'Sources' };
+    ? { read: 'min de lecture', updated: 'mis à jour le', by: 'Par', keep: 'À retenir', brief: 'En bref', more: 'Pour aller plus loin', glossary: 'Glossaire', next: 'À lire ensuite', sources: 'Sources' }
+    : { read: 'min read', updated: 'updated', by: 'By', keep: 'Key takeaway', brief: 'In brief', more: 'Going further', glossary: 'Glossary', next: 'Read next', sources: 'Sources' };
 const metaBits = [a.category, a.kicker, dateStr, updatedStr ? `${ui.updated} ${updatedStr}` : null, a.readingMinutes ? `${a.readingMinutes} ${ui.read}` : null].filter(Boolean);
+
+// SEO : données structurées Article
+const canonical = `${Astro.site}${Astro.url.pathname.slice(1)}`;
+const siteName = t(lang, 'site.title');
+const author = 'Victoria';
+const aboutUrl = `${Astro.site}${getLocalizedRoute(lang, 'about').slice(1)}`;
+const publishedISO = a.date.toISOString();
+const modifiedISO = (a.updated ?? a.date).toISOString();
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: a.title,
+  description: a.description,
+  inLanguage: lang,
+  datePublished: publishedISO,
+  dateModified: modifiedISO,
+  mainEntityOfPage: canonical,
+  image: new URL('/og-default.jpg', Astro.site).href,
+  author: { '@type': 'Person', name: author, url: aboutUrl },
+  publisher: { '@type': 'Organization', name: siteName, url: Astro.site?.href },
+};
 ---
 
-<BaseLayout title={a.title} description={a.description}>
+<BaseLayout
+  title={a.title}
+  description={a.description}
+  type="article"
+  publishedTime={publishedISO}
+  modifiedTime={modifiedISO}
+  jsonLd={articleLd}
+>
   <article class="section">
     <div class="wrap max-w-3xl">
       <p class="eyebrow !text-clay mb-6 flex flex-wrap items-center gap-x-2.5 gap-y-1">
@@ -40,7 +68,9 @@ const metaBits = [a.category, a.kicker, dateStr, updatedStr ? `${ui.updated} ${u
         ))}
       </p>
 
-      <h1 class="t-h1 mb-10 text-balance">{a.title}</h1>
+      <h1 class="t-h1 mb-4 text-balance">{a.title}</h1>
+
+      <p class="mb-10 text-[0.9rem] text-ink-soft">{ui.by} <a href={getLocalizedRoute(lang, 'about')} class="text-clay underline underline-offset-2 hover:text-terracotta">{author}</a></p>
 
       {a.summary && (
         <aside class="mb-12 rounded-[var(--radius)] border-l-2 border-clay bg-sand-2 px-6 py-5">
@@ -49,10 +79,14 @@ const metaBits = [a.category, a.kicker, dateStr, updatedStr ? `${ui.updated} ${u
         </aside>
       )}
 
+      <div class="article-prose">
+        <Content />
+      </div>
+
       {a.keyPoints && a.keyPoints.length > 0 && (
-        <section class="mb-14">
+        <section class="mt-16 border-t border-line pt-8">
           <h2 class="eyebrow mb-4 text-ink-soft">{ui.brief}</h2>
-          <ul class="space-y-3 border-t border-line pt-5">
+          <ul class="space-y-3">
             {a.keyPoints.map((p) => (
               <li class="flex gap-3 text-ink-soft">
                 <span class="shrink-0 text-clay">–</span>
@@ -64,10 +98,6 @@ const metaBits = [a.category, a.kicker, dateStr, updatedStr ? `${ui.updated} ${u
           </ul>
         </section>
       )}
-
-      <div class="article-prose">
-        <Content />
-      </div>
 
       {(a.glossary?.length || a.readNext?.length) && (
         <section class="mt-16 border-t border-line pt-8">
