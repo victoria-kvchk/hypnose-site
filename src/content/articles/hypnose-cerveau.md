@@ -91,8 +91,6 @@ Une nuance essentielle, à ne pas perdre : ces chiffres viennent surtout de la *
 
 Au-delà de la douleur, l’hypnose est explorée comme appoint pour l’anxiété, le stress de certains soins ou des gestes médicaux. Le niveau de preuve y est plus variable : prometteur, mais à manier avec la même honnêteté.
 
-**Important.** Cet article est informatif et ne remplace pas un avis médical. L’hypnose est un complément, pas un substitut à un traitement. Pour un usage thérapeutique, adressez-vous à un professionnel de santé qualifié (médecin, psychologue, sage-femme, infirmier formé à l’hypnose). En cas de symptôme préoccupant, consultez d’abord votre médecin.
-
 ## Les limites de tout ça
 
 Pour rester défendable devant un chercheur, il faut dire ce que ces études ne disent pas :

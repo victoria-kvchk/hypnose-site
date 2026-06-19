@@ -22,6 +22,7 @@ const content = {
     newsletter: { title: 'Recevoir la newsletter', placeholder: 'Votre email', action: 'S’inscrire' },
     legal: [{ label: 'Mentions légales', route: 'legal' }, { label: 'Confidentialité', route: 'privacy' }, { label: 'Contact', route: 'contact' }],
     legalAria: 'Liens légaux',
+    disclaimer: 'Les contenus de ce site sont informatifs et ne remplacent pas un avis médical. L’hypnose est un complément, jamais un substitut à un traitement. Pour tout usage thérapeutique, consultez un professionnel de santé qualifié.',
   },
   en: {
     columns: [
@@ -32,6 +33,7 @@ const content = {
     newsletter: { title: 'Subscribe to the newsletter', placeholder: 'Your email', action: 'Subscribe' },
     legal: [{ label: 'Legal notice', route: 'legal' }, { label: 'Privacy', route: 'privacy' }, { label: 'Contact', route: 'contact' }],
     legalAria: 'Legal links',
+    disclaimer: 'The content on this site is informational and does not replace medical advice. Hypnosis is a complement, never a substitute for treatment. For any therapeutic use, consult a qualified healthcare professional.',
   },
 }[lang];
 ---
@@ -66,8 +68,11 @@ const content = {
       </div>
     </div>
 
+    {/* avertissement médical — vaut pour tout le site (articles inclus) */}
+    <p class="mt-14 border-t border-line pt-6 max-w-3xl text-[0.78rem] leading-relaxed text-ink-faint">{content.disclaimer}</p>
+
     {/* barre inférieure */}
-    <div class="mt-16 flex flex-col gap-3 border-t border-line pt-6 text-[0.78rem] text-ink-faint md:flex-row md:items-center md:justify-between">
+    <div class="mt-6 flex flex-col gap-3 border-t border-line pt-6 text-[0.78rem] text-ink-faint md:flex-row md:items-center md:justify-between">
       <p>&copy; {year} Hypnosis Research</p>
       <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label={content.legalAria}>
         {content.legal.map((link) => (
