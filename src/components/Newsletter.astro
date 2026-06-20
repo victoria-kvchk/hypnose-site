@@ -4,12 +4,12 @@
  *
  * Variantes :
  *  - `footer`  : compact, champ souligné + flèche (fond clair).
- *  - `section` : champ arrondi + bouton libellé, mention RGPD (fond sombre).
+ *  - `section` : champ arrondi + bouton libellé.
  *
- * Progressif : le `<form>` poste nativement vers Brevo sans JS (repli).
- * Avec JS, la soumission est interceptée (validation + états inline) et
- * envoyée en `fetch` no-cors. La logique client est mutualisée par
- * délégation d'évènement (un seul handler pour tous les formulaires).
+ * Soumission NATIVE (POST classique, url-encodé) vers l'URL du formulaire
+ * Brevo : c'est exactement ce que Brevo attend. Le navigateur est redirigé
+ * vers la page de confirmation Brevo (configurable côté Brevo pour revenir
+ * sur le site). Pas de JS requis.
  */
 import { BREVO, newsletterCopy } from '../i18n/newsletter';
 import { type Lang } from '../i18n/utils';
@@ -24,20 +24,11 @@ const copy = newsletterCopy[lang];
 
 // id unique du champ (évite les collisions footer/section sur la même page)
 const emailId = `nl-email-${variant}`;
-// messages d'état sérialisés pour le script client
-const msgsJson = JSON.stringify(copy.messages);
 const action = BREVO.formAction || undefined;
 ---
 
 {variant === 'footer' ? (
-  <form
-    data-newsletter-form
-    action={action}
-    method="post"
-    data-nl-msgs={msgsJson}
-    novalidate
-    class="max-w-xs"
-  >
+  <form action={action} method="POST" class="max-w-xs">
     <div class="flex items-center border-b border-line focus-within:border-ink/40">
       <label for={emailId} class="sr-only">{copy.placeholder}</label>
       <input
@@ -49,16 +40,8 @@ const action = BREVO.formAction || undefined;
         placeholder={copy.placeholder}
         class="w-full bg-transparent py-2 text-[0.875rem] text-ink placeholder:text-ink-faint focus:outline-none"
       />
-      {/* piège anti-bot : invisible, doit rester vide */}
-      <input
-        type="text"
-        name={BREVO.honeypotField}
-        data-nl-honeypot
-        tabindex="-1"
-        autocomplete="off"
-        aria-hidden="true"
-        class="absolute left-[-9999px] h-0 w-0 opacity-0"
-      />
+      {/* piège anti-bot Brevo : invisible, doit rester vide */}
+      <input type="text" name={BREVO.honeypotField} tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute left-[-9999px] h-0 w-0 opacity-0" />
       <input type="hidden" name={BREVO.localeField} value={lang} />
       <button
         type="submit"
@@ -66,16 +49,9 @@ const action = BREVO.formAction || undefined;
         class="shrink-0 px-1 text-ink-soft transition-colors hover:text-terracotta"
       >→</button>
     </div>
-    <p data-nl-status role="status" aria-live="polite" class="mt-2 leading-snug"></p>
   </form>
 ) : (
-  <form
-    data-newsletter-form
-    action={action}
-    method="post"
-    data-nl-msgs={msgsJson}
-    novalidate
-  >
+  <form action={action} method="POST">
     <div class="flex flex-col gap-3 sm:flex-row">
       <label for={emailId} class="sr-only">{copy.placeholder}</label>
       <input
@@ -87,113 +63,11 @@ const action = BREVO.formAction || undefined;
         placeholder={copy.placeholder}
         class="w-full rounded-full border border-line-strong bg-paper px-5 py-3 text-ink placeholder:text-ink-faint transition-colors focus:border-ink/45 focus:outline-none"
       />
-      <input
-        type="text"
-        name={BREVO.honeypotField}
-        data-nl-honeypot
-        tabindex="-1"
-        autocomplete="off"
-        aria-hidden="true"
-        class="absolute left-[-9999px] h-0 w-0 opacity-0"
-      />
+      <input type="text" name={BREVO.honeypotField} tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute left-[-9999px] h-0 w-0 opacity-0" />
       <input type="hidden" name={BREVO.localeField} value={lang} />
       <button type="submit" class="pill shrink-0">
         {copy.action} <span class="arrow">→</span>
       </button>
     </div>
-    <p data-nl-status role="status" aria-live="polite" class="mt-3 leading-snug"></p>
   </form>
 )}
-
-<style>
-  /* états du message inline (couleur selon data-state, clair vs sombre) */
-  [data-nl-status] {
-    min-height: 1.2rem;
-    font-size: var(--step-label);
-  }
-  [data-nl-status]:empty {
-    min-height: 0;
-  }
-  [data-nl-status][data-state='loading'] { color: var(--ink-faint); }
-  [data-nl-status][data-state='error']   { color: #b23b22; }
-  [data-nl-status][data-state='success'] { color: var(--cool); }
-</style>
-
-{/* Logique client mutualisée — exécutée une seule fois (garde globale). */}
-<script is:inline>
-  (() => {
-    if (window.__newsletterInit) return;
-    window.__newsletterInit = true;
-
-    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    const setBusy = (form, busy) => {
-      form.querySelectorAll('input, button').forEach((el) => {
-        if (busy) el.setAttribute('disabled', '');
-        else el.removeAttribute('disabled');
-      });
-    };
-
-    document.addEventListener('submit', async (ev) => {
-      const form = ev.target.closest('[data-newsletter-form]');
-      if (!form) return;
-      ev.preventDefault();
-
-      const input = form.querySelector('input[type="email"]');
-      const status = form.querySelector('[data-nl-status]');
-      const honeypot = form.querySelector('[data-nl-honeypot]');
-      const action = form.getAttribute('action') || '';
-      let msgs = {};
-      try { msgs = JSON.parse(form.dataset.nlMsgs || '{}'); } catch (_) {}
-
-      const set = (state, text) => {
-        if (!status) return;
-        status.dataset.state = state;
-        status.textContent = text || '';
-      };
-
-      // bot détecté (champ piège rempli) : on simule un succès sans rien envoyer
-      if (honeypot && honeypot.value) {
-        set('success', msgs.success);
-        form.reset();
-        return;
-      }
-
-      const email = (input?.value || '').trim();
-      if (!EMAIL_RE.test(email)) {
-        set('error', msgs.invalid);
-        input?.focus();
-        return;
-      }
-
-      set('loading', msgs.loading);
-      setBusy(form, true);
-
-      const finish = (state, text) => {
-        set(state, text);
-        setBusy(form, false);
-        if (state === 'success') form.reset();
-      };
-
-      // mode démo : URL Brevo non configurée
-      if (!action) {
-        console.warn(
-          '[newsletter] PUBLIC_BREVO_FORM_ACTION non défini — mode démo, aucun envoi réel.'
-        );
-        finish('success', msgs.success);
-        return;
-      }
-
-      try {
-        await fetch(action, {
-          method: 'POST',
-          body: new FormData(form),
-          mode: 'no-cors',
-        });
-        finish('success', msgs.success);
-      } catch (_) {
-        finish('error', msgs.error);
-      }
-    });
-  })();
-</script>
