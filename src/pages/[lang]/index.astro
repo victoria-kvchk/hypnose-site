@@ -51,6 +51,7 @@ const ui = {
     ],
     heroAlt: 'Paysage minéral abstrait vu du ciel',
     placeholderBody: 'Contenu à venir.',
+    readArticle: 'Lire l’article',
   },
   en: {
     cta: 'Explore',
@@ -73,6 +74,7 @@ const ui = {
     ],
     heroAlt: 'Abstract mineral landscape seen from above',
     placeholderBody: 'Content to come.',
+    readArticle: 'Read the article',
   },
 }[lang];
 
@@ -234,7 +236,10 @@ const siteLd = {
             <div class="grid grid-cols-1 items-baseline gap-2 py-7 md:grid-cols-[6rem_1fr_auto] md:gap-8">
               <span class="eyebrow !text-clay">{article.data.date.getFullYear()}</span>
               <span class="t-card !text-[1.15rem] text-ink transition-colors group-hover:text-clay">{article.data.title}</span>
-              <span class="eyebrow">{article.data.category}</span>
+              <span class="flex items-center gap-3 md:flex-col md:items-end md:gap-1.5">
+                <span class="eyebrow">{article.data.category}</span>
+                <span class="link-action !text-clay">{ui.readArticle} <span class="arrow group-hover:translate-x-1">→</span></span>
+              </span>
             </div>
             <hr class="hairline" />
           </a>
