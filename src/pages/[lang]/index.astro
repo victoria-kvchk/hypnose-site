@@ -110,11 +110,21 @@ const siteLd = {
   <script is:inline>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('reveal-ready');
-      // Lecture de la vidéo hero seulement si le mouvement est autorisé.
+      // Lecture des vidéos de fond seulement si le mouvement est autorisé.
       // Sinon (ou sans JS), le poster reste affiché : aucun mouvement imposé.
+      // IntersectionObserver : ne charge/joue une vidéo qu'à l'approche de
+      // l'écran (économise le téléchargement des cartes sous la ligne de flottaison)
+      // et met en pause hors champ (CPU/batterie).
       addEventListener('DOMContentLoaded', () => {
-        const v = document.querySelector('[data-hero-video]');
-        if (v) { v.muted = true; v.play().catch(() => {}); }
+        const vids = document.querySelectorAll('video[data-autoplay]');
+        if (!vids.length) return;
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { e.target.muted = true; e.target.play().catch(() => {}); }
+            else { e.target.pause(); }
+          }
+        }, { rootMargin: '200px' });
+        vids.forEach((v) => io.observe(v));
       });
     }
   </script>
@@ -133,7 +143,7 @@ const siteLd = {
       <div class="media__parallax" data-parallax data-parallax-speed="0.08">
         <div class="media__zoom">
           <video
-            data-hero-video
+            data-autoplay
             class="h-full w-full object-cover [object-position:28%_center]"
             poster={heroImage.src}
             aria-label={ui.heroAlt}
@@ -208,14 +218,30 @@ const siteLd = {
     <div class="grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-3">
         {ui.cards.map((card, i) => (
           <a href={getLocalizedRoute(lang, 'articles')} data-reveal class="group block">
-            {/* wrapper image : overflow-hidden UNIQUEMENT ici, pour le zoom au survol */}
+            {/* wrapper image/vidéo : overflow-hidden UNIQUEMENT ici, pour le zoom au survol */}
             <div class="relative aspect-square w-full overflow-hidden rounded-[var(--radius)]">
-              <Image
-                src={axisImages[i]}
-                alt={card.title}
-                sizes="(min-width: 768px) 30vw, 100vw"
-                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-              />
+              {i === 2 ? (
+                <video
+                  data-autoplay
+                  class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                  poster="/video/applications-poster.jpg"
+                  aria-label={card.title}
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                >
+                  <source src="/video/applications-loop.webm" type="video/webm" />
+                  <source src="/video/applications-loop.mp4" type="video/mp4" />
+                </video>
+              ) : (
+                <Image
+                  src={axisImages[i]}
+                  alt={card.title}
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                />
+              )}
               <div class="pointer-events-none absolute inset-0 rounded-[var(--radius)] ring-1 ring-inset ring-ink/5"></div>
             </div>
             {/* pastille crème — FRÈRE du wrapper, remontée pour chevaucher le bord bas de l'image */}
