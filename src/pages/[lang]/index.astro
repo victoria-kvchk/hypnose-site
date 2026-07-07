@@ -110,6 +110,12 @@ const siteLd = {
   <script is:inline>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('reveal-ready');
+      // Lecture de la vidéo hero seulement si le mouvement est autorisé.
+      // Sinon (ou sans JS), le poster reste affiché : aucun mouvement imposé.
+      addEventListener('DOMContentLoaded', () => {
+        const v = document.querySelector('[data-hero-video]');
+        if (v) { v.muted = true; v.play().catch(() => {}); }
+      });
     }
   </script>
 
@@ -120,18 +126,25 @@ const siteLd = {
     data-section="hero"
     class="relative isolate flex min-h-[clamp(580px,90vh,860px)] items-center overflow-hidden"
   >
-    {/* image plein cadre + parallaxe/zoom (sable à gauche) */}
+    {/* vidéo de fond en boucle + parallaxe/zoom (sable à gauche).
+        L'image hero sert de poster : fallback statique au chargement,
+        sans JS, et pour prefers-reduced-motion (lecture pilotée par script). */}
     <figure data-reveal class="reveal-fade absolute inset-0 overflow-hidden">
       <div class="media__parallax" data-parallax data-parallax-speed="0.08">
         <div class="media__zoom">
-          <Image
-            src={heroImage}
-            alt={ui.heroAlt}
-            loading="eager"
-            fetchpriority="high"
-            sizes="100vw"
+          <video
+            data-hero-video
             class="h-full w-full object-cover [object-position:28%_center]"
-          />
+            poster={heroImage.src}
+            aria-label={ui.heroAlt}
+            muted
+            loop
+            playsinline
+            preload="auto"
+          >
+            <source src="/video/header-loop.webm" type="video/webm" />
+            <source src="/video/header-loop.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </figure>
