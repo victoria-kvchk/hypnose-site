@@ -4,7 +4,6 @@ seoTitle: "Revue systématique : de 10 404 études à 40 (les coulisses du tri)"
 description: "Comment les chercheurs passent de plus de 10 000 articles à seulement 40, sans garder ceux qui les arrangent : les cinq pièges qu’une revue systématique cherche à éviter."
 date: 2026-07-21
 category: "Méthode scientifique"
-kicker: "Coulisses de la science"
 readingMinutes: 8
 lang: "fr"
 tags: ["revue systématique", "méthode scientifique", "biais cognitifs", "PROSPERO", "PICOS", "preuves"]
