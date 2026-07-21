@@ -1,6 +1,7 @@
 ---
-title: "L’hypnose : ce qu’elle est, et ce qu’elle n’est pas"
-description: "L’hypnose n’a rien de magique : un état d’attention focalisée où l’on devient plus réceptif aux suggestions, tout en restant conscient et maître de soi. Ce que dit la science, et ce qui relève du mythe."
+title: "Qu’est-ce que l’hypnose ?"
+seoTitle: "Qu’est-ce que l’hypnose ? Ce qu’en dit la science"
+description: "Un état d’attention focalisée où l’on devient plus réceptif aux suggestions, tout en restant conscient et maître de soi. Ce que dit la science, et ce qui relève du mythe."
 date: 2023-09-12
 updated: 2026-06-17
 category: "Les bases"
@@ -8,7 +9,7 @@ kicker: "Consensus scientifique"
 readingMinutes: 6
 lang: "fr"
 tags: ["définition", "mythes", "suggestibilité", "mécanismes cognitifs"]
-summary: "L’hypnose n’a rien de magique ni de mystérieux. C’est un état d’attention focalisée dans lequel on devient plus réceptif à des suggestions [1]. On y reste conscient et on garde le contrôle [2], et l’effet varie beaucoup d’une personne à l’autre [3]. La plupart des idées reçues – sommeil, perte de volonté, pouvoir sur autrui – sont fausses [2]."
+summary: "L’hypnose n’a rien de mystérieux. C’est un état d’attention focalisée dans lequel on devient plus réceptif à des suggestions [1]. On y reste conscient et on garde le contrôle [2], et l’effet varie beaucoup d’une personne à l’autre [3]. La plupart des idées reçues – sommeil, perte de volonté, pouvoir sur autrui – sont fausses [2]."
 keyPoints:
   - "L’hypnose repose sur un fonctionnement ordinaire du cerveau, une attention concentrée et une réceptivité accrue aux suggestions [1], pas un « état d’exception »."
   - "Tout le monde n’y répond pas de la même façon : la sensibilité à l’hypnose est une caractéristique mesurable [3], assez stable au cours de la vie [4]."

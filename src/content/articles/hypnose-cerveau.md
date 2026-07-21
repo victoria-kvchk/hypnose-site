@@ -1,5 +1,5 @@
 ---
-title: "Que se passe-t-il dans le cerveau sous hypnose ?"
+title: "Que se passe-t-il dans un cerveau sous hypnose ?"
 description: "L’attention, la perception, la mémoire et le contrôle : ce que la science observe vraiment quand on est hypnotisé, sans mythe ni promesse."
 date: 2024-02-24
 updated: 2026-06-18

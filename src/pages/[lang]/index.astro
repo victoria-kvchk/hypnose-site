@@ -21,6 +21,9 @@ import { getCollection } from 'astro:content';
 // visuels + icônes des axes, dans l'ordre des cartes
 const axisImages = [axeMecanismes, axeClinique, axeApplications];
 const axisIcons = ['brain', 'flask', 'leaf'] as const;
+// Cartes illustrées par une vidéo de fond (basename dans /public/video/) ;
+// null = image statique. clinique = eau (écho fiole), applications = terre (écho plante).
+const axisVideos = ['mecanismes', 'clinique', 'applications'] as const;
 
 export function getStaticPaths() {
   return supportedLangs.map((lang) => ({ params: { lang } }));
@@ -33,7 +36,7 @@ const ui = {
   fr: {
     cta: 'Explorer',
     sections: {
-      hero: { h: 'L’hypnose, autrement.', body: 'Un espace dédié à la recherche scientifique sur l’hypnose et la thérapie par hypnose.' },
+      hero: { h: 'L’hypnose, autrement.', body: 'Un espace dédié à la recherche scientifique sur l’hypnose et son utilisation en thérapie.' },
       quote: { text: 'L’hypnose n’est pas un état d’exception, mais une variation naturelle de la conscience.', lede: 'Les recherches contemporaines montrent des effets mesurables sur l’attention, la perception, la mémoire et le contrôle cognitif.', link: 'En savoir plus' },
       axes: { eyebrow: 'Axes de recherche', h: 'Explorer. Comprendre. Transmettre.' },
       pubs: { eyebrow: 'Publications récentes', h: 'La science en mouvement' },
@@ -220,19 +223,19 @@ const siteLd = {
           <a href={getLocalizedRoute(lang, 'articles')} data-reveal class="group block">
             {/* wrapper image/vidéo : overflow-hidden UNIQUEMENT ici, pour le zoom au survol */}
             <div class="relative aspect-square w-full overflow-hidden rounded-[var(--radius)]">
-              {i === 2 ? (
+              {axisVideos[i] ? (
                 <video
                   data-autoplay
                   class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                  poster="/video/applications-poster.jpg"
+                  poster={`/video/${axisVideos[i]}-poster.jpg`}
                   aria-label={card.title}
                   muted
                   loop
                   playsinline
                   preload="none"
                 >
-                  <source src="/video/applications-loop.webm" type="video/webm" />
-                  <source src="/video/applications-loop.mp4" type="video/mp4" />
+                  <source src={`/video/${axisVideos[i]}-loop.webm`} type="video/webm" />
+                  <source src={`/video/${axisVideos[i]}-loop.mp4`} type="video/mp4" />
                 </video>
               ) : (
                 <Image

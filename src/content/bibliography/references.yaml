@@ -90,6 +90,13 @@ references:
     journal: "Neuroscience & Biobehavioral Reviews, 81(Pt A), 75-98"
     doi: "10.1016/j.neubiorev.2017.02.020"
     topic: mechanisms
+  - id: wolf2022
+    authors: ["Wolf, T. G.", "Faerber, K. A.", "Rummel, C.", "Halsband, U.", "Campus, G."]
+    year: 2022
+    title: "Functional changes in brain activity using hypnosis: a systematic review"
+    journal: "Brain Sciences, 12(1), 108"
+    doi: "10.3390/brainsci12010108"
+    topic: mechanisms
   - id: vanhaudenhuyse2014
     authors: ["Vanhaudenhuyse, A.", "Laureys, S.", "Faymonville, M.-E."]
     year: 2014
@@ -262,6 +269,14 @@ references:
     journal: "Complementary Therapies in Medicine, 23(5), 719-732"
     doi: "10.1016/j.ctim.2015.07.011"
     level: promising
+    topic: clinical
+  - id: wofford2023
+    authors: ["Wofford, N.", "Snyder, M.", "Corlett, C. E.", "Elkins, G. R."]
+    year: 2023
+    title: "Systematic review of hypnotherapy for sleep and sleep disturbance"
+    journal: "International Journal of Clinical and Experimental Hypnosis, 71(3), 176-215"
+    doi: "10.1080/00207144.2023.2226177"
+    level: exploratory
     topic: clinical
   - id: rotaru2016ptsd
     authors: ["Rotaru, T. S.", "Rusu, A."]
