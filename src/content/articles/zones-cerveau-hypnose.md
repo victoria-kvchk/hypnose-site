@@ -1,5 +1,5 @@
 ---
-title: "Quelles zones du cerveau sont vraiment touchées en hypnose ?"
+title: "Quelles zones cérébrales sont vraiment touchées en hypnose ?"
 description: "Il n’existe pas de « bouton hypnose » dans le cerveau, plutôt un petit nombre de réseaux qui se réaccordent, et beaucoup de zones qui ne bougent pas."
 date: 2024-05-18
 updated: 2026-06-19

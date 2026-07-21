@@ -50,7 +50,7 @@ const articleLd = {
 ---
 
 <BaseLayout
-  title={a.title}
+  title={a.seoTitle ?? a.title}
   description={a.description}
   type="article"
   publishedTime={publishedISO}
