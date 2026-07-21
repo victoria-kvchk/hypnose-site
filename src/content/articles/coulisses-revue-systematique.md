@@ -8,10 +8,10 @@ kicker: "Coulisses de la science"
 readingMinutes: 8
 lang: "fr"
 tags: ["revue systématique", "méthode scientifique", "biais cognitifs", "PROSPERO", "PICOS", "preuves"]
-summary: "Une revue systématique part de milliers d’articles pour n’en garder que quelques dizaines. Loin d’un tri arbitraire ou orienté, c’est une méthode anti-biais : protocole déposé à l’avance, recherche exhaustive, double lecture indépendante et notation de la qualité. L’exemple de la revue de Wolf et al. (2022) sur l’hypnose et le cerveau — 10 404 articles au départ, 40 à l’arrivée — montre à quoi sert vraiment cet énorme écrémage."
+summary: "Une revue systématique part de milliers d’articles pour n’en garder que quelques dizaines. Loin d’un tri arbitraire ou orienté, c’est une méthode anti-biais : protocole déposé à l’avance, recherche exhaustive, double lecture indépendante et notation de la qualité. L’exemple de la revue de Wolf et al. (2022) sur l’hypnose et le cerveau (10 404 articles au départ, 40 à l’arrivée) montre à quoi sert vraiment cet énorme écrémage."
 keyPoints:
   - "Une revue systématique n’est pas une sélection d’articles « qui arrangent » : c’est une méthode conçue pour rendre le tri difficile à biaiser."
-  - "Le protocole est déposé à l’avance sur un registre public (PROSPERO), avant de connaître le moindre résultat — impossible de changer les règles après coup [1]."
+  - "Le protocole est déposé à l’avance sur un registre public (PROSPERO), avant de connaître le moindre résultat : impossible de changer les règles après coup [1]."
   - "La recherche ratisse volontairement très large : 10 404 références au départ, dont la quasi-totalité seront écartées pour hors-sujet ou doublon [1]."
   - "Chaque étape de tri est faite en double, par deux chercheurs indépendants ; un troisième tranche en cas de désaccord."
   - "Toutes les études ne pèsent pas pareil : leur qualité est notée (18 bonnes, 15 correctes, 7 faibles pour les 40 retenues) [1]."
@@ -61,9 +61,9 @@ Et c’est là que commence le véritable travail.
 
 ## Troisième piège : garder les études qui nous arrangent
 
-Contrairement à ce que l’on pourrait penser, les chercheurs ne se jettent pas tout de suite sur la lecture détaillée des articles. D’abord, ils retirent les doublons, car une même étude apparaît souvent dans plusieurs bases de données. Puis ils examinent les titres et les résumés et s’aperçoivent que certaines études parlent d’hypnose sans mesurer l’activité cérébrale. D’autres concernent des enfants alors que seuls des adultes étaient recherchés. D’autres encore ne correspondent tout simplement pas à la question posée.
+Contrairement à ce que l’on pourrait penser, les chercheurs ne se jettent pas tout de suite sur la lecture détaillée des articles. D’abord, ils retirent les doublons, car une même étude apparaît souvent dans plusieurs bases de données. Puis ils examinent les titres et les résumés. Ainsi ils peuvent voir que certaines études parlent d’hypnose sans mesurer l’activité cérébrale, d’autres concernent des enfants alors que seuls des adultes étaient recherchés, et d’autres encore ne correspondent tout simplement pas à la question posée.
 
-Peu à peu, les 10 404 publications se réduisent à une vingtaine d’études suffisamment pertinentes pour être lues intégralement. À ce chiffre s’ajoutent 20 autres études, passées à travers le filet des moteurs de recherche et donc retrouvées à la main par les chercheurs — soit les 40 études finales.
+Peu à peu, les 10 404 publications se réduisent à une vingtaine d’études suffisamment pertinentes pour être lues intégralement. À ce chiffre s’ajoutent 20 autres études, passées à travers le filet des moteurs de recherche et donc retrouvées à la main par les chercheurs, soit les 40 études finales.
 
 <figure style="margin:2.25rem 0;">
   <picture>
