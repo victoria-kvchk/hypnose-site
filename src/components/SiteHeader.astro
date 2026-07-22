@@ -5,7 +5,7 @@
  * passe en fond crème + filet + ombre légère au scroll.
  * Mobile (<900px) : nav repliée dans un drawer plein écran.
  */
-import { getLocalizedRoute, getSwitchLangPath, type Lang } from '../i18n/utils';
+import { getLocalizedRoute, getSwitchLangPath, t, type Lang } from '../i18n/utils';
 
 interface Props {
   lang: Lang;
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const { lang, currentPath = `/${lang}/`, solid = false } = Astro.props;
+const siteTitle = t(lang, 'site.title');
 const other: Lang = lang === 'fr' ? 'en' : 'fr';
 const switchPath = getSwitchLangPath(currentPath, other);
 
@@ -42,9 +43,9 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
 <header id="site-header" data-header class:list={['site-header', solid && 'site-header--solid']}>
   <div class="wrap grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4">
     <!-- Logo -->
-    <a href={`/${lang}/`} class="emblem-link" aria-label="HYPNOSIS, accueil">
+    <a href={`/${lang}/`} class="emblem-link" aria-label={`${siteTitle}, ${lang === 'fr' ? 'accueil' : 'home'}`}>
       <span class="emblem-img" aria-hidden="true"></span>
-      <span class="wordmark">HYPNOSIS</span>
+      <span class="wordmark">{siteTitle}</span>
     </a>
 
     <!-- Navigation centrale (desktop) -->
@@ -72,7 +73,7 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   <div class="wrap flex items-center justify-between py-4">
     <span class="emblem-link">
       <span class="emblem-img" aria-hidden="true"></span>
-      <span class="wordmark">HYPNOSIS</span>
+      <span class="wordmark">{siteTitle}</span>
     </span>
     <button type="button" id="drawer-close" class="burger burger--close" aria-label={closeLabel}>
       <span></span><span></span>
@@ -134,11 +135,11 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   }
   .wordmark {
     font-family: var(--font-ui);
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
     color: var(--ink);
+    white-space: nowrap;
   }
 
   /* ——— Nav centrale ——— */

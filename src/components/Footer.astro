@@ -1,5 +1,5 @@
 ---
-import { getLocalizedRoute, type Lang } from '../i18n/utils';
+import { getLocalizedRoute, t, type Lang } from '../i18n/utils';
 import Newsletter from './Newsletter.astro';
 
 interface Props {
@@ -64,7 +64,7 @@ const content = {
 
     {/* barre inférieure */}
     <div class="mt-6 flex flex-col gap-3 border-t border-line pt-6 text-[0.78rem] text-ink-faint md:flex-row md:items-center md:justify-between">
-      <p>&copy; {year} Hypnosis Research</p>
+      <p>&copy; {year} {t(lang, 'site.title')}</p>
       <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label={content.legalAria}>
         {content.legal.map((link) => (
           <a href={link.route ? getLocalizedRoute(lang, link.route) : '#'} class="transition-colors hover:text-terracotta">{link.label}</a>
