@@ -5,6 +5,7 @@ description: "Un état d’attention focalisée où l’on devient plus récepti
 date: 2023-09-12
 updated: 2026-06-17
 category: "Les bases"
+cover: "05-sable-degrade.jpg"
 kicker: "Consensus scientifique"
 readingMinutes: 6
 lang: "fr"

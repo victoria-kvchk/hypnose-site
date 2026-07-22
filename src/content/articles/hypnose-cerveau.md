@@ -4,6 +4,7 @@ description: "L’attention, la perception, la mémoire et le contrôle : ce que
 date: 2024-02-24
 updated: 2026-06-18
 category: "Mécanismes cognitifs"
+cover: "04-cote.jpg"
 kicker: "Imagerie cérébrale"
 readingMinutes: 10
 lang: "fr"
