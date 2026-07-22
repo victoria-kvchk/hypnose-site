@@ -4,6 +4,7 @@ seoTitle: "Hypnose et cerveau : ce que 40 études n’expliquent pas encore"
 description: "40 études confirment que l’hypnose modifie l’activité cérébrale, mais elles ne dessinent pas une signature unique. Pourquoi, et pourquoi cette prudence est une force de la méthode scientifique."
 date: 2026-07-22
 category: "Méthode scientifique"
+cover: "01-strate-diagonale.jpg"
 readingMinutes: 8
 lang: "fr"
 tags: ["revue systématique", "imagerie cérébrale", "EEG", "méta-analyse", "ondes thêta", "cortex cingulaire"]

@@ -4,6 +4,7 @@ description: "Il n’existe pas de « bouton hypnose » dans le cerveau, plutôt
 date: 2024-05-18
 updated: 2026-06-19
 category: "Mécanismes cognitifs"
+cover: "03-ardoise-noire.jpg"
 kicker: "Neuro-imagerie"
 readingMinutes: 7
 lang: "fr"

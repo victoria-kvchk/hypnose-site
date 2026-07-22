@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { supportedLangs, type Lang } from '../../../i18n/translations';
 import { t } from '../../../i18n/utils';
@@ -13,11 +14,30 @@ const { lang } = Astro.params as { lang: Lang };
 const articles = (await getCollection('articles'))
   .filter((a) => a.data.lang === lang)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Pool d'images minérales importées à la compilation (optimisées par astro:assets).
+const covers = import.meta.glob<{ default: ImageMetadata }>(
+  '../../../assets/articles/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+const pool = Object.entries(covers)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, mod]) => mod.default);
+
+// Couverture d'un article : `cover` du frontmatter si présent, sinon
+// une image du pool assignée de façon déterministe (par position).
+function coverFor(cover: string | undefined, i: number): ImageMetadata {
+  if (cover) {
+    const hit = Object.entries(covers).find(([path]) => path.endsWith(`/${cover}`));
+    if (hit) return hit[1].default;
+  }
+  return pool[i % pool.length];
+}
 ---
 
 <BaseLayout title={t(lang, 'articles.title')}>
   <section class="section">
-    <div class="wrap max-w-3xl">
+    <div class="wrap max-w-6xl">
       <h1 class="t-h1 mb-12">
         {t(lang, 'articles.title')}
       </h1>
@@ -25,20 +45,32 @@ const articles = (await getCollection('articles'))
       {articles.length === 0 ? (
         <p class="text-ink-soft">{t(lang, 'articles.empty')}</p>
       ) : (
-        <ul>
-          {articles.map((article) => (
+        <ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article, i) => (
             <li>
               <a
                 href={`/${lang}/articles/${article.id}/`}
-                class="group block border-t border-line py-8"
+                class="group relative block aspect-[3/4] overflow-hidden rounded-[var(--radius)]"
+                aria-label={article.data.title}
               >
-                <p class="eyebrow !text-clay mb-3">
-                  {article.data.date.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB')}
-                </p>
-                <h2 class="t-card text-ink transition-colors group-hover:text-clay">
-                  {article.data.title}
-                </h2>
-                <p class="mt-2 text-ink-soft">{article.data.description}</p>
+                <Image
+                  src={coverFor(article.data.cover, i)}
+                  alt=""
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                  class="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+                />
+                {/* encadré blanc translucide centré, révélé au survol / focus */}
+                <div
+                  class="absolute inset-0 flex items-stretch p-3 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-4"
+                >
+                  <div class="flex w-full flex-col items-center justify-center gap-4 border border-ink/15 bg-paper/75 px-6 py-8 text-center backdrop-blur-[1px]">
+                    <p class="eyebrow !text-ink/60">{article.data.category}</p>
+                    <span class="h-px w-8 bg-ink/25"></span>
+                    <h2 class="t-card text-ink">{article.data.title}</h2>
+                  </div>
+                </div>
+                {/* liseré interne discret, cohérent avec les cartes d'axes */}
+                <div class="pointer-events-none absolute inset-0 rounded-[var(--radius)] ring-1 ring-inset ring-ink/5"></div>
               </a>
             </li>
           ))}

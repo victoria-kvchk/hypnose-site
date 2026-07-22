@@ -11,6 +11,9 @@ const articles = defineCollection({
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     category: z.string(),
+    // image de couverture (nom de fichier dans src/assets/articles/) ;
+    // à défaut, une image du pool est assignée automatiquement
+    cover: z.string().optional(),
     tags: z.array(z.string()),
     lang: z.enum(['fr', 'en']),
     // chapeau éditorial
