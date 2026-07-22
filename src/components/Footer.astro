@@ -9,8 +9,6 @@ interface Props {
 const { lang } = Astro.props;
 const year = new Date().getFullYear();
 
-const brand = 'Hypnose';
-
 /** Contenu du footer, par langue. Les `route` renvoient vers les pages existantes. */
 const content = {
   fr: {
@@ -41,12 +39,7 @@ const content = {
     <hr class="hairline mb-14" />
 
     {/* bloc principal : logo · 3 colonnes de liens · newsletter */}
-    <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-[1.6fr_1fr_1fr_1.8fr] md:gap-10">
-      {/* logo (gauche) */}
-      <div>
-        <p class="display text-[1.5rem] text-ink">{brand}<span class="text-terracotta">·</span></p>
-      </div>
-
+    <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-[1fr_1fr_1.8fr] md:gap-10">
       {/* colonnes de liens */}
       {content.columns.map((col) => (
         <nav aria-label={col.title}>
