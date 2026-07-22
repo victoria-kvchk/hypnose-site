@@ -15,8 +15,7 @@ const brand = 'Hypnose';
 const content = {
   fr: {
     columns: [
-      { title: 'Recherche', links: [{ label: 'Projets en cours' }, { label: 'Publications', route: 'articles' }, { label: 'Axes de recherche' }] },
-      { title: 'Thérapie', links: [{ label: 'Applications cliniques', route: 'therapy' }, { label: 'Formations' }, { label: 'Ressources patients' }] },
+      { title: 'Recherche', links: [{ label: 'Axes de recherche', anchor: 'research' }, { label: 'Articles', route: 'articles' }] },
       { title: 'Ressources', links: [{ label: 'Bibliothèque', route: 'bibliography' }, { label: 'Glossaire', route: 'glossary' }, { label: 'FAQ', route: 'faq' }] },
     ],
     newsletter: { title: 'Recevoir la newsletter', placeholder: 'Votre email', action: 'S’inscrire' },
@@ -26,8 +25,7 @@ const content = {
   },
   en: {
     columns: [
-      { title: 'Research', links: [{ label: 'Ongoing projects' }, { label: 'Publications', route: 'articles' }, { label: 'Research axes' }] },
-      { title: 'Therapy', links: [{ label: 'Clinical applications', route: 'therapy' }, { label: 'Trainings' }, { label: 'Patient resources' }] },
+      { title: 'Research', links: [{ label: 'Research axes', anchor: 'research' }, { label: 'Articles', route: 'articles' }] },
       { title: 'Resources', links: [{ label: 'Library', route: 'bibliography' }, { label: 'Glossary', route: 'glossary' }, { label: 'FAQ', route: 'faq' }] },
     ],
     newsletter: { title: 'Subscribe to the newsletter', placeholder: 'Your email', action: 'Subscribe' },
@@ -43,7 +41,7 @@ const content = {
     <hr class="hairline mb-14" />
 
     {/* bloc principal : logo · 3 colonnes de liens · newsletter */}
-    <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-[1.5fr_1fr_1fr_1fr_1.7fr] md:gap-10">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-[1.6fr_1fr_1fr_1.8fr] md:gap-10">
       {/* logo (gauche) */}
       <div>
         <p class="display text-[1.5rem] text-ink">{brand}<span class="text-terracotta">·</span></p>
@@ -55,7 +53,7 @@ const content = {
           <p class="eyebrow mb-4 text-ink-soft">{col.title}</p>
           <ul class="space-y-2.5">
             {col.links.map((link) => (
-              <li><a href={link.route ? getLocalizedRoute(lang, link.route) : '#'} class="text-[0.875rem] text-ink-soft transition-colors hover:text-terracotta">{link.label}</a></li>
+              <li><a href={link.route ? getLocalizedRoute(lang, link.route) : link.anchor ? `/${lang}/#${link.anchor}` : '#'} class="text-[0.875rem] text-ink-soft transition-colors hover:text-terracotta">{link.label}</a></li>
             ))}
           </ul>
         </nav>

@@ -39,7 +39,7 @@ const ui = {
       hero: { h: 'L’hypnose, autrement.', body: 'Un espace dédié à la recherche scientifique sur l’hypnose et son utilisation en thérapie.' },
       quote: { text: 'L’hypnose n’est pas un état d’exception, mais une variation naturelle de la conscience.', lede: 'Les recherches contemporaines montrent des effets mesurables sur l’attention, la perception, la mémoire et le contrôle cognitif.', link: 'En savoir plus' },
       axes: { eyebrow: 'Axes de recherche', h: 'Explorer. Comprendre. Transmettre.' },
-      pubs: { eyebrow: 'Publications récentes', h: 'La science en mouvement' },
+      pubs: { eyebrow: 'Articles récents', h: 'La science en mouvement' },
       mission: {
         eyebrow: 'La démarche',
         h: 'Transmettre la recherche au plus grand nombre',
@@ -62,7 +62,7 @@ const ui = {
       hero: { h: 'Rethinking Hypnosis', body: 'A closer look at the science of hypnosis and its therapeutic use.' },
       quote: { text: 'Hypnosis is not an exceptional state, but a natural variation of consciousness.', lede: 'Contemporary research shows measurable effects on attention, perception, memory and cognitive control.', link: 'Learn more' },
       axes: { eyebrow: 'Research axes', h: 'Explore. Understand. Share.' },
-      pubs: { eyebrow: 'Recent publications', h: 'Science in motion' },
+      pubs: { eyebrow: 'Recent articles', h: 'Science in motion' },
       mission: {
         eyebrow: 'The approach',
         h: 'Bringing research to the widest audience',
@@ -81,7 +81,7 @@ const ui = {
   },
 }[lang];
 
-// articles publiés (section Publications) — du plus récent au plus ancien
+// articles publiés (section Articles récents) — du plus récent au plus ancien
 const publishedArticles = (await getCollection('articles'))
   .filter((article) => article.data.lang === lang)
   .sort((x, y) => y.data.date.getTime() - x.data.date.getTime())

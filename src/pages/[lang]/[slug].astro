@@ -11,7 +11,7 @@ import { aboutSections } from '../../i18n/about';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
-  const pageKeys = ['bibliography', 'about', 'contact', 'therapy', 'support', 'faq', 'glossary', 'legal', 'privacy'];
+  const pageKeys = ['bibliography', 'about', 'contact', 'support', 'faq', 'glossary', 'legal', 'privacy'];
   const paths: { params: { lang: string; slug: string }; props: { routeKey: string } }[] = [];
 
   for (const lang of supportedLangs) {
@@ -307,7 +307,7 @@ const BIB_UI =
         </div>
       )}
 
-      {(routeKey === 'therapy' || routeKey === 'support') && (
+      {routeKey === 'support' && (
         <p class="max-w-prose text-[1.06rem] leading-relaxed text-ink-soft">
           {t(lang, 'page.construction')}
         </p>

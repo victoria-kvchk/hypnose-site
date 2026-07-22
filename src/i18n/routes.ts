@@ -6,7 +6,6 @@ export const routes: Record<string, Record<Lang, string>> = {
   bibliography: { fr: '/bibliographie/', en: '/bibliography/' },
   about:        { fr: '/a-propos/',     en: '/about/' },
   contact:      { fr: '/contact/',      en: '/contact/' },
-  therapy:      { fr: '/therapie/',     en: '/therapy/' },
   support:      { fr: '/soutenir/',     en: '/support/' },
   faq:          { fr: '/faq/',          en: '/faq/' },
   glossary:     { fr: '/glossaire/',    en: '/glossary/' },

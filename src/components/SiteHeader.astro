@@ -4,9 +4,6 @@
  * Transparent au-dessus du hero (texte sombre lisible sur photo claire),
  * passe en fond crème + filet + ombre légère au scroll.
  * Mobile (<900px) : nav repliée dans un drawer plein écran.
- *
- * NB : les liens de nav pointent vers des ancres de la landing / la route
- * "à propos" ; THÉRAPIE et RESSOURCES sont provisoires (#) en attendant l'IA.
  */
 import { getLocalizedRoute, getSwitchLangPath, type Lang } from '../i18n/utils';
 
@@ -25,15 +22,13 @@ const nav =
   lang === 'fr'
     ? [
         { label: 'Recherche', href: `/${lang}/#research` },
-        { label: 'Thérapie', href: getLocalizedRoute(lang, 'therapy') },
-        { label: 'Publications', href: getLocalizedRoute(lang, 'articles') },
+        { label: 'Articles', href: getLocalizedRoute(lang, 'articles') },
         { label: 'À propos', href: getLocalizedRoute(lang, 'about') },
         { label: 'Ressources', href: getLocalizedRoute(lang, 'bibliography') },
       ]
     : [
         { label: 'Research', href: `/${lang}/#research` },
-        { label: 'Therapy', href: getLocalizedRoute(lang, 'therapy') },
-        { label: 'Publications', href: getLocalizedRoute(lang, 'articles') },
+        { label: 'Articles', href: getLocalizedRoute(lang, 'articles') },
         { label: 'About', href: getLocalizedRoute(lang, 'about') },
         { label: 'Resources', href: getLocalizedRoute(lang, 'bibliography') },
       ];
