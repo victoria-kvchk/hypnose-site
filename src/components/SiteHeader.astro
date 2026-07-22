@@ -141,6 +141,10 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
     color: var(--ink);
     white-space: nowrap;
   }
+  /* petits écrans : nom légèrement réduit pour laisser la place au bouton menu */
+  @media (max-width: 420px) {
+    .wordmark { font-size: 0.82rem; letter-spacing: 0; }
+  }
 
   /* ——— Nav centrale ——— */
   .primary-nav {
