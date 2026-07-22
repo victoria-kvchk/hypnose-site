@@ -135,15 +135,16 @@ const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
   }
   .wordmark {
     font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.01em;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
     color: var(--ink);
     white-space: nowrap;
   }
-  /* petits écrans : nom légèrement réduit pour laisser la place au bouton menu */
+  /* petits écrans : nom réduit et resserré pour laisser la place au bouton menu */
   @media (max-width: 420px) {
-    .wordmark { font-size: 0.82rem; letter-spacing: 0; }
+    .wordmark { font-size: 0.72rem; letter-spacing: 0.1em; }
   }
 
   /* ——— Nav centrale ——— */
