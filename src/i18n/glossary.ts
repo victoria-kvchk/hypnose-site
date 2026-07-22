@@ -3,6 +3,8 @@ import type { Lang } from './translations';
 export interface GlossaryItem {
   term: string;
   def: string;
+  /** Formes alternatives reconnues par la syntaxe [[…]] dans les articles (en plus du terme). */
+  match?: string[];
 }
 
 /** Contenu du glossaire, par langue. Ordre pédagogique (concepts puis méthodes). */
@@ -19,6 +21,7 @@ export const glossaryItems: Record<Lang, GlossaryItem[]> = {
     {
       term: 'Suggestibilité hypnotique (ou hypnotisabilité)',
       def: 'La facilité, propre à chacun, à répondre aux suggestions hypnotiques. Elle se mesure avec des échelles standardisées et varie fortement d’une personne à l’autre.',
+      match: ['suggestibilité', 'réceptivité', 'réceptif', 'réceptifs', 'réceptive', 'réceptives', 'hypnotisabilité'],
     },
     {
       term: 'État modifié de conscience',
@@ -55,6 +58,7 @@ export const glossaryItems: Record<Lang, GlossaryItem[]> = {
     {
       term: 'Essai contrôlé randomisé (ECR)',
       def: 'Une étude qui compare un groupe recevant l’intervention à un groupe témoin, les participants étant répartis au hasard. C’est l’un des moyens les plus fiables de tester si quelque chose marche vraiment.',
+      match: ['essais randomisés', 'essai randomisé', 'randomisation', 'randomisé'],
     },
     {
       term: 'Revue systématique',
@@ -71,14 +75,17 @@ export const glossaryItems: Record<Lang, GlossaryItem[]> = {
     {
       term: 'IRM (imagerie par résonance magnétique)',
       def: 'Appareil qui photographie le cerveau. En version « fonctionnelle » (IRMf), il suit l’afflux de sang pour repérer, indirectement, les zones les plus actives.',
+      match: ['irmf', 'irm fonctionnelle'],
     },
     {
       term: 'TEP (tomographie par émission de positons)',
       def: 'Technique d’imagerie qui mesure l’activité du cerveau à l’aide d’un traceur faiblement radioactif, en suivant la consommation d’énergie ou le débit sanguin.',
+      match: ['tomographie par émission de positons'],
     },
     {
       term: 'EEG (électroencéphalographie)',
       def: 'Appareil permettant de mesurer l’activité électrique du cerveau, à l’aide d’électrodes posées sur le cuir chevelu.',
+      match: ['électroencéphalogramme', 'électroencéphalographie'],
     },
     {
       term: 'Cortex cingulaire antérieur',

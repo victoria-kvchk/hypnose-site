@@ -41,9 +41,9 @@ sources:
 
 Lire est automatique. Vous ne *décidez* pas de lire le mot « CHIEN », il s’impose. C’est ce qu’exploite le test de Stroop : nommer la couleur de l’encre d’un mot est ralenti quand le mot désigne une autre couleur (« ROUGE » écrit en bleu). Ce frein passe pour incontournable.
 
-Et pourtant. Quand on suggère à des personnes très réceptives que les mots à l’écran sont de simples symboles sans signification, le frein diminue fortement [1]. Comme si le projecteur de l’attention cessait d’éclairer le sens des lettres. Plus parlant encore : l’imagerie montre que cette baisse du conflit s’accompagne d’une moindre activité dans une région qui sert justement à détecter les conflits, le cortex cingulaire antérieur, ainsi que dans les aires visuelles [1]. Le cerveau ne fait pas semblant, il traite l’information autrement.
+Et pourtant. Quand on suggère à des personnes très [[réceptives]] que les mots à l’écran sont de simples symboles sans signification, le frein diminue fortement [1]. Comme si le projecteur de l’attention cessait d’éclairer le sens des lettres. Plus parlant encore : l’imagerie montre que cette baisse du conflit s’accompagne d’une moindre activité dans une région qui sert justement à détecter les conflits, le [[cortex cingulaire antérieur]], ainsi que dans les aires visuelles [1]. Le cerveau ne fait pas semblant, il traite l’information autrement.
 
-L’étude de référence (Raz, Fan et Posner) a comparé des personnes très réceptives à des personnes peu réceptives, en combinant IRM fonctionnelle et EEG, sur de petits échantillons typiques de ce champ [1].
+L’étude de référence (Raz, Fan et Posner) a comparé des personnes très réceptives à des personnes peu réceptives, en combinant [[IRM]] fonctionnelle et [[EEG]], sur de petits échantillons typiques de ce champ [1].
 
 Faut-il en conclure que l’hypnose « débranche » la lecture ? Prudence. Plusieurs chercheurs pensent que les sujets ne deviennent pas littéralement aveugles aux mots, mais qu’ils *répartissent* autrement leur attention : l’effet est limité dans le temps et semble plus stratégique qu’une vraie « cécité aux mots » [2]. Le mécanisme exact reste discuté.
 
@@ -53,9 +53,9 @@ Faut-il en conclure que l’hypnose « débranche » la lecture ? Prudence. Plus
 
 On pourrait croire qu’une personne hypnotisée « joue le jeu » et dit voir du gris pour faire plaisir. L’imagerie raconte autre chose.
 
-Quand on demande à des sujets très réceptifs de voir un motif coloré comme une image en niveaux de gris, l’activité de l’aire cérébrale de la couleur baisse, comme si la couleur s’effaçait vraiment, et l’inverse fonctionne aussi [3]. Surtout : cet effet n’apparaît que *pendant* l’hypnose. L’étude (Kosslyn et coll.) reposait sur 8 sujets très réceptifs en tomographie par émission de positons, un échantillon minuscule [3].
+Quand on demande à des sujets très réceptifs de voir un motif coloré comme une image en niveaux de gris, l’activité de l’aire cérébrale de la couleur baisse, comme si la couleur s’effaçait vraiment, et l’inverse fonctionne aussi [3]. Surtout : cet effet n’apparaît que *pendant* l’hypnose. L’étude (Kosslyn et coll.) reposait sur 8 sujets très réceptifs en [[tomographie par émission de positons]], un échantillon minuscule [3].
 
-Même histoire pour la douleur, et c’est sans doute le plus utile. La douleur a deux faces : son intensité (c’est fort) et son caractère désagréable (c’est insupportable). Une suggestion peut agir sur l’une *sans* toucher l’autre. Quand on réduit seulement le côté désagréable, c’est l’activité du cortex cingulaire antérieur qui baisse, pas celle des aires du toucher [4]. Et l’étude miroir le confirme : agir sur l’intensité touche cette fois les aires du toucher, pas le cingulaire [5]. Les chercheurs parlent de « double dissociation ».
+Même histoire pour la douleur, et c’est sans doute le plus utile. La douleur a deux faces : son intensité (c’est fort) et son caractère désagréable (c’est insupportable). Une [[suggestion]] peut agir sur l’une *sans* toucher l’autre. Quand on réduit seulement le côté désagréable, c’est l’activité du cortex cingulaire antérieur qui baisse, pas celle des aires du toucher [4]. Et l’étude miroir le confirme : agir sur l’intensité touche cette fois les aires du toucher, pas le cingulaire [5]. Les chercheurs parlent de « [[double dissociation]] ».
 
 La douleur n’est pas un simple signal qui monte : c’est une construction du cerveau. Et ce qui se construit peut, en partie, se moduler.
 
@@ -75,7 +75,7 @@ Beaucoup imaginent l’inverse : que l’hypnose ferait *remonter* des souvenirs
 
 La grande peur, c’est de « perdre le contrôle ». Ce que montre l’imagerie est plus subtil : le contrôle ne disparaît pas, il se réorganise.
 
-Trois réseaux entrent en jeu : le réseau exécutif (le pilote, autour du cortex préfrontal), le réseau de la vigilance (le détecteur d’alerte) et le réseau du mode par défaut (le « moi » qui rumine). Pendant l’hypnose, chez les personnes très réceptives : la vigilance d’alerte s’apaise, le pilote se connecte mieux aux signaux du corps (l’insula), et se déconnecte en partie du mode par défaut [7]. Cette combinaison colle bien à l’expérience vécue : attention absorbée, meilleur contrôle du corps et des émotions, et cette curieuse mise en veille de la petite voix qui commente tout.
+Trois réseaux entrent en jeu : le réseau exécutif (le pilote, autour du cortex préfrontal), le réseau de la vigilance (le détecteur d’alerte) et le [[réseau du mode par défaut]] (le « moi » qui rumine). Pendant l’hypnose, chez les personnes très réceptives : la vigilance d’alerte s’apaise, le pilote se connecte mieux aux signaux du corps (l’[[insula]]), et se déconnecte en partie du mode par défaut [7]. Cette combinaison colle bien à l’expérience vécue : attention absorbée, meilleur contrôle du corps et des émotions, et cette curieuse mise en veille de la petite voix qui commente tout.
 
 L’étude (Jiang et coll., Stanford) a analysé 36 personnes très réceptives face à 21 peu réceptives, au repos puis sous hypnose [7]. Elle ne dit pas le sens de cause à effet, ni si ces signatures sont propres à l’hypnose plutôt qu’à un état d’attention focalisée en général.
 
@@ -89,7 +89,7 @@ La grande synthèse disponible regroupe 85 essais et plus de 3 600 participants.
 
 Une nuance essentielle, à ne pas perdre : ces chiffres viennent surtout de la *douleur expérimentale* en laboratoire (chaleur, pression) chez des adultes jeunes et en bonne santé, pas de la douleur clinique de longue durée [8]. La comparaison directe avec les antalgiques médicamenteux reste mal établie. L’effet est réel, mais à transposer prudemment à la vraie vie.
 
-Au-delà de la douleur, l’hypnose est explorée comme appoint pour l’anxiété, le stress de certains soins ou des gestes médicaux. Le niveau de preuve y est plus variable : prometteur, mais à manier avec la même honnêteté.
+Au-delà de la douleur, l’hypnose est explorée comme appoint pour l’anxiété, le stress de certains soins ou des gestes médicaux. Le [[niveau de preuve]] y est plus variable : prometteur, mais à manier avec la même honnêteté.
 
 ## Les limites de tout ça
 

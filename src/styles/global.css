@@ -152,6 +152,63 @@
   /* titre d'article : plafonné pour éviter les titres sur 3+ lignes */
   .art-title { font-size: clamp(36px, 3.3vw, 48px); }
 
+  /* ——— termes du glossaire : définition au survol / focus ——— */
+  .gloss {
+    position: relative;
+    border-bottom: 1px dotted var(--clay);
+    cursor: help;
+  }
+  .gloss:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .gloss-pop {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.55rem);
+    z-index: 30;
+    width: max-content;
+    max-width: min(280px, 78vw);
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius);
+    background: var(--ink-deep);
+    color: var(--paper-on-dark);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.45;
+    letter-spacing: normal;
+    text-transform: none;
+    box-shadow: 0 12px 30px -12px rgba(31, 31, 31, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(4px);
+    transition: opacity 0.18s var(--ease), transform 0.18s var(--ease),
+      visibility 0.18s var(--ease);
+    pointer-events: none;
+  }
+  .gloss-pop::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--ink-deep);
+  }
+  .gloss:hover .gloss-pop,
+  .gloss:focus .gloss-pop,
+  .gloss:focus-within .gloss-pop {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gloss-pop { transition: none; }
+  }
+
   /* eyebrow / labels / nav / dates / catégories */
   .eyebrow {
     font-family: var(--font-ui);

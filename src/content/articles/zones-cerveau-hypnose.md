@@ -40,17 +40,17 @@ sources:
 
 Pour comprendre ce que l’hypnose « fait » au cerveau, commençons par trois repères.
 
-**1. Le cerveau a des régions et des réseaux.** Une *région*, c’est un quartier précis du cerveau. Un *réseau*, c’est plusieurs régions, parfois éloignées les unes des autres, qui s’allument et s’éteignent **ensemble**, comme une équipe. Le réseau le plus connu, le *réseau du mode par défaut*, s’active quand on ne fait rien de précis : on rêvasse, on repense à sa journée, on rumine.
+**1. Le cerveau a des régions et des réseaux.** Une *région*, c’est un quartier précis du cerveau. Un *réseau*, c’est plusieurs régions, parfois éloignées les unes des autres, qui s’allument et s’éteignent **ensemble**, comme une équipe. Le réseau le plus connu, le *[[réseau du mode par défaut]]*, s’active quand on ne fait rien de précis : on rêvasse, on repense à sa journée, on rumine.
 
-**2. On ne « voit » pas vraiment le cerveau penser.** Les machines comme l’IRM ou la TEP (deux façons de photographier le cerveau en marche) mesurent surtout où le sang et l’énergie vont. Là où ça consomme plus, on en *déduit* que la zone travaille. Donc on ne voit pas une zone « s’allumer » comme une ampoule : on le devine, indirectement.
+**2. On ne « voit » pas vraiment le cerveau penser.** Les machines comme l’[[IRM]] ou la [[TEP]] (deux façons de photographier le cerveau en marche) mesurent surtout où le sang et l’énergie vont. Là où ça consomme plus, on en *déduit* que la zone travaille. Donc on ne voit pas une zone « s’allumer » comme une ampoule : on le devine, indirectement.
 
-**3. Tout le monde ne réagit pas pareil.** Certaines personnes répondent très fort à l’hypnose, d’autres presque pas. On appelle ça la *réceptivité*. La plupart des études portent sur les personnes très réceptives. Donc « le cerveau sous hypnose » a majoritairement été mesuré chez des personnes très réceptives.
+**3. Tout le monde ne réagit pas pareil.** Certaines personnes répondent très fort à l’hypnose, d’autres presque pas. On appelle ça la *[[réceptivité]]*. La plupart des études portent sur les personnes très réceptives. Donc « le cerveau sous hypnose » a majoritairement été mesuré chez des personnes très réceptives.
 
 ## Il n’y a pas de « bouton hypnose »
 
 Avec ces trois repères en tête, posons la question qui fâche. On voudrait une réponse simple : une zone qui s’allume, et hop, voilà l’hypnose. Les études disent le contraire. Quand on rassemble des dizaines de recherches, le constat est sobre : presque aucun schéma cérébral ne se répète d’une étude à l’autre [1].
 
-*Pourquoi ?* Parce que ce qui se passe dépend de trois choses : la personne (sa réceptivité), la façon d’entrer en hypnose (l’induction, la façon de guider la personne vers cet état au début de la séance) et surtout la phrase qu’on lui dit (la suggestion). L’hypnose, c’est moins un interrupteur qu’une **table de mixage** : selon le réglage, on pousse certains curseurs et on en baisse d’autres.
+*Pourquoi ?* Parce que ce qui se passe dépend de trois choses : la personne (sa réceptivité), la façon d’entrer en hypnose (l’[[induction]], la façon de guider la personne vers cet état au début de la séance) et surtout la phrase qu’on lui dit (la [[suggestion]]). L’hypnose, c’est moins un interrupteur qu’une **table de mixage** : selon le réglage, on pousse certains curseurs et on en baisse d’autres.
 
 ## Les régions qui reviennent le plus souvent
 
@@ -121,11 +121,11 @@ Cinq zones reviennent souvent dans les études (le schéma ci-dessus en montre s
 
 La plus citée, d’abord : le **cingulaire antérieur**, une zone cachée au milieu du cerveau qui sert de sonnette d’alarme, elle réagit quand quelque chose « coince » ou quand une douleur est désagréable. Sous hypnose, elle peut se calmer ou s’activer davantage, selon la suggestion hypnotique [2, 8].
 
-Encore faut-il quelqu’un pour piloter tout ça. Et c’est le rôle du **cortex préfrontal dorsolatéral**, juste derrière le front, sur les côtés : le chef d’orchestre de l’attention et de la concentration. Sous hypnose, il se rebranche autrement, davantage vers les sensations du corps, moins vers la rêverie [2]. Attention à ne pas le confondre avec une autre partie, le préfrontal médian, qui appartient justement au réseau suivant.
+Encore faut-il quelqu’un pour piloter tout ça. Et c’est le rôle du **[[cortex préfrontal dorsolatéral]]**, juste derrière le front, sur les côtés : le chef d’orchestre de l’attention et de la concentration. Sous hypnose, il se rebranche autrement, davantage vers les sensations du corps, moins vers la rêverie [2]. Attention à ne pas le confondre avec une autre partie, le préfrontal médian, qui appartient justement au réseau suivant.
 
 Ce réseau, c’est le **mode par défaut** : l’équipe de régions qui tourne quand on ne fait rien de précis (rêverie, retour sur soi, rumination). Là encore, tout ne bouge pas pareil. Chez les personnes très réceptives, son avant (le préfrontal médian) se met en veille, tandis que son arrière (le cingulaire postérieur) reste plutôt stable [2, 3].
 
-Et si le chef d’orchestre se tourne vers le corps, c’est qu’il a un interlocuteur : l’**insula**, nichée au creux du cerveau, qui reçoit les nouvelles du corps, le cœur, la respiration, la douleur. Sa liaison avec le préfrontal se renforce, et c’est peut-être pour ça que l’hypnose aide à reprendre la main sur certaines sensations [2].
+Et si le chef d’orchestre se tourne vers le corps, c’est qu’il a un interlocuteur : l’**[[insula]]**, nichée au creux du cerveau, qui reçoit les nouvelles du corps, le cœur, la respiration, la douleur. Sa liaison avec le préfrontal se renforce, et c’est peut-être pour ça que l’hypnose aide à reprendre la main sur certaines sensations [2].
 
 Restent les **zones des sens**. Elles ne bougent que si on les vise : suggérez de voir une couleur autrement, et la zone qui traite les couleurs suit [6]. C’est même ce qui revient le plus régulièrement d’une étude à l’autre [1].
 
@@ -165,7 +165,7 @@ Prenons l’exemple de la douleur, qui le montre très bien. La douleur a deux c
 - Si on suggère « c’est moins pénible », c’est le cingulaire (l’alarme) qui change, pas la zone du toucher [4].
 - Si on suggère « c’est moins fort », c’est l’inverse : la zone du toucher change, pas le cingulaire [5].
 
-Deux phrases différentes, deux zones différentes. Les scientifiques appellent ça une *double dissociation* : la preuve que ces deux choses sont bien séparées dans le cerveau.
+Deux phrases différentes, deux zones différentes. Les scientifiques appellent ça une *[[double dissociation]]* : la preuve que ces deux choses sont bien séparées dans le cerveau.
 
 Mieux : une même zone peut bouger dans les deux sens. Sur le fameux test d’attention, le *test de Stroop* (on doit dire la couleur de l’encre d’un mot, par exemple le mot « ROUGE » écrit en bleu, et c’est plus dur qu’on ne croit), une suggestion peut faire **baisser** l’activité du cingulaire [7], alors qu’une simple mise en hypnose peut la faire **monter** [8].
 
@@ -210,7 +210,7 @@ Puisque tout dépend de la suggestion, on devine la suite : ce qu’on ne vise p
 
 **Ce n’est pas du sommeil.** Le mot « hypnose » vient du grec *hypnos*, qui veut dire sommeil, mais c’est trompeur. Le cerveau reste éveillé, on n’y retrouve pas les signes du sommeil. C’est plutôt une attention très absorbée, comme quand on est plongé dans un film.
 
-**Pas de signe unique et fiable.** D’une étude à l’autre, peu de zones ressortent toujours [1]. Même un signe proposé par l’EEG (un appareil permettant de mesurer l’activité électrique du cerveau), une montée des ondes lentes dites « thêta », est discuté : ces ondes apparaissent aussi quand on écoute simplement une voix.
+**Pas de signe unique et fiable.** D’une étude à l’autre, peu de zones ressortent toujours [1]. Même un signe proposé par l’[[EEG]] (un appareil permettant de mesurer l’activité électrique du cerveau), une montée des ondes lentes dites « thêta », est discuté : ces ondes apparaissent aussi quand on écoute simplement une voix.
 
 Enfin, tout cela vaut surtout pour une minorité. **Chez les personnes peu réceptives, les effets sont bien plus discrets** : l’induction ne calme pas le mode par défaut de la même façon [3]. Attention cependant, cela ne veut pas dire que l’hypnose « ne marche pas » pour elles : la réceptivité joue sur l’ampleur de l’effet, pas sur le tout ou rien.
 
