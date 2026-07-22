@@ -23,8 +23,8 @@ const dateStr = a.date.toLocaleDateString(locale, dateOpts);
 const updatedStr = a.updated ? a.updated.toLocaleDateString(locale, dateOpts) : null;
 const ui =
   lang === 'fr'
-    ? { read: 'min de lecture', updated: 'mis à jour le', by: 'Par', keep: 'À retenir', brief: 'En bref', more: 'Pour aller plus loin', glossary: 'Glossaire', next: 'À lire ensuite', sources: 'Sources' }
-    : { read: 'min read', updated: 'updated', by: 'By', keep: 'Key takeaway', brief: 'In brief', more: 'Going further', glossary: 'Glossary', next: 'Read next', sources: 'Sources' };
+    ? { read: 'min de lecture', updated: 'mis à jour le', by: 'Par', keep: 'Résumé', brief: 'En bref', more: 'Pour aller plus loin', glossary: 'Glossaire', next: 'À lire ensuite', sources: 'Sources' }
+    : { read: 'min read', updated: 'updated', by: 'By', keep: 'Summary', brief: 'In brief', more: 'Going further', glossary: 'Glossary', next: 'Read next', sources: 'Sources' };
 const metaBits = [a.category, a.kicker, dateStr, updatedStr ? `${ui.updated} ${updatedStr}` : null, a.readingMinutes ? `${a.readingMinutes} ${ui.read}` : null].filter(Boolean);
 
 // SEO : données structurées Article
@@ -68,7 +68,7 @@ const articleLd = {
         ))}
       </p>
 
-      <h1 class="t-h1 mb-4 text-balance">{a.title}</h1>
+      <h1 class="t-h1 art-title mb-4">{a.title}</h1>
 
       <p class="mb-10 text-[0.9rem] text-ink-soft">{ui.by} <a href={getLocalizedRoute(lang, 'about')} class="text-clay underline underline-offset-2 hover:text-terracotta">{author}</a></p>
 

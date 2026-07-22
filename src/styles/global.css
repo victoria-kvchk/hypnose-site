@@ -149,6 +149,8 @@
   .t-quote { font-size: var(--step-quote); line-height: var(--lh-quote); font-weight: 400; }
   .t-h2    { font-size: var(--step-h2);    line-height: var(--lh-snug); }
   .t-card  { font-size: var(--step-card);  line-height: var(--lh-snug); }
+  /* titre d'article : plafonné pour éviter les titres sur 3+ lignes */
+  .art-title { font-size: clamp(36px, 3.3vw, 48px); }
 
   /* eyebrow / labels / nav / dates / catégories */
   .eyebrow {
