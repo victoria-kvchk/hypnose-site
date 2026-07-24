@@ -143,6 +143,10 @@ function rehypeGlossary() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hypno-therapeutique.fr',
+  // Redirections d'anciens slugs d'articles (préserve les URL déjà en ligne / indexées).
+  redirects: {
+    '/fr/articles/hypnose-cerveau-reste-a-savoir-comment': '/fr/articles/40-etudes-daccord-conclusions-differentes',
+  },
   markdown: {
     rehypePlugins: [rehypeCitations, rehypeGlossary],
   },
