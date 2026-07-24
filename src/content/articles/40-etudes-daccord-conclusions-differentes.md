@@ -1,5 +1,5 @@
 ---
-title: "L’hypnose change le cerveau. Reste à savoir comment."
+title: "Pourquoi 40 études sont-elles d’accord sans conclure la même chose ?"
 seoTitle: "Hypnose et cerveau : ce que 40 études n’expliquent pas encore"
 description: "40 études confirment que l’hypnose modifie l’activité cérébrale, mais elles ne dessinent pas une signature unique. Pourquoi, et pourquoi cette prudence est une force de la méthode scientifique."
 date: 2026-07-22
